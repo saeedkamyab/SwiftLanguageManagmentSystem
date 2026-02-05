@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/Application/" />
+  <Folder Name="/ApplicationCore/">
+    <Project Path="ApplicationCore/SLMS.Domain/SLMS.Domain.csproj" />
+  </Folder>
+  <Folder Name="/Dto/" />
+  <Folder Name="/Persistence/" />
+  <Folder Name="/Shared/">
+    <Project Path="Shared/SLMS.Shared/SLMS.Shared.csproj" />
+  </Folder>
+</Solution>
