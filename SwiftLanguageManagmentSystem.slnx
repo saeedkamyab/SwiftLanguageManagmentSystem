@@ -2,12 +2,21 @@
   <Folder Name="/Api/">
     <Project Path="Api/SLMS.Api/SLMS.Api.csproj" Id="398917ee-6fb1-4923-ac2b-c58d28ff4060" />
   </Folder>
-  <Folder Name="/Application/" />
+  <Folder Name="/Application/">
+    <Project Path="Application/SLMS.Application/SLMS.Application.csproj" Id="1095ce73-dbac-4004-96e4-a978b7e722a7" />
+  </Folder>
   <Folder Name="/ApplicationCore/">
     <Project Path="ApplicationCore/SLMS.Domain/SLMS.Domain.csproj" />
   </Folder>
-  <Folder Name="/Dto/" />
-  <Folder Name="/Persistence/" />
+  <Folder Name="/Dto/">
+    <Project Path="Dto/SLMS.Dto/SLMS.Dto.csproj" Id="808c69f8-4cab-42b1-ba2f-ffc08a9945de" />
+  </Folder>
+  <Folder Name="/Infrastructure/">
+    <Project Path="Infrastructure/SLMS.Infrastructure/SLMS.Infrastructure.csproj" Id="befdfe8d-ffdf-40a0-92ba-8bd6ca16e936" />
+  </Folder>
+  <Folder Name="/Persistence/">
+    <Project Path="Persistence/SLMS.Persistence/SLMS.Persistence.csproj" Id="02d67962-d90a-4eef-b1b3-5ea2cbd42b93" />
+  </Folder>
   <Folder Name="/Presentation/">
     <Project Path="Presentation/SLMS.WebApplication/SLMS.WebApplication.csproj" Id="7c958330-a5c3-4395-bed8-e621763b8df5" />
     <Project Path="Presentation/SLMS.WebApplicationComponents/SLMS.WebApplicationComponents.csproj" Id="b980d2a8-1917-4f6b-a596-51c6b96fc2ad" />
