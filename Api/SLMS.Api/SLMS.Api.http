@@ -1,0 +1,6 @@
+@SLMS.Api_HostAddress = http://localhost:5293
+
+GET {{SLMS.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

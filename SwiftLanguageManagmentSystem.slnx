@@ -1,10 +1,17 @@
 <Solution>
+  <Folder Name="/Api/">
+    <Project Path="Api/SLMS.Api/SLMS.Api.csproj" Id="398917ee-6fb1-4923-ac2b-c58d28ff4060" />
+  </Folder>
   <Folder Name="/Application/" />
   <Folder Name="/ApplicationCore/">
     <Project Path="ApplicationCore/SLMS.Domain/SLMS.Domain.csproj" />
   </Folder>
   <Folder Name="/Dto/" />
   <Folder Name="/Persistence/" />
+  <Folder Name="/Presentation/">
+    <Project Path="Presentation/SLMS.WebApplication/SLMS.WebApplication.csproj" Id="7c958330-a5c3-4395-bed8-e621763b8df5" />
+    <Project Path="Presentation/SLMS.WebApplicationComponents/SLMS.WebApplicationComponents.csproj" Id="b980d2a8-1917-4f6b-a596-51c6b96fc2ad" />
+  </Folder>
   <Folder Name="/Shared/">
     <Project Path="Shared/SLMS.Shared/SLMS.Shared.csproj" />
   </Folder>
