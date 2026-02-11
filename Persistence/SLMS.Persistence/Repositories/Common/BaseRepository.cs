@@ -1,0 +1,73 @@
+﻿using Microsoft.EntityFrameworkCore;
+using SLMS.Application.Contracts.Persistance;
+using SLMS.ApplicationCore;
+using System.Collections.ObjectModel;
+
+namespace SLMS.Persistence.Repositories.Common
+{
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
+    {
+
+        private readonly SLMSDbContext _context;
+        private readonly DbSet<TEntity> _dbSet;
+
+        public BaseRepository(SLMSDbContext context)
+        {
+            _context = context;
+            _dbSet = _context.Set<TEntity>();
+        }
+        public virtual async Task<TEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+        {
+            return await _dbSet
+                .Where(x => !x.IsDeleted)
+                .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        }
+        public virtual async Task<IReadOnlyList<TEntity>> GetAllAsync(
+        CancellationToken cancellationToken = default)
+        {
+            return await _dbSet
+                .Where(x => !x.IsDeleted)
+                .ToListAsync(cancellationToken);
+        }
+        public virtual void Add(TEntity entity)
+        {
+            _dbSet.Add(entity);
+        }
+        public virtual void AddRange(IEnumerable<TEntity> entities)
+        {
+            _dbSet.AddRange(entities);
+        }
+        public virtual void Update(TEntity entity)
+        {
+            _dbSet.Update(entity);
+        }
+        public virtual void UpdateRange(IEnumerable<TEntity> entities)
+        {
+            _dbSet.UpdateRange(entities);
+        }
+        public virtual void Remove(TEntity entity)
+        {
+            if (_dbSet.Entry(entity).State == EntityState.Detached)
+                _dbSet.Attach(entity);
+
+            _dbSet.Remove(entity);
+        }
+        public virtual void RemoveRange(IEnumerable<TEntity> entities)
+        {
+            _dbSet.RemoveRange(entities);
+        }
+        public virtual void SoftDelete(TEntity entity)
+        {
+            entity.IsDeleted = true;
+            _dbSet.Entry(entity).State = EntityState.Modified;
+        }
+        public virtual void SoftDeleteRange(IEnumerable<TEntity> entities)
+        {
+            foreach (var entity in entities)
+            {
+                entity.IsDeleted = true;
+                _dbSet.Entry(entity).State = EntityState.Modified;
+            }
+        }
+    }
+}

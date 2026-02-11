@@ -1,18 +1,17 @@
-﻿using SLMS.ApplicationCore.Domain.PersonManagment;
+﻿using SLMS.ApplicationCore.Domain.PersonManagement;
 
 namespace SLMS.Application.Contracts.Persistance
 {
     public interface IUnitOfWork
     {
-        #region PersonManagment
+        #region PersonManagement
         IBaseRepository<Person> PersonRepository { get; }
         #endregion
 
 
-        #region InstituteManagment
+        #region InstituteManagement
 
         #endregion
-
-        Task<int> CommitAsync();
+        Task<int> CommitAsync(CancellationToken cancellationToken = default);
     }
 }
