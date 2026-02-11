@@ -6,7 +6,7 @@
     <Project Path="Application/SLMS.Application/SLMS.Application.csproj" Id="1095ce73-dbac-4004-96e4-a978b7e722a7" />
   </Folder>
   <Folder Name="/ApplicationCore/">
-    <Project Path="ApplicationCore/SLMS.Domain/SLMS.Domain.csproj" />
+    <Project Path="ApplicationCore/SLMS.ApplicationCore/SLMS.ApplicationCore.csproj" Id="17bb9444-c8b8-4c95-a9c6-a79b76347ec9" />
   </Folder>
   <Folder Name="/Dto/">
     <Project Path="Dto/SLMS.Dto/SLMS.Dto.csproj" Id="808c69f8-4cab-42b1-ba2f-ffc08a9945de" />
