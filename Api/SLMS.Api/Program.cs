@@ -1,3 +1,7 @@
+
+using SLMS.Application;
+using SLMS.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,6 +20,11 @@ builder.Services.AddSwaggerGen(op =>
 
     });
 });
+builder.Services.ConfigureApplicationServices();
+builder.Services.ConfigurePersistenceServices(builder.Configuration);
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -8,11 +8,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Application\SLMS.Application\SLMS.Application.csproj" />
+    <ProjectReference Include="..\..\Persistence\SLMS.Persistence\SLMS.Persistence.csproj" />
+    <ProjectReference Include="..\..\Shared\SLMS.Shared\SLMS.Shared.csproj" />
   </ItemGroup>
 
 </Project>

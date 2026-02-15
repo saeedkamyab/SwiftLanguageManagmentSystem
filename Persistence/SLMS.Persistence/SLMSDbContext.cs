@@ -6,6 +6,10 @@ namespace SLMS.Persistence
 {
     public class SLMSDbContext : DbContext
     {
+        public SLMSDbContext()
+        {
+            
+        }
         public SLMSDbContext(DbContextOptions<SLMSDbContext> options) : base(options)
         {
 
