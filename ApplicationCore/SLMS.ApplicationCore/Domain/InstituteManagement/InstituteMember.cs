@@ -6,6 +6,7 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
     {
         public Guid InstituteId { get; set; }
         public Guid PersonId { get; set; }
+        public Guid LevelId { get; set; }
         public MemberType MemberType { get; set; }
     }
 }

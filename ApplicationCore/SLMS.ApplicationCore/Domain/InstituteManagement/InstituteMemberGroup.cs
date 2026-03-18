@@ -1,8 +1,8 @@
 ﻿namespace SLMS.ApplicationCore.Domain.InstituteManagement
 {
-    public class StudentGroup : BaseEntity
+    public class InstituteMemberGroup : BaseEntity
     {
-        public Guid PersonId { get; set; }
+        public Guid InstituteMemberId { get; set; }
         public Guid GroupId { get; set; }
     }
 }
