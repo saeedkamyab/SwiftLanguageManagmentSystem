@@ -5,7 +5,6 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
 {
     public class Certificate 
     {
-        public bool IsDeleted { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime LastUpdate { get; set; }
 

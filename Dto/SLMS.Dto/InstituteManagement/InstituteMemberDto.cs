@@ -2,7 +2,7 @@
 
 namespace SLMS.Dto.InstituteManagement
 {
-    public class InstituteMemberDto : BaseDto
+    public class InstituteMembershipDto : BaseDto
     {
         public Guid InstituteId { get; set; }
         public Guid PersonId { get; set; }

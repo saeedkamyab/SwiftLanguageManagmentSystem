@@ -2,9 +2,12 @@
 {
     public class Classification : BaseEntity
     {
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
         public Guid TermCourseId {  get; set; }
-        public Guid StudentId {  get; set; }//InstituteMemberId
+        public TermCourse TermCourse { get; set; }
+        public Guid ClassificationMemberId {  get; set; }//InstituteMembershipId
+        public InstituteMembership ClassificationMember { get; set; }
         public Certificate? Certificate { get; set; }
+        public List<AbsentPresent> AbsentPresents { get; set; } = [];
     }
 }

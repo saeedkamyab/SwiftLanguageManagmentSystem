@@ -3,6 +3,7 @@
     public class Level : BaseEntity
     {
         public Guid InstituteId { get; set; }
+        public Institute Institute { get; set; }
         public string Title { get; set; } = string.Empty;
     }
 }

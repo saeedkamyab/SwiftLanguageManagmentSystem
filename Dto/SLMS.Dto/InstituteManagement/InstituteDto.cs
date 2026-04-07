@@ -6,6 +6,6 @@
         public string Description { get; set; } = string.Empty;
 
 
-        public List<InstituteMemberDto> InstituteMembers { get; set; } = [];
+        public List<InstituteMembershipDto> InstituteMemberships { get; set; } = [];
     }
 }

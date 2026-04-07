@@ -5,6 +5,7 @@
         public string Title { get; set; } = string.Empty;
         public string Fields { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        public List<InstituteMember> InstituteMembers { get; set; } = [];
+        public List<InstituteMembership> InstituteMemberships { get; set; } = [];
+        public List<MembershipRequest> MembershipRequests { get; set; } = [];
     }
 }
