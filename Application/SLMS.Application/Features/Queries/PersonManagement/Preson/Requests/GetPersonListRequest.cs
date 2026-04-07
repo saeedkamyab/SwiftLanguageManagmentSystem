@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using SLMS.Dto.PersonManagement;
+using SLMS.Dto.UserManagement;
 
-namespace SLMS.Application.Features.Queries.PersonManagement.Preson.Requests
+namespace SLMS.Application.Features.Queries.UserManagement.Preson.Requests
 {
-    public class GetPersonListRequest:IRequest<List<PersonDto>>
+    public class GetUserListRequest:IRequest<List<UserDto>>
     {
     }
 }

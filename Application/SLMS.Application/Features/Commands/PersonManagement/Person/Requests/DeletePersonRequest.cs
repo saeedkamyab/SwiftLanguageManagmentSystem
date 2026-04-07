@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using SLMS.Dto.PersonManagement;
+using SLMS.Dto.UserManagement;
 
-namespace SLMS.Application.Features.Commands.PersonManagement.Person.Requests
+namespace SLMS.Application.Features.Commands.UserManagement.User.Requests
 {
-    public class DeletePersonRequest : IRequest<bool>
+    public class DeleteUserRequest : IRequest<bool>
     {
         public Guid Id { get; set; }
     }

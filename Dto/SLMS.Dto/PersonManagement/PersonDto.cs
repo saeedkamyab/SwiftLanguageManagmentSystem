@@ -1,6 +1,6 @@
-﻿namespace SLMS.Dto.PersonManagement
+﻿namespace SLMS.Dto.UserManagement
 {
-    public class PersonDto : BaseDto
+    public class UserDto : BaseDto
     {
         public string FirstName { get; set; }=string.Empty;
         public string LastName { get; set; } = string.Empty;

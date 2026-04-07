@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SLMS.ApplicationCore;
-using SLMS.ApplicationCore.Domain.PersonManagement;
+using SLMS.ApplicationCore.Domain.UserManagement;
 
 namespace SLMS.Persistence
 {
@@ -15,8 +15,8 @@ namespace SLMS.Persistence
 
         }
 
-        #region PersonManagement
-        public DbSet<Person> People { get; set; }
+        #region UserManagement
+        public DbSet<User> People { get; set; }
 
         #endregion
 

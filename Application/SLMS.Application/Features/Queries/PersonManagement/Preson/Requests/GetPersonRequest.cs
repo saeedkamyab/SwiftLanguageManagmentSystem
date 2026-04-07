@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using SLMS.Dto.PersonManagement;
+using SLMS.Dto.UserManagement;
 
-namespace SLMS.Application.Features.Queries.PersonManagement.Preson.Requests
+namespace SLMS.Application.Features.Queries.UserManagement.Preson.Requests
 {
-    public class GetPersonRequest:IRequest<PersonDto>
+    public class GetUserRequest:IRequest<UserDto>
     {
         public Guid Id { get; set; }
     }

@@ -1,10 +1,10 @@
 ﻿using MediatR;
-using SLMS.Dto.PersonManagement;
+using SLMS.Dto.UserManagement;
 
-namespace SLMS.Application.Features.Commands.PersonManagement.Person.Requests
+namespace SLMS.Application.Features.Commands.UserManagement.User.Requests
 {
-    public class CreatePersonRequest : IRequest<bool>
+    public class CreateUserRequest : IRequest<bool>
     {
-        public required PersonDto Person { get; set; }
+        public required UserDto User { get; set; }
     }
 }

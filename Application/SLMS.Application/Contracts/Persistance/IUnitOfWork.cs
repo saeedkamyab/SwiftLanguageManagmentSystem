@@ -1,11 +1,11 @@
-﻿using SLMS.ApplicationCore.Domain.PersonManagement;
+﻿using SLMS.ApplicationCore.Domain.UserManagement;
 
 namespace SLMS.Application.Contracts.Persistance
 {
     public interface IUnitOfWork
     {
-        #region PersonManagement
-        IBaseRepository<Person> PersonRepository { get; }
+        #region UserManagement
+        IBaseRepository<User> UserRepository { get; }
         #endregion
 
 

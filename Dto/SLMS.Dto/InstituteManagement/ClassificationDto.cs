@@ -3,6 +3,6 @@
     public class Classification : BaseDto
     {
         public Guid TermCourseId {  get; set; }
-        public Guid PersonId {  get; set; }
+        public Guid UserId {  get; set; }
     }
 }

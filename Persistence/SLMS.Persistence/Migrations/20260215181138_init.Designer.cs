@@ -25,7 +25,7 @@ namespace SLMS.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.PersonManagement.Person", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

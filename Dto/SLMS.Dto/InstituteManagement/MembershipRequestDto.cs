@@ -3,6 +3,6 @@
     public class MembershipRequestDto : BaseDto
     {
         public DateTime RequestDate { get; set; }
-        public Guid PersonId { get; set; }
+        public Guid UserId { get; set; }
     }
 }

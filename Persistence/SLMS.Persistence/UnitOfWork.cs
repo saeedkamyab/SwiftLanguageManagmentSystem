@@ -1,5 +1,5 @@
 ﻿using SLMS.Application.Contracts.Persistance;
-using SLMS.ApplicationCore.Domain.PersonManagement;
+using SLMS.ApplicationCore.Domain.UserManagement;
 using SLMS.Persistence.Repositories.Common;
 
 namespace SLMS.Persistence
@@ -10,8 +10,8 @@ namespace SLMS.Persistence
         private bool _disposed;
         #region Fields -----------------------------------------------------------
 
-        #region PersonManagement
-        private readonly Lazy<IBaseRepository<Person>> _personRepository;
+        #region UserManagement
+        private readonly Lazy<IBaseRepository<User>> _UserRepository;
 
         #endregion
 
@@ -20,9 +20,9 @@ namespace SLMS.Persistence
 
         #region Properties -------------------------------------------------------
 
-        #region PersonManagement
-        public IBaseRepository<Person> PersonRepository
-      => _personRepository.Value ;
+        #region UserManagement
+        public IBaseRepository<User> UserRepository
+      => _UserRepository.Value ;
 
         #endregion
 
@@ -33,8 +33,8 @@ namespace SLMS.Persistence
         public UnitOfWork(SLMSDbContext context)
         {
             _context = context;
-            _personRepository = new Lazy<IBaseRepository<Person>>(
-       () => new BaseRepository<Person>(_context));
+            _UserRepository = new Lazy<IBaseRepository<User>>(
+       () => new BaseRepository<User>(_context));
         }
         public async Task<int> CommitAsync(CancellationToken cancellationToken = default)
         {

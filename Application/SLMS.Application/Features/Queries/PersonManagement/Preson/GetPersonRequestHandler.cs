@@ -1,28 +1,28 @@
 ﻿using AutoMapper;
 using MediatR;
 using SLMS.Application.Contracts.Persistance;
-using SLMS.Application.Features.Queries.PersonManagement.Preson.Requests;
-using SLMS.Dto.PersonManagement;
+using SLMS.Application.Features.Queries.UserManagement.Preson.Requests;
+using SLMS.Dto.UserManagement;
 
-namespace SLMS.Application.Features.Queries.PersonManagement.Preson
+namespace SLMS.Application.Features.Queries.UserManagement.Preson
 {
-    public class GetPersonRequestHandler:IRequestHandler<GetPersonRequest,PersonDto>
+    public class GetUserRequestHandler:IRequestHandler<GetUserRequest,UserDto>
     {
         IMapper _mapper;
         IUnitOfWork _unitofwork;
 
-        public GetPersonRequestHandler(IMapper mapper, IUnitOfWork unitofwork)
+        public GetUserRequestHandler(IMapper mapper, IUnitOfWork unitofwork)
         {
             _mapper = mapper;
             _unitofwork = unitofwork;
         }
 
-        public async Task<PersonDto> Handle(GetPersonRequest request, CancellationToken cancellationToken)
+        public async Task<UserDto> Handle(GetUserRequest request, CancellationToken cancellationToken)
         {
             try
             {
-                var person = await _unitofwork.PersonRepository.GetByIdAsync(request.Id);
-                return _mapper.Map<PersonDto>(person);
+                var User = await _unitofwork.UserRepository.GetByIdAsync(request.Id);
+                return _mapper.Map<UserDto>(User);
             }
             catch
             {

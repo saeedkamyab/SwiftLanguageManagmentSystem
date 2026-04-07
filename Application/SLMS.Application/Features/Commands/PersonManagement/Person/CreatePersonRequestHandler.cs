@@ -1,27 +1,27 @@
 ﻿using AutoMapper;
 using MediatR;
 using SLMS.Application.Contracts.Persistance;
-using SLMS.Application.Features.Commands.PersonManagement.Person.Requests;
+using SLMS.Application.Features.Commands.UserManagement.User.Requests;
 
-namespace SLMS.Application.Features.Commands.PersonManagement.Person
+namespace SLMS.Application.Features.Commands.UserManagement.User
 {
-    public class CreatePersonRequestHandler : IRequestHandler<CreatePersonRequest, bool>
+    public class CreateUserRequestHandler : IRequestHandler<CreateUserRequest, bool>
     {
         IUnitOfWork _unitOfWork;
         IMapper _mapper;
 
-        public CreatePersonRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public CreateUserRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
-        public async Task<bool> Handle(CreatePersonRequest request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(CreateUserRequest request, CancellationToken cancellationToken)
         {
             try
             {
-                var person = _mapper.Map<ApplicationCore.Domain.PersonManagement.Person>(request.Person);
-                _unitOfWork.PersonRepository.Add(person);
+                var User = _mapper.Map<ApplicationCore.Domain.UserManagement.User>(request.User);
+                _unitOfWork.UserRepository.Add(User);
                 await _unitOfWork.CommitAsync();
                 return true;
             }
