@@ -17,5 +17,6 @@ namespace SLMS.ApplicationCore.Domain.UserManagement
 
         public ICollection<Follow> Followings { get; set; } = [];
         public ICollection<Follow> Followers { get; set; } = [];
+        public ICollection<Post> Posts { get; set; } = [];
     }
 }

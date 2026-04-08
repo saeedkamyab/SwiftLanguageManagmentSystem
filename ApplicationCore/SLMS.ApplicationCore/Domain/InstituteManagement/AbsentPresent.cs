@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SLMS.ApplicationCore.Domain.InstituteManagement
 {
     public class AbsentPresent:BaseEntity
     {
         public Guid ClassifictionId { get; set; }
+        [ForeignKey(nameof(ClassifictionId))]
         public Classification Classifiction { get; set; }
         public bool Status { get; set; }
         public DateTime Date { get; set; }
