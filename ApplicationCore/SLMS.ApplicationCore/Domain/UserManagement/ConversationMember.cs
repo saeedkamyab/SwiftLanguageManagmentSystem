@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SLMS.ApplicationCore.Domain.UserManagement
 {
-    public class ConversationMembers
+    public class ConversationMember
     {
         public Guid ConversationId { get; set; }
         public Conversation Conversation { get; set; }
