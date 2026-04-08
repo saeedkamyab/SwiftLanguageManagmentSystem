@@ -1,4 +1,6 @@
-﻿namespace SLMS.ApplicationCore.Domain.InstituteManagement
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SLMS.ApplicationCore.Domain.InstituteManagement
 {
     public class AbsentPresent:BaseEntity
     {
@@ -7,6 +9,7 @@
         public bool Status { get; set; }
         public DateTime Date { get; set; }
         public int SessionNumber { get; set; }
+        [StringLength(250)]
         public string Description { get; set; } = string.Empty;
     }
 }

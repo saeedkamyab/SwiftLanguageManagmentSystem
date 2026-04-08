@@ -19,4 +19,10 @@
         Thursday=6,
         Friday=7,
     }
+    public enum CertificateStatus : byte
+    {
+        None = 0,
+        Passed = 1,
+        Failed = 2,
+    }
 }

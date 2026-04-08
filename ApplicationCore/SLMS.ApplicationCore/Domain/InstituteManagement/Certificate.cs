@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SLMS.Shared.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SLMS.ApplicationCore.Domain.InstituteManagement
@@ -14,7 +15,7 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
         public int Speaking { get; set; }
         public int MidTerm { get; set; }
         public int Final { get; set; }
-        public byte Status { get; set; }
+        public CertificateStatus Status { get; set; }
         
 
         [Key, ForeignKey("Classification")]

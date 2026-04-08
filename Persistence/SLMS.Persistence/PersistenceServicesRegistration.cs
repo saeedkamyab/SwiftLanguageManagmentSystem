@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 using SLMS.Application.Contracts.Persistance;
 namespace SLMS.Persistence
 {
@@ -10,7 +11,7 @@ namespace SLMS.Persistence
         {
             services.AddDbContext<SLMSDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("connectionString"));
+                options.UseNpgsql(configuration.GetConnectionString("connectionString"));
             });
 
             //services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
