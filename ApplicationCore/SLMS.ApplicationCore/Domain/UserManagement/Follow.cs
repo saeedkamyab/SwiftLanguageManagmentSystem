@@ -5,13 +5,12 @@ using System.Text;
 
 namespace SLMS.ApplicationCore.Domain.UserManagement
 {
+    [Table("Follow", Schema = "UserManagment")]
     public class Follow:BaseEntity
     {
         public Guid FollowerUserId {  get; set; }
-        [ForeignKey(nameof(FollowerUserId))]
         public User FollowerUser {  get; set; }
         public Guid FollowingUserId {  get; set; }
-        [ForeignKey(nameof(FollowingUserId))]
         public User FollowingUser {  get; set; }
     }
 }

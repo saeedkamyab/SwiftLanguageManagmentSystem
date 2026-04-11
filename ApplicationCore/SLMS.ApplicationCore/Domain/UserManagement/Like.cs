@@ -5,13 +5,13 @@ using System.Text;
 
 namespace SLMS.ApplicationCore.Domain.UserManagement
 {
+    [Table("Like", Schema = "UserManagment")]
     public class Like:BaseEntity
     {
         public Guid PostId { get; set; }
-        [ForeignKey(nameof(PostId))]
         public Post Post { get; set; }
+       
         public Guid UserId { get; set; }
-        [ForeignKey(nameof(UserId))]
         public User User { get; set; }
     }
 }
