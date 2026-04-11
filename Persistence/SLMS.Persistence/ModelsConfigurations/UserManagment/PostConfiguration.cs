@@ -8,6 +8,11 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
     {
         public void Configure(EntityTypeBuilder<Post> post)
         {
+            post.Property(p=>p.Title).HasMaxLength(100);
+            post.Property(p=>p.Caption).HasMaxLength(500);
+            post.Property(p=>p.ImageUrl).HasMaxLength(1500).IsRequired(false);
+           
+
             post.HasOne(p=>p.PostOwner)
                 .WithMany(u=>u.Posts)
                 .HasForeignKey(p=>p.PostOwnerId)

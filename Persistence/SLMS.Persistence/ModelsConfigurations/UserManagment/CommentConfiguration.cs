@@ -8,6 +8,9 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
     {
         public void Configure(EntityTypeBuilder<Comment> comment)
         {
+
+            comment.Property(c => c.CommentContext).HasMaxLength(350);
+
             comment.HasOne(c => c.Post)
                 .WithMany(c => c.Comments)
                 .HasForeignKey(c => c.PostId)

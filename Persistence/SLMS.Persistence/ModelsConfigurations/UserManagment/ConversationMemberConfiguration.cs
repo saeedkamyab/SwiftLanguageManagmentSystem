@@ -8,6 +8,10 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
     {
         public void Configure(EntityTypeBuilder<ConversationMember> conversationMember)
         {
+
+
+            conversationMember.Property(c => c.LastReadMessageTimestamp).IsRequired(false);
+
             conversationMember.HasOne(c => c.Conversation)
                 .WithMany(c => c.ConversationMembers)
                 .HasForeignKey(c => c.ConversationId)
