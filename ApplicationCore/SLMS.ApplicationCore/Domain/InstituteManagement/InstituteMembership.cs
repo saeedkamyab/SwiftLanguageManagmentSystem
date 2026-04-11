@@ -4,18 +4,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SLMS.ApplicationCore.Domain.InstituteManagement
 {
+    [Table("InstituteMembership", Schema = "InstituteManagement")]
     public class InstituteMembership : BaseEntity
     {
+        public MemberType MemberType { get; set; }
+
+
         public Guid InstituteId { get; set; }
-        [ForeignKey(nameof(InstituteId))]
         public Institute Institute { get; set; }
         public Guid UserId { get; set; }
-        [ForeignKey(nameof(UserId))]
         public User User { get; set; }
         public Guid LevelId { get; set; }
-        [ForeignKey(nameof(LevelId))]
         public Level Level { get; set; }
-        public MemberType MemberType { get; set; }
+
+       public ICollection<Classification> Classifications { get; set; }
+       public ICollection<InstituteMembershipGroup> InstituteMembershipGroups { get; set; }
 
     }
 }

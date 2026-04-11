@@ -1,17 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SLMS.ApplicationCore.Domain.InstituteManagement
 {
+    [Table("AbsentPresent", Schema = "InstituteManagement")]
     public class AbsentPresent:BaseEntity
     {
-        public Guid ClassifictionId { get; set; }
-        [ForeignKey(nameof(ClassifictionId))]
-        public Classification Classifiction { get; set; }
         public bool Status { get; set; }
         public DateTime Date { get; set; }
         public int SessionNumber { get; set; }
-        [StringLength(250)]
         public string Description { get; set; } = string.Empty;
+
+        
+        public Guid ClassifictionId { get; set; }
+        public Classification Classifiction { get; set; }
+        
     }
 }

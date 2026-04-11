@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SLMS.ApplicationCore;
+using SLMS.ApplicationCore.Domain.InstituteManagement;
 using SLMS.ApplicationCore.Domain.UserManagement;
 
 namespace SLMS.Persistence
@@ -14,6 +15,20 @@ namespace SLMS.Persistence
         {
 
         }
+        #region InstituteManagement
+        public DbSet<AbsentPresent> AbsentPresents { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
+        public DbSet<Classification> Classifications { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Institute> Institutes { get; set; }
+        public DbSet<InstituteMembership> InstituteMemberships { get; set; }
+        public DbSet<InstituteMembershipGroup> InstituteMembershipGroups { get; set; }
+        public DbSet<Level> Levels { get; set; }
+        public DbSet<MembershipRequest> MembershipRequests { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<TermCourse> TermCourses { get; set; }
+        #endregion
+
 
         #region UserManagement
         public DbSet<User> Users { get; set; }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using SLMS.ApplicationCore.Domain.InstituteManagement;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SLMS.ApplicationCore.Domain.UserManagement
 {
@@ -11,6 +12,8 @@ namespace SLMS.ApplicationCore.Domain.UserManagement
         public string UserName { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
 
+
+
         public ICollection<Follow> Followings { get; set; } = [];
         public ICollection<Follow> Followers { get; set; } = [];
         public ICollection<Post> Posts { get; set; } = [];
@@ -18,5 +21,7 @@ namespace SLMS.ApplicationCore.Domain.UserManagement
         public ICollection<Comment> Comments { get; set; } = [];
         public ICollection<Message> Messages { get; set; } = [];
         public ICollection<ConversationMember> ConversationMembers { get; set; } = [];
+        public ICollection<InstituteMembership> InstituteMemberships { get; set; } = [];
+        public ICollection<MembershipRequest> MembershipRequests { get; set; } = [];
     }
 }

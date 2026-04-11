@@ -1,9 +1,9 @@
 ﻿using SLMS.Shared.Enums;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SLMS.ApplicationCore.Domain.InstituteManagement
 {
+    [Table("Certificate", Schema = "InstituteManagement")]
     public class Certificate 
     {
         public DateTime CreateDate { get; set; }
@@ -17,9 +17,7 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
         public int Final { get; set; }
         public CertificateStatus Status { get; set; }
         
-
-        [Key, ForeignKey("Classification")]
         public Guid ClassificationId { get; set; }
-        public Classification? Classification { get; set; }
+        public Classification Classification { get; set; }
     }
 }
