@@ -1,4 +1,5 @@
-﻿using SLMS.ApplicationCore.Domain.UserManagement;
+﻿using SLMS.ApplicationCore.Domain.InstituteManagement;
+using SLMS.ApplicationCore.Domain.UserManagement;
 
 namespace SLMS.Application.Contracts.Persistance
 {
@@ -6,12 +7,29 @@ namespace SLMS.Application.Contracts.Persistance
     {
         #region UserManagement
         IBaseRepository<User> UserRepository { get; }
-        #endregion
+        IBaseRepository<Comment> CommentRepository { get; }
+        IBaseRepository<Conversation> ConversationRepository { get;  }
+        IBaseRepository<ConversationMember> ConversationMemberRepository { get; }
+        IBaseRepository<Follow> FollowRepository { get; }
+        IBaseRepository<Message> MessageRepository { get; }
+        IBaseRepository<Post> PostRepository { get;  }
 
+        #endregion
 
         #region InstituteManagement
-
+        IBaseRepository<AbsentPresent> AbsentPresentRepository { get; }
+        IBaseRepository<Certificate> CertificateRepository { get; }
+        IBaseRepository<Classification> ClassificationRepository { get;}
+        IBaseRepository<Group> GroupRepository { get;  }
+        IBaseRepository<Institute> InstituteRepository { get;  }
+        IBaseRepository<InstituteMembership> InstituteMembershipRepository { get;  }
+        IBaseRepository<InstituteMembershipGroup> InstituteMembershipGroupRepository { get;  }
+        IBaseRepository<Level> LevelRepository { get; }
+        IBaseRepository<MembershipRequest> MembershipRequestRepository { get;  }
+        IBaseRepository<Room> RoomRepository { get; }
+        IBaseRepository<TermCourse> TermCourseRepository { get; }
         #endregion
+      
         Task<int> CommitAsync(CancellationToken cancellationToken = default);
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace SLMS.Persistence.Repositories.Common
 {
-    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity :BaseEntity
     {
 
         private readonly SLMSDbContext _context;

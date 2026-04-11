@@ -15,6 +15,7 @@ namespace SLMS.Persistence
         {
 
         }
+
         #region InstituteManagement
         public DbSet<AbsentPresent> AbsentPresents { get; set; }
         public DbSet<Certificate> Certificates { get; set; }
@@ -29,7 +30,6 @@ namespace SLMS.Persistence
         public DbSet<TermCourse> TermCourses { get; set; }
         #endregion
 
-
         #region UserManagement
         public DbSet<User> Users { get; set; }
         public DbSet<Comment> Comments { get; set; }
@@ -37,7 +37,7 @@ namespace SLMS.Persistence
         public DbSet<ConversationMember> ConversationMembers { get; set; }
         public DbSet<Follow> Follows { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<Post> Post { get; set; }
+        public DbSet<Post> Posts { get; set; }
 
         #endregion
 

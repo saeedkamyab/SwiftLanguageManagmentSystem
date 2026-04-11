@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SLMS.ApplicationCore.Domain.InstituteManagement
 {
     [Table("Certificate", Schema = "InstituteManagement")]
-    public class Certificate 
+    public class Certificate :BaseEntity
     {
         public DateTime CreateDate { get; set; }
         public DateTime LastUpdate { get; set; }

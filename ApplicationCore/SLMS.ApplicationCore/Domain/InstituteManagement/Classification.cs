@@ -12,7 +12,7 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
         public TermCourse TermCourse { get; set; }
         public Guid ClassificationMemberId {  get; set; }//InstituteMembershipId
         public InstituteMembership ClassificationMember { get; set; }
-        public Certificate Certificate { get; set; }
+        public Certificate? Certificate { get; set; }
         public ICollection<AbsentPresent> AbsentPresents { get; set; } = [];
     }
 }
