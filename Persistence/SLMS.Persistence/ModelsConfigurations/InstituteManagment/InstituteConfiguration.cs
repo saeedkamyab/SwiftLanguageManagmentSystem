@@ -9,9 +9,9 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
         public void Configure(EntityTypeBuilder<Institute> Institute)
         {
 
-            Institute.Property(i =>i.Title).HasMaxLength(100);
-            Institute.Property(i =>i.Title).HasMaxLength(300);
-            Institute.Property(i =>i.Description).HasMaxLength(250).IsRequired(false);
+            Institute.Property<>(i => i.Title).HasMaxLength(100);
+            Institute.Property<>(i => i.Title).HasMaxLength(300);
+            Institute.Property<>(i => i.Description).HasMaxLength(250).IsRequired(false);
 
         }
     }
