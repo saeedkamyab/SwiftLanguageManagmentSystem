@@ -11,13 +11,11 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
             membershipRequest.HasOne(msr => msr.User)
                 .WithMany(u => u.MembershipRequests)
                 .HasForeignKey(msr => msr.UserId)
-                .HasConstraintName("FK_MembershipRequest_User");
-
+;
 
             membershipRequest.HasOne(msr => msr.Institute)
                 .WithMany(i => i.MembershipRequests)
                 .HasForeignKey(msr => msr.InstituteId)
-                .HasConstraintName("FK_MembershipRequest_Institute");
-        }
+;        }
     }
 }

@@ -15,7 +15,6 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
             group.HasOne(g => g.Institute)
                 .WithMany(i=>i.Groups)
                 .HasForeignKey(g=>g.InstituteId)
-                .HasConstraintName("FK_Group_Institute");
-        }
+;        }
     }
 }

@@ -14,8 +14,7 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
             room.HasOne(r => r.Institute)
                 .WithMany(i => i.Rooms)
                 .HasForeignKey(r => r.InstituteId)
-                .HasConstraintName("FK_Room_Institute");
-
+;
         }
     }
 }

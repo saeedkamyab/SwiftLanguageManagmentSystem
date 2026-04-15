@@ -12,20 +12,17 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
             instituteMembership.HasOne(im => im.Institute)
                 .WithMany(i => i.InstituteMemberships)
                 .HasForeignKey(im => im.InstituteId)
-                .HasConstraintName("FK_InstituteMembership_Institute");
-
+;
 
             instituteMembership.HasOne(im => im.User)
                 .WithMany(u => u.InstituteMemberships)
                 .HasForeignKey(im => im.UserId)
-                .HasConstraintName("FK_InstituteMembership_User");
-
+;
 
             instituteMembership.HasOne(im => im.Level)
                 .WithMany()
                 .HasForeignKey(im => im.LevelId)
-                .HasConstraintName("FK_InstituteMembership_Level");
-
+;
         }
     }
 }

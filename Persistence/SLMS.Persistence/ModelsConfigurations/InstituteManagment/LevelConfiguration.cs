@@ -14,7 +14,6 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
             level.HasOne(l => l.Institute)
                 .WithMany(c => c.Levels)
                 .HasForeignKey(l => l.InstituteId)
-                .HasConstraintName("FK_Level_Institute");
-        }
+;        }
     }
 }

@@ -14,12 +14,10 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
             classification.HasOne(c => c.TermCourse)
                 .WithMany(tc => tc.Classifications)
                 .HasForeignKey(c => c.TermCourseId)
-                .HasConstraintName("FK_Classification_TermCourse");
-
+;
             classification.HasOne(c => c.ClassificationMember)
         .WithMany(im => im.Classifications)
         .HasForeignKey(c => c.ClassificationMemberId)
-        .HasConstraintName("FK_Classification_ClassificationMember");
-        }
+;        }
     }
 }

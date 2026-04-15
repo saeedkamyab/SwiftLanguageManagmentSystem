@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SLMS.Application.Features.Commands.UserManagement.User.Requests;
-using SLMS.Application.Features.Queries.UserManagement.Preson.Requests;
+using SLMS.Application.Features.Queries.UserManagement.User.Requests;
 using SLMS.Dto.UserManagement;
 
 namespace SLMS.Api.Controllers.UserManagement

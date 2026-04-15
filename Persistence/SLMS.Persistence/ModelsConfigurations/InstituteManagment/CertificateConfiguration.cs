@@ -12,8 +12,7 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
             certificate.HasOne(c => c.Classification)
                 .WithOne(cl => cl.Certificate)
                 .HasForeignKey<Certificate>(c => c.ClassificationId)
-                .HasConstraintName("FK_Certificate_Classifiction");
-
+;
 
         }
     }

@@ -14,7 +14,6 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
             absentPresent.HasOne(ap => ap.Classifiction)
                 .WithMany(c => c.AbsentPresents)
                 .HasForeignKey(ap => ap.ClassifictionId)
-                .HasConstraintName("FK_AbsentPresent_Classifiction");
-        }
+;        }
     }
 }

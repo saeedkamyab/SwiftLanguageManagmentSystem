@@ -16,7 +16,6 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
             post.HasOne(p=>p.PostOwner)
                 .WithMany(u=>u.Posts)
                 .HasForeignKey(p=>p.PostOwnerId)
-                .HasConstraintName("FK_Post_PosterUser");
-        }
+;        }
     }
 }

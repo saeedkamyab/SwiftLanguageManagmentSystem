@@ -11,12 +11,10 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
             follow.HasOne(f => f.FollowerUser)
                 .WithMany(u => u.Followers)
                 .HasForeignKey(f => f.FollowerUserId)
-                .HasConstraintName("FK_Follow_FollowerUser");
-
+;
             follow.HasOne(f => f.FollowingUser)
                         .WithMany(u => u.Followings)
                         .HasForeignKey(f => f.FollowingUserId)
-                        .HasConstraintName("FK_Follow_FollowingsUser");
-        }
+;        }
     }
 }

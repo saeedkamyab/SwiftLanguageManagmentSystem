@@ -1,4 +1,4 @@
-﻿namespace SLMS.Dto.nstituteManagement
+﻿namespace SLMS.Dto.InstituteManagement
 {
     public class LevelDto : BaseDto
     {

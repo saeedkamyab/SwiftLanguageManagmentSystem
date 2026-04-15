@@ -11,12 +11,10 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
             Like.HasOne(l => l.Post)
                 .WithMany(p => p.Likes)
                 .HasForeignKey(l => l.PostId)
-                .HasConstraintName("FK_Like_Post");
-
+;
             Like.HasOne(l => l.User)
                         .WithMany(u => u.Likes)// you can have empty
                         .HasForeignKey(l => l.UserId)
-                        .HasConstraintName("FK_Like_User");
-        }
+;        }
     }
 }

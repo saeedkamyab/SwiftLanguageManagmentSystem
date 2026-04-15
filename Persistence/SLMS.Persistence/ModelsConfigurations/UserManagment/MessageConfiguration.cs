@@ -19,12 +19,10 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
             message.HasOne(m => m.Conversation)
                 .WithMany(c => c.Messages)
                 .HasForeignKey(m => m.ConversationId)
-                .HasConstraintName("FK_Message_Conversation");
-
+;
             message.HasOne(m => m.SenderUser)
                         .WithMany(u => u.Messages)
                         .HasForeignKey(m => m.SenderUserId)
-                        .HasConstraintName("FK_Message_User");
-        }
+;        }
     }
 }

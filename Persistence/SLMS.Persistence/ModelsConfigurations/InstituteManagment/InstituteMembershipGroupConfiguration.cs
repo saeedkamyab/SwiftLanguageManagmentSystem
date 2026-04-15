@@ -11,12 +11,10 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
             instituteMembershipGroup.HasOne(img => img.InstituteMembership)
                 .WithMany(im => im.InstituteMembershipGroups)
                 .HasForeignKey(img => img.InstituteMembershipId)
-                .HasConstraintName("FK_InstituteMembershipGroup_InstituteMembership");
-
+;
             instituteMembershipGroup.HasOne(img => img.Group)
                .WithMany(g => g.InstituteMembershipGroups)
                .HasForeignKey(img => img.GroupId)
-               .HasConstraintName("FK_InstituteMembershipGroup_Group");
-        }
+;        }
     }
 }

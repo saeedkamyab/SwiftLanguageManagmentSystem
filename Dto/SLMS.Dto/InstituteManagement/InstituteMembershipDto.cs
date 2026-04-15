@@ -1,7 +1,7 @@
 ﻿using SLMS.Dto.UserManagement;
 using SLMS.Shared.Enums;
 
-namespace SLMS.Dto.nstituteManagement
+namespace SLMS.Dto.InstituteManagement
 {
     public class InstituteMembershipDto : BaseDto
     {

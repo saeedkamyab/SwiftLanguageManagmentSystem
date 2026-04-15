@@ -6,12 +6,12 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
 {
     public class InstituteConfiguration : IEntityTypeConfiguration<Institute>
     {
-        public void Configure(EntityTypeBuilder<Institute> Institute)
+        public void Configure(EntityTypeBuilder<Institute> institute)
         {
 
-            Institute.Property<>(i => i.Title).HasMaxLength(100);
-            Institute.Property<>(i => i.Title).HasMaxLength(300);
-            Institute.Property<>(i => i.Description).HasMaxLength(250).IsRequired(false);
+            institute.Property(i => i.Title).HasMaxLength(100);
+            institute.Property(i => i.Title).HasMaxLength(300);
+            institute.Property(i => i.Description).HasMaxLength(250).IsRequired(false);
 
         }
     }

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using SLMS.Dto.UserManagement;
 
-namespace SLMS.Application.Features.Queries.UserManagement.Preson.Requests
+namespace SLMS.Application.Features.Queries.UserManagement.User.Requests
 {
     public class GetUserRequest:IRequest<UserDto>
     {

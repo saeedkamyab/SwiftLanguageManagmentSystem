@@ -1,6 +1,6 @@
 ﻿using SLMS.Dto.UserManagement;
 
-namespace SLMS.Dto.nstituteManagement
+namespace SLMS.Dto.InstituteManagement
 {
     public class MembershipRequestDto : BaseDto
     {
