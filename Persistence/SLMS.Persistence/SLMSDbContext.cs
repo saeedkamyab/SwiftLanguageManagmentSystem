@@ -9,7 +9,7 @@ namespace SLMS.Persistence
     {
         public SLMSDbContext()
         {
-            
+
         }
         public SLMSDbContext(DbContextOptions<SLMSDbContext> options) : base(options)
         {
@@ -62,6 +62,11 @@ namespace SLMS.Persistence
                 if (entry.State == EntityState.Added)
                 {
                     entry.Entity.CreateDate = DateTime.UtcNow;
+                    entry.Entity.IsDeleted = false;
+                    if (entry.Entity is Message message)
+                    {
+                        message.SentAt = DateTime.UtcNow;
+                    }
                 }
                 else if (entry.State == EntityState.Modified)
                 {
