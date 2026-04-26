@@ -1,4 +1,4 @@
-﻿using SLMS.Dto.UserManagement;
+﻿using SLMS.Dto.User;
 using SLMS.Shared.Enums;
 
 namespace SLMS.Dto.InstituteManagement

@@ -424,47 +424,7 @@ namespace SLMS.Persistence.Migrations
                     b.ToTable("TermCourse", "InstituteManagement");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.Comment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("CommentContext")
-                        .IsRequired()
-                        .HasMaxLength(350)
-                        .HasColumnType("character varying(350)");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("ParentId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("PostId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentId");
-
-                    b.HasIndex("PostId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Comment", "UserManagment");
-                });
-
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.Conversation", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.Messaging.Conversation", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -484,10 +444,10 @@ namespace SLMS.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Conversation", "UserManagment");
+                    b.ToTable("Conversation", "Messaging");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.ConversationMember", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.Messaging.ConversationMember", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -517,70 +477,10 @@ namespace SLMS.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ConversationMember", "UserManagment");
+                    b.ToTable("ConversationMember", "Messaging");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.Follow", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("FollowerUserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("FollowingUserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FollowerUserId");
-
-                    b.HasIndex("FollowingUserId");
-
-                    b.ToTable("Follow", "UserManagment");
-                });
-
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.Like", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("PostId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PostId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Like", "UserManagment");
-                });
-
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.Message", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.Messaging.Message", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -628,10 +528,110 @@ namespace SLMS.Persistence.Migrations
 
                     b.HasIndex("SenderUserId");
 
-                    b.ToTable("Message", "UserManagment");
+                    b.ToTable("Message", "Messaging");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.Post", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.SocialNetwork.Comment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CommentContext")
+                        .IsRequired()
+                        .HasMaxLength(350)
+                        .HasColumnType("character varying(350)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("ParentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comment", "SocialNetwork");
+                });
+
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.SocialNetwork.Follow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("FollowerUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("FollowingUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FollowerUserId");
+
+                    b.HasIndex("FollowingUserId");
+
+                    b.ToTable("Follow", "SocialNetwork");
+                });
+
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.SocialNetwork.Like", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Like", "SocialNetwork");
+                });
+
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.SocialNetwork.Post", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -667,10 +667,10 @@ namespace SLMS.Persistence.Migrations
 
                     b.HasIndex("PostOwnerId");
 
-                    b.ToTable("Post", "UserManagment");
+                    b.ToTable("Post", "SocialNetwork");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.User", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.User.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -679,13 +679,15 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Email")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
+
                     b.Property<string>("FatherName")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
@@ -693,17 +695,25 @@ namespace SLMS.Persistence.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("NationalCode")
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(1500)
                         .HasColumnType("character varying(1500)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("character varying(11)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -781,7 +791,7 @@ namespace SLMS.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SLMS.ApplicationCore.Domain.UserManagement.User", "User")
+                    b.HasOne("SLMS.ApplicationCore.Domain.User.User", "User")
                         .WithMany("InstituteMemberships")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -832,7 +842,7 @@ namespace SLMS.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SLMS.ApplicationCore.Domain.UserManagement.User", "User")
+                    b.HasOne("SLMS.ApplicationCore.Domain.User.User", "User")
                         .WithMany("MembershipRequests")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -881,19 +891,57 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("Room");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.Comment", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.Messaging.ConversationMember", b =>
                 {
-                    b.HasOne("SLMS.ApplicationCore.Domain.UserManagement.Comment", "Parent")
+                    b.HasOne("SLMS.ApplicationCore.Domain.Messaging.Conversation", "Conversation")
+                        .WithMany("ConversationMembers")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SLMS.ApplicationCore.Domain.User.User", "User")
+                        .WithMany("ConversationMembers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Conversation");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.Messaging.Message", b =>
+                {
+                    b.HasOne("SLMS.ApplicationCore.Domain.Messaging.Conversation", "Conversation")
+                        .WithMany("Messages")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SLMS.ApplicationCore.Domain.User.User", "SenderUser")
+                        .WithMany("Messages")
+                        .HasForeignKey("SenderUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Conversation");
+
+                    b.Navigation("SenderUser");
+                });
+
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.SocialNetwork.Comment", b =>
+                {
+                    b.HasOne("SLMS.ApplicationCore.Domain.SocialNetwork.Comment", "Parent")
                         .WithMany("ChildComments")
                         .HasForeignKey("ParentId");
 
-                    b.HasOne("SLMS.ApplicationCore.Domain.UserManagement.Post", "Post")
+                    b.HasOne("SLMS.ApplicationCore.Domain.SocialNetwork.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SLMS.ApplicationCore.Domain.UserManagement.User", "User")
+                    b.HasOne("SLMS.ApplicationCore.Domain.User.User", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -906,34 +954,15 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.ConversationMember", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.SocialNetwork.Follow", b =>
                 {
-                    b.HasOne("SLMS.ApplicationCore.Domain.UserManagement.Conversation", "Conversation")
-                        .WithMany("ConversationMembers")
-                        .HasForeignKey("ConversationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SLMS.ApplicationCore.Domain.UserManagement.User", "User")
-                        .WithMany("ConversationMembers")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Conversation");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.Follow", b =>
-                {
-                    b.HasOne("SLMS.ApplicationCore.Domain.UserManagement.User", "FollowerUser")
+                    b.HasOne("SLMS.ApplicationCore.Domain.User.User", "FollowerUser")
                         .WithMany("Followers")
                         .HasForeignKey("FollowerUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SLMS.ApplicationCore.Domain.UserManagement.User", "FollowingUser")
+                    b.HasOne("SLMS.ApplicationCore.Domain.User.User", "FollowingUser")
                         .WithMany("Followings")
                         .HasForeignKey("FollowingUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -944,15 +973,15 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("FollowingUser");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.Like", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.SocialNetwork.Like", b =>
                 {
-                    b.HasOne("SLMS.ApplicationCore.Domain.UserManagement.Post", "Post")
+                    b.HasOne("SLMS.ApplicationCore.Domain.SocialNetwork.Post", "Post")
                         .WithMany("Likes")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SLMS.ApplicationCore.Domain.UserManagement.User", "User")
+                    b.HasOne("SLMS.ApplicationCore.Domain.User.User", "User")
                         .WithMany("Likes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -963,28 +992,9 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.Message", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.SocialNetwork.Post", b =>
                 {
-                    b.HasOne("SLMS.ApplicationCore.Domain.UserManagement.Conversation", "Conversation")
-                        .WithMany("Messages")
-                        .HasForeignKey("ConversationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SLMS.ApplicationCore.Domain.UserManagement.User", "SenderUser")
-                        .WithMany("Messages")
-                        .HasForeignKey("SenderUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Conversation");
-
-                    b.Navigation("SenderUser");
-                });
-
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.Post", b =>
-                {
-                    b.HasOne("SLMS.ApplicationCore.Domain.UserManagement.User", "PostOwner")
+                    b.HasOne("SLMS.ApplicationCore.Domain.User.User", "PostOwner")
                         .WithMany("Posts")
                         .HasForeignKey("PostOwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1035,26 +1045,26 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("Classifications");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.Comment", b =>
-                {
-                    b.Navigation("ChildComments");
-                });
-
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.Conversation", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.Messaging.Conversation", b =>
                 {
                     b.Navigation("ConversationMembers");
 
                     b.Navigation("Messages");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.Post", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.SocialNetwork.Comment", b =>
+                {
+                    b.Navigation("ChildComments");
+                });
+
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.SocialNetwork.Post", b =>
                 {
                     b.Navigation("Comments");
 
                     b.Navigation("Likes");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.UserManagement.User", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.User.User", b =>
                 {
                     b.Navigation("Comments");
 

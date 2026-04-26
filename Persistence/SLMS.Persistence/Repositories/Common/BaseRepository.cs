@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SLMS.Application.Contracts.Persistance;
 using SLMS.ApplicationCore;
-using System.Collections.ObjectModel;
+using System.Linq.Expressions;
 
 namespace SLMS.Persistence.Repositories.Common
 {
-    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity :BaseEntity
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
     {
 
         private readonly SLMSDbContext _context;
@@ -22,11 +22,11 @@ namespace SLMS.Persistence.Repositories.Common
                 .Where(x => !x.IsDeleted)
                 .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
-        public virtual async Task<IReadOnlyList<TEntity>> GetAllAsync(
+        public virtual async Task<IReadOnlyList<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate,
         CancellationToken cancellationToken = default)
         {
             return await _dbSet
-                .Where(x => !x.IsDeleted)
+                .Where(predicate)
                 .ToListAsync(cancellationToken);
         }
         public virtual void Add(TEntity entity)
@@ -56,10 +56,14 @@ namespace SLMS.Persistence.Repositories.Common
         {
             _dbSet.RemoveRange(entities);
         }
-        public virtual void SoftDelete(TEntity entity)
+        public virtual async Task SoftDelete(Guid id)
         {
-            entity.IsDeleted = true;
-            _dbSet.Entry(entity).State = EntityState.Modified;
+            var entity = await GetByIdAsync(id);
+            if (entity != null)
+            {
+                entity.IsDeleted = true;
+                _dbSet.Entry(entity).State = EntityState.Modified;
+            }
         }
         public virtual void SoftDeleteRange(IEnumerable<TEntity> entities)
         {
@@ -69,5 +73,6 @@ namespace SLMS.Persistence.Repositories.Common
                 _dbSet.Entry(entity).State = EntityState.Modified;
             }
         }
+       
     }
 }

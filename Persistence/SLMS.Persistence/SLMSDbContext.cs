@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SLMS.ApplicationCore;
 using SLMS.ApplicationCore.Domain.InstituteManagement;
-using SLMS.ApplicationCore.Domain.UserManagement;
+using SLMS.ApplicationCore.Domain.Messaging;
+using SLMS.ApplicationCore.Domain.SocialNetwork;
+using SLMS.ApplicationCore.Domain.User;
 
 namespace SLMS.Persistence
 {

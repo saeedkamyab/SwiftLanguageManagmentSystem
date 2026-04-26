@@ -1,11 +1,12 @@
 ﻿using SLMS.ApplicationCore;
+using System.Linq.Expressions;
 
 namespace SLMS.Application.Contracts.Persistance
 {
     public interface IBaseRepository<TEntity> where TEntity : BaseEntity
     {
         Task<TEntity?> GetByIdAsync(Guid id,CancellationToken cancellationToken=default);
-        Task<IReadOnlyList<TEntity>> GetAllAsync(CancellationToken cancellationToken = default);
+        Task<IReadOnlyList<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
        
         
         void Add(TEntity entity);
@@ -15,7 +16,7 @@ namespace SLMS.Application.Contracts.Persistance
 
 
 
-        void SoftDelete(TEntity entity);
+        Task SoftDelete(Guid id);
         void SoftDeleteRange(IEnumerable<TEntity> entities);
 
     }

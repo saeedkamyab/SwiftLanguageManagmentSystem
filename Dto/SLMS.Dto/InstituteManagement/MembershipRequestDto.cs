@@ -1,4 +1,4 @@
-﻿using SLMS.Dto.UserManagement;
+﻿using SLMS.Dto.User;
 
 namespace SLMS.Dto.InstituteManagement
 {

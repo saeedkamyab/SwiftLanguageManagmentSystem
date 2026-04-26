@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using SLMS.ApplicationCore.Domain.UserManagement;
-using SLMS.Dto.UserManagement;
+using SLMS.ApplicationCore.Domain.User;
+using SLMS.Dto.User;
 
 namespace SLMS.Application
 {
@@ -9,6 +9,8 @@ namespace SLMS.Application
         public MappingProfiles()
         {
             #region  UserManagment
+            CreateMap<CreateUserDto, User>();
+            CreateMap<UpdateUserDto, User>();
             CreateMap<User, UserDto>().ReverseMap();
             #endregion
         }
