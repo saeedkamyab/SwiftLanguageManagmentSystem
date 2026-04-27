@@ -1,0 +1,21 @@
+﻿using System.Net.Http.Json;
+
+namespace SLMS.WebApplicationComponents.Services.Base
+{
+    public class BaseApiService
+    {
+        private readonly HttpClient _httpClient;
+
+        public BaseApiService(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
+        public async Task<T> GetAllAsync<T>(string endpoint)
+        {
+            var response = await _httpClient.GetAsync(endpoint);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<T>();
+        }
+}
+}

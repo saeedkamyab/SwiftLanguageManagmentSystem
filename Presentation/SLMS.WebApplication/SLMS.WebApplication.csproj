@@ -11,4 +11,8 @@
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SLMS.WebApplicationComponents\SLMS.WebApplicationComponents.csproj" />
+  </ItemGroup>
+
 </Project>
