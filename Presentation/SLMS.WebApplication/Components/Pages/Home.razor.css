@@ -1,0 +1,6 @@
+﻿.card {
+    height: 30rem;
+    width: 50rem;
+    background-color: var(--white);
+    margin: 10rem;
+}
