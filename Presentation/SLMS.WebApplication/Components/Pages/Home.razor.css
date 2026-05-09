@@ -1,6 +1,21 @@
-﻿.card {
+﻿/*.card {
     height: 30rem;
     width: 50rem;
     background-color: var(--white);
     margin: 10rem;
+}*/
+.main {
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start; 
+    gap: 20px; 
+    max-width: 135rem; 
+    margin: 0 auto; 
+}
+.post-container {
+    flex: 1;
+    max-width: 95rem;
+}
+.sidebar-container {
+    max-width: 30rem;
 }
