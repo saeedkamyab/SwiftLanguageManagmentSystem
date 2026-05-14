@@ -6,9 +6,10 @@
         "feed left-sidebar"
         "feed left-sidebar";
     gap: 1rem;
-    overflow: hidden;
+/*    overflow: hidden;*/
     height: 100%;
 }
+
 .feed {
     grid-area: feed;
     overflow-y: auto;
@@ -17,10 +18,53 @@
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE/Edge */
 }
+
 .left-sidebar {
     grid-area: left-sidebar;
     overflow-y: auto;
     padding-left: 2.5rem;
-   /* height: 100vh;*/
+    /* height: 100vh;*/
 }
 
+.mobile-add-post-btn {
+    display: none;
+}
+
+@media (max-width: 402px) {
+
+    .home-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "left-sidebar"
+            "feed";
+    }
+
+    .left-sidebar {
+        display: flex;
+        overflow-x: auto;
+        gap: 1rem;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+    }
+    .new-post{
+        display:none;
+    }
+    .mobile-add-post-btn {
+        display: flex;
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        width: 5rem;
+        height: 5rem;
+        border: none;
+        border-radius: 50%;
+        background: var(--mainBlue);
+        color: var(--white);
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0,0,0,.3);
+        z-index: 3000;
+    }
+}

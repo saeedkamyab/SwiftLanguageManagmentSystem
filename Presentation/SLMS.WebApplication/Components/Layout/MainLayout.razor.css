@@ -25,7 +25,30 @@
     grid-area: sidebar;
     overflow-y: auto;
 }
+.menu-btn {
+    display: none;
+    border: none;
+    background: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+.close-menu {
+    display: none;
+}
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+    z-index: 1500;
+}
 
+    .overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
 .content {
     grid-area: content;
     overflow-y: auto;
@@ -59,4 +82,93 @@
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
+}
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1500;
+}
+
+@media (max-width: 402px) {
+
+    .app-container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "content";
+    }
+
+    /* نمایش دکمه منو */
+    .menu-btn {
+        display: block;
+
+    }
+
+    /* سایدبار موبایل */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 16rem;
+        height: 100vh;
+        background: white;
+        z-index: 2000;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 20px rgba(0,0,0,.1);
+    }
+
+        /* وقتی باز شد */
+        .sidebar.active {
+            right: 0;
+        }
+
+    .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.4);
+        opacity: 0;
+        visibility: hidden;
+        transition: .3s;
+        z-index: 1500;
+    }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+    /* دکمه بستن */
+    .close-menu {
+        display: block;
+        border: none;
+        background: none;
+        padding: 0.5rem;
+        cursor: pointer;
+        border: 1px solid var(--blackgrey54);
+        color: var(--blackgrey54);
+        position: absolute;
+        z-index:2000;
+        left:0;
+    }
+
+    /* سرچ کوچکتر */
+    .search {
+        width: 100%;
+    }
+
+    .input-search {
+        width: 100%;
+    }
+
+    /* هدر */
+    .header {
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+
+    /* پروفایل مخفی */
+    .profile {
+        display: none;
+    }
 }
