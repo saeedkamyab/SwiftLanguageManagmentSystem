@@ -5,5 +5,5 @@
     background-color: var(--white);
     border-radius: 1.1rem;
     box-shadow: var(--boxshadow);
-    margin-top:2rem;
+    margin:2rem 1rem 0rem 0;
 }

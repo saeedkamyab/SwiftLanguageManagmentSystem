@@ -1,13 +1,20 @@
 ﻿.home-container {
     display: grid;
-    grid-template-columns: 1fr 30rem;
-    grid-template-rows: 1fr;
+    height: 100vh;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
     grid-template-areas:
-        "feed left-sidebar"
-        "feed left-sidebar";
+        "left-sidebar"
+        "feed";
+}
+
+.left-sidebar {
+    grid-area: left-sidebar;
+    display: flex;
+    overflow-x: auto;
     gap: 1rem;
-/*    overflow: hidden;*/
-    height: 100%;
+    scrollbar-width: none; /*Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
 }
 
 .feed {
@@ -15,56 +22,70 @@
     overflow-y: auto;
     padding: 16px;
     min-height: 0;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
+    scrollbar-width: none; /*Firefox*/
+    -ms-overflow-style: none; /*IE/Edge*/
 }
 
-.left-sidebar {
-    grid-area: left-sidebar;
-    overflow-y: auto;
-    padding-left: 2.5rem;
-    /* height: 100vh;*/
-}
-
-.mobile-add-post-btn {
+.new-post {
     display: none;
 }
 
-@media (max-width: 402px) {
+.mobile-add-post-btn {
+    display: flex;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 5rem;
+    height: 5rem;
+    border: none;
+    border-radius: 50%;
+    background: var(--mainBlue);
+    color: var(--white);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,.3);
+    z-index: 3000;
+}
 
+@media (min-width: 402px) {
+}
+/* mobile default */
+
+@media (min-width: 640px) {
+    /* large mobile */
+}
+
+@media (min-width: 768px) {
+    /* tablet */
+}
+
+@media (min-width: 1024px) {
+    /* laptop */
     .home-container {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto;
+        grid-template-columns: 1fr 30rem;
+        grid-template-rows: 1fr;
         grid-template-areas:
-            "left-sidebar"
-            "feed";
+            "feed left-sidebar"
+            "feed left-sidebar";
+        gap: 1rem;
+        /*    overflow: hidden;*/
+    }
+
+    .new-post {
+        display: block;
     }
 
     .left-sidebar {
-        display: flex;
-        overflow-x: auto;
-        gap: 1rem;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE/Edge */
+        overflow-y: auto;
+        display: block;
     }
-    .new-post{
-        display:none;
-    }
+
     .mobile-add-post-btn {
-        display: flex;
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        width: 5rem;
-        height: 5rem;
-        border: none;
-        border-radius: 50%;
-        background: var(--mainBlue);
-        color: var(--white);
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: 0 4px 15px rgba(0,0,0,.3);
-        z-index: 3000;
+        display: none;
     }
+}
+
+@media (min-width: 1280px) {
+    /* desktop */
 }
