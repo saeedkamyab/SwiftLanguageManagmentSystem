@@ -1,9 +1,28 @@
 ﻿.card {
     display: flex;
     flex-direction: column;
-    height: 15rem;
+    /* height: 15rem;*/
     background-color: var(--white);
     border-radius: 1.1rem;
     box-shadow: var(--boxshadow);
-    margin-top: 2rem;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.post-owner {
+    display: flex;
+}
+
+.post-owner__img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 4rem;
+    margin:0 0.5rem;
+}
+
+.owner-name {
+}
+
+.extera-detail {
+    color: var(--black);
 }

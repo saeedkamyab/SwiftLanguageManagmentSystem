@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using SLMS.ApplicationCore.Domain.SocialNetwork;
 using SLMS.ApplicationCore.Domain.User;
+using SLMS.Dto.SocialNetwork;
 using SLMS.Dto.User;
 
 namespace SLMS.Application
@@ -12,6 +14,24 @@ namespace SLMS.Application
             CreateMap<CreateUserDto, User>();
             CreateMap<UpdateUserDto, User>();
             CreateMap<User, UserDto>().ReverseMap();
+            #endregion
+
+            #region  SocialNetwork
+            //CreateMap<PostDto, Post>().ReverseMap();
+            CreateMap<Post, PostSummaryDto>()
+                .ForMember(postSummary => postSummary.OwnerId, opt => opt.MapFrom(post => post.PostOwner.Id))
+                .ForMember(postSummary => postSummary.OwnerFirstName, opt => opt.MapFrom(post => post.PostOwner.FirstName))
+                .ForMember(postSummary => postSummary.OwnerLastName, opt => opt.MapFrom(post => post.PostOwner.LastName))
+                //.ForMember(postSummary => postSummary.ImageUrl, opt => opt.MapFrom(post => post.PostOwner.pro))
+                .ForMember(postSummary => postSummary.LikesCount, opt => opt.MapFrom(post => post.Likes.Count))
+                //.ForMember(postSummary => postSummary.SharesCount, opt => opt.MapFrom(post => post.PostOwner.sh.Count))
+                .ForMember(postSummary => postSummary.CommentsCount, opt => opt.MapFrom(post => post.Comments.Count(c => !c.IsDeleted)))
+                .ForMember(postSummary => postSummary.IsLikedByCurrentUser, opt => opt.Ignore())
+                .ForMember(postSummary => postSummary.IsBookmarkedByCurrentUser, opt => opt.Ignore())
+               /* .ForMember(postSummary => postSummary.OwnerFullName, opt => opt.Ignore())*/.ReverseMap()
+
+                ;
+
             #endregion
         }
     }

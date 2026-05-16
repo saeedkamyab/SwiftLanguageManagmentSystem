@@ -1,7 +1,41 @@
-﻿<div class="card">
-    <h3>Posts</h3>
-</div>
+﻿@using SLMS.Dto.SocialNetwork
+@using SLMS.WebApplicationComponents.Services.SocialNetwork.Interface
+@inject IPostService PostService
+
+
+
+@if (posts == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    @foreach (var postItem in posts)
+    {
+        <div class="card">
+            <div class="post-owner">
+                <img class="post-owner__img" src="images/profiles/marj.jpg" />
+                <div>
+                    <span class="owner-name">مرجانه گلچین</span>
+                    <div class="extera-detail">
+                        <span>زبان فرانسه، انگلیسی</span>
+                        <span>3 ساعت قبل</span>
+                    </div>
+                </div>
+            </div>
+            <h3><b>@postItem.Title</b></h3>
+            <div>@postItem.Caption</div>
+         @*    <div>@postItem.Caption</div>
+            <div>@postItem.Caption</div> *@
+        </div>
+    }
+}
 
 @code {
+    private List<PostDto> posts;
 
+    protected override async Task OnInitializedAsync()
+    {
+        posts = await PostService.GetAllPostsAsync();
+    }
 }

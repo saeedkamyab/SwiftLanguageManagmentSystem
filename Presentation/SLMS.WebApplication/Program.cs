@@ -1,6 +1,8 @@
 using SLMS.WebApplication;
 using SLMS.WebApplication.Components;
 using SLMS.WebApplicationComponents.Services.Base;
+using SLMS.WebApplicationComponents.Services.SocialNetwork;
+using SLMS.WebApplicationComponents.Services.SocialNetwork.Interface;
 using SLMS.WebApplicationComponents.Services.Users;
 using SLMS.WebApplicationComponents.Services.Users.Interface;
 
@@ -10,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddHttpClient<BaseApiService>(client =>
 {
     client.BaseAddress = new Uri("https://localhost:7218");

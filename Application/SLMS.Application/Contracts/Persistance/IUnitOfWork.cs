@@ -1,4 +1,5 @@
-﻿using SLMS.ApplicationCore.Domain.InstituteManagement;
+﻿using SLMS.Application.Contracts.SocialNetwork;
+using SLMS.ApplicationCore.Domain.InstituteManagement;
 using SLMS.ApplicationCore.Domain.Messaging;
 using SLMS.ApplicationCore.Domain.SocialNetwork;
 using SLMS.ApplicationCore.Domain.User;
@@ -14,7 +15,9 @@ namespace SLMS.Application.Contracts.Persistance
         IBaseRepository<ConversationMember> ConversationMemberRepository { get; }
         IBaseRepository<Follow> FollowRepository { get; }
         IBaseRepository<Message> MessageRepository { get; }
-        IBaseRepository<Post> PostRepository { get;  }
+        IBaseRepository<Like> LikeRepository { get; }
+        //IBaseRepository<Post> PostRepository { get;  }
+        IPostRepository PostRepository { get;  }
 
         #endregion
 
