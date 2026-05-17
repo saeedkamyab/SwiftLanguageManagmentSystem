@@ -4,6 +4,6 @@ namespace SLMS.WebApplicationComponents.Services.SocialNetwork.Interface
 {
     public interface IPostService
     {
-        Task<List<PostDto>> GetAllPostsAsync();
+        Task<PagedResult<PostSummaryDto>> GetAllPostsAsync();
     }
 }

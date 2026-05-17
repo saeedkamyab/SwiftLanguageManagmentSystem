@@ -13,9 +13,9 @@ namespace SLMS.WebApplicationComponents.Services.SocialNetwork
             _baseApiService = baseApiService;
         }
 
-        public async Task<List<PostDto>> GetAllPostsAsync()
+        public async Task<PagedResult<PostSummaryDto>> GetAllPostsAsync()
         {
-            return await _baseApiService.GetAllAsync<List<PostDto>>("/api/v1/Post");
+            return await _baseApiService.GetAllAsync<PagedResult<PostSummaryDto>>("/api/v1/Post");
         }
     }
 

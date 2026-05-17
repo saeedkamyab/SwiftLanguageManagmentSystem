@@ -1,7 +1,6 @@
-﻿.card {
+﻿.post {
     display: flex;
     flex-direction: column;
-    /* height: 15rem;*/
     background-color: var(--white);
     border-radius: 1.1rem;
     box-shadow: var(--boxshadow);
@@ -9,20 +8,68 @@
     padding: 1rem;
 }
 
-.post-owner {
+.post__owner {
     display: flex;
 }
 
-.post-owner__img {
+.post__avatar {
     width: 5rem;
     height: 5rem;
-    border-radius: 4rem;
-    margin:0 0.5rem;
+    border-radius: 50%;
+    margin: 0 0.5rem;
 }
 
-.owner-name {
+.post__owner-info {
+    display: flex;
+    flex-direction: column;
 }
 
-.extera-detail {
+.post__owner-name {
+    font-weight: 600;
+}
+
+.post__meta {
     color: var(--black);
+    font-size: 0.9rem;
+}
+
+.post__content {
+    margin-top: 0.8rem;
+}
+
+.post__title {
+    font-weight: 600;
+}
+
+.post__caption {
+    margin-top: 0.3rem;
+}
+
+.post__image {
+    width: 100%;
+    border-radius: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.post__actions {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+}
+
+.post__action {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+}
+    .post__action:hover {
+        color: var(--primary);
+    }
+.post__count {
+    font-size: 1.5rem;
+}
+
+.post__action--bookmark {
+    margin-right: auto;
 }

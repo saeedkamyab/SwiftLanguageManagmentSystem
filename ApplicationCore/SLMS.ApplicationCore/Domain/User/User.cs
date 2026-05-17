@@ -21,6 +21,7 @@ namespace SLMS.ApplicationCore.Domain.User
         public string? LastName { get; set; } 
         public string? FatherName { get; set; } 
         public string? NationalCode { get; set; } 
+        public string? ProfileImageUrl { get; set; } 
 
 
 

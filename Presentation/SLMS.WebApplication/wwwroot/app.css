@@ -7,11 +7,11 @@
     --blackgrey100: rgba(149,149,149,1);
     --darkgray100: rgba(112,112,112,1);
     --mainBlue: rgba(5,150,154,1);
+    --primary: rgba(5,150,154,1);
     --mainBlue10: rgba(5,150,154,0.1);
     --bodybackground: #F5F7FA;
     --lightGrey: rgba(245,247,250,1);
-
-    --boxshadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --boxshadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 /*App Reset Styles*/

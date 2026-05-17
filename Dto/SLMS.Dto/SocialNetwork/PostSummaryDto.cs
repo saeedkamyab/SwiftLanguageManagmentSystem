@@ -1,4 +1,6 @@
-﻿namespace SLMS.Dto.SocialNetwork
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SLMS.Dto.SocialNetwork
 {
     public class PostSummaryDto: BaseDto
     {
@@ -21,5 +23,6 @@
 
         public bool IsLikedByCurrentUser { get; set; }
         public bool IsBookmarkedByCurrentUser { get; set; }
+
     }
 }
