@@ -21,5 +21,6 @@ namespace SLMS.Persistence.Repositories.SocialNetwork
                 .Where(predicate)
                 .AsNoTracking();
         }
+
     }
 }

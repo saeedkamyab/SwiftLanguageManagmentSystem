@@ -3,7 +3,6 @@
 @inject IPostService PostService
 
 
-
 @if (posts == null)
 {
     <p>Loading...</p>
@@ -19,7 +18,7 @@ else
                 <div class="post__owner-info">
                     <span class="post__owner-name">@postItem.OwnerFullName</span>
                     
-                    
+              
                     <div class="post__meta">
                         <span class="post__languages">زبان فرانسه، انگلیسی</span>
                         <span class="post__time">@TimeAgo(postItem.CreateDate)</span>
@@ -40,12 +39,12 @@ else
 
 
             <div class="post__actions">
-               
-                <button class="post__action">
-                    <svg class="post__icon" viewBox="0 0 26 26" width="20" height="20">
+
+                <button class="post__action @(postItem.IsLikedByCurrentUser ? "post__action--active" : "")" @onclick="() => ToggleLike(postItem)">
+                    <svg class="post__icon"  viewBox="0 0 26 26" width="20" height="20">
                         <path d="M14.570313 1.042969C15.449219 2.503906 14.453125 4.332031 13.710938 5.925781C13.070313 7.296875 13.167969 8.851563 14.882813 8.652344C16.949219 8.414063 17.785156 8.25 19.542969 8.128906C21.320313 8.007813 21.878906 8.734375 21.878906 9.410156C21.878906 10.5 21.515625 10.582031 21.515625 11C21.515625 11.417969 22.878906 11.148438 22.878906 12.519531C22.878906 13.890625 21.8125 13.847656 21.8125 14.230469C21.8125 14.613281 22.851563 14.785156 22.851563 15.882813C22.851563 16.980469 21.453125 17.125 21.453125 17.578125C21.453125 18.03125 21.90625 18.148438 21.90625 18.828125C21.90625 19.507813 20.488281 21 15.488281 21C6.96875 21 7.976563 18.960938 4 18.960938L4 11.417969C6.070313 11.417969 5.957031 9.585938 7.386719 8.1875C8.828125 6.777344 11.585938 3.582031 12.128906 1.0625C12.488281 -0.625 14.03125 0.140625 14.570313 1.042969Z" fill="currentColor" />
                     </svg>
-                    <span class="post__count">294</span>
+                    <span class="post__count">@postItem.LikesCount</span>
                 </button>
 
                 <button class="post__action">
@@ -99,5 +98,24 @@ else
             return $"{(int)(diff.TotalDays / 30)} ماه قبل";
 
         return $"{(int)(diff.TotalDays / 365)} سال قبل";
+    }
+    private async Task ToggleLike(PostSummaryDto post)
+    {
+
+        var previousState = post.IsLikedByCurrentUser;
+
+        post.IsLikedByCurrentUser = !post.IsLikedByCurrentUser;
+        post.LikesCount += post.IsLikedByCurrentUser ? 1 : -1;
+
+        try
+        {
+            await PostService.ToggleLikeAsync(post.Id);
+        }
+        catch
+        {
+            // rollback UI
+            post.IsLikedByCurrentUser = previousState;
+            post.LikesCount += post.IsLikedByCurrentUser ? 1 : -1;
+        }
     }
 }

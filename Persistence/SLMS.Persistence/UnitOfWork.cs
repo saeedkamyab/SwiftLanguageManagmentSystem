@@ -21,7 +21,8 @@ namespace SLMS.Persistence
         private readonly Lazy<IBaseRepository<ConversationMember>> _ConversationMemberRepository;
         private readonly Lazy<IBaseRepository<Follow>> _FollowRepository;
         private readonly Lazy<IBaseRepository<Message>> _MessageRepository;
-        private readonly Lazy<IBaseRepository<Like>> _LikeRepository;
+        //private readonly Lazy<IBaseRepository<Like>> _LikeRepository;
+        private readonly Lazy<ILikeRepository> _LikeRepository;
         private readonly Lazy<IPostRepository> _PostRepository;
         //private readonly Lazy<IBaseRepository<Post>> _PostRepository;
         #endregion
@@ -52,7 +53,8 @@ namespace SLMS.Persistence
         public IBaseRepository<ConversationMember> ConversationMemberRepository => _ConversationMemberRepository.Value;
         public IBaseRepository<Follow> FollowRepository => _FollowRepository.Value;
         public IBaseRepository<Message> MessageRepository => _MessageRepository.Value;
-        public IBaseRepository<Like> LikeRepository => _LikeRepository.Value;
+        //public IBaseRepository<Like> LikeRepository => _LikeRepository.Value;
+        public ILikeRepository LikeRepository => _LikeRepository.Value;
         public IPostRepository PostRepository => _PostRepository.Value;
         //public IBaseRepository<Post> PostRepository => _PostRepository.Value;
         #endregion
@@ -87,7 +89,8 @@ namespace SLMS.Persistence
             _ConversationMemberRepository = new Lazy<IBaseRepository<ConversationMember>>(() => new BaseRepository<ConversationMember>(_context));
             _FollowRepository = new Lazy<IBaseRepository<Follow>>(() => new BaseRepository<Follow>(_context));
             _MessageRepository = new Lazy<IBaseRepository<Message>>(() => new BaseRepository<Message>(_context));
-            _LikeRepository = new Lazy<IBaseRepository<Like>>(() => new BaseRepository<Like>(_context));
+            //_LikeRepository = new Lazy<IBaseRepository<Like>>(() => new BaseRepository<Like>(_context));
+            _LikeRepository = new Lazy<ILikeRepository>(() => new LikeRepository(_context));
             //_PostRepository = new Lazy<IBaseRepository<Post>>(() => new BaseRepository<Post>(_context));
             _PostRepository = new Lazy<IPostRepository>(() => new PostRepository(_context));
             #endregion

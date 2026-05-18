@@ -17,6 +17,10 @@ namespace SLMS.WebApplicationComponents.Services.SocialNetwork
         {
             return await _baseApiService.GetAllAsync<PagedResult<PostSummaryDto>>("/api/v1/Post");
         }
+        public async Task ToggleLikeAsync(Guid postId)
+        {
+            await _baseApiService.PostAsync($"api/v1/Post/{postId}/toggle-like");
+        }
     }
 
 

@@ -66,6 +66,13 @@
     .post__action:hover {
         color: var(--primary);
     }
+.post__action--active {
+    color: var(--primary);
+}
+.post__icon {
+    pointer-events: none;
+}
+
 .post__count {
     font-size: 1.5rem;
 }

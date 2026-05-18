@@ -5,5 +5,6 @@ namespace SLMS.WebApplicationComponents.Services.SocialNetwork.Interface
     public interface IPostService
     {
         Task<PagedResult<PostSummaryDto>> GetAllPostsAsync();
+        Task ToggleLikeAsync(Guid postId);
     }
 }

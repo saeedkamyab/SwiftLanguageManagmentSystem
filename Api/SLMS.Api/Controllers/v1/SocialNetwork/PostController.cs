@@ -1,5 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using SLMS.Application.Features.SocialNetwork.Posts.Commands;
+
 //using SLMS.Application.Features.Commands.SocialNetwork.Requests;
 using SLMS.Application.Features.SocialNetwork.Posts.Queries;
 using SLMS.Dto.SocialNetwork;
@@ -46,8 +49,15 @@ namespace SLMS.Api.Controllers.v1.SocialNetwork
         //    var result = await _mediator.Send(new GetPostRequest { Id = id });
         //    return result;
         //}
-      
-        
+
+        [HttpPost("/api/v1/Post/{postId}/toggle-like")]
+        public async Task<IActionResult> ToggleLike(Guid postId)
+        {
+            var userid = Guid.Parse("3fa85f64-5717-4562-b3fc-2c963f66afa6");
+            var res = await _mediator.Send(new ToggleLikeCommandRequest { PostId=postId,UserId=userid});
+            return Ok(res);
+        }
+
         
         
         

@@ -7,5 +7,6 @@ namespace SLMS.Application.Contracts.SocialNetwork
     public interface IPostRepository:IBaseRepository<Post>
     {
         IQueryable<Post> GetQueryable(Expression<Func<Post, bool>> predicate);
+
     }
 }
