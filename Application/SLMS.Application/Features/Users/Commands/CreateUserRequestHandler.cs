@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using SLMS.Application.Contracts.Persistance;
-using SLMS.Application.Features.Commands.User.Requests;
 
-namespace SLMS.Application.Features.Commands.User
+namespace SLMS.Application.Features.Users.Commands
 {
     public class CreateUserRequestHandler : IRequestHandler<CreateUserRequest, bool>
     {

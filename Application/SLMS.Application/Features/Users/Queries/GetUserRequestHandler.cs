@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
 using SLMS.Application.Contracts.Persistance;
-using SLMS.Application.Features.Queries.User.Requests;
 using SLMS.Dto.User;
 
-namespace SLMS.Application.Features.Queries.User
+namespace SLMS.Application.Features.Users.Queries
 {
     public class GetUserRequestHandler:IRequestHandler<GetUserRequest,UserDto>
     {

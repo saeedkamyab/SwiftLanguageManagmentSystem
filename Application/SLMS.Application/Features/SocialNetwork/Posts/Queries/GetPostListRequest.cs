@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using SLMS.Dto.SocialNetwork;
 
-namespace SLMS.Application.Features.Queries.SocialNetwork.Requests
+namespace SLMS.Application.Features.SocialNetwork.Posts.Queries
 {
     public class GetPostListRequest:IRequest<PagedResult<PostSummaryDto>>
     {

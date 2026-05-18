@@ -3,12 +3,11 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SLMS.Application.Contracts.Persistance;
-using SLMS.Application.Features.Queries.SocialNetwork.Requests;
 using SLMS.ApplicationCore.Domain.SocialNetwork;
 using SLMS.Dto.SocialNetwork;
 using System.Linq.Expressions;
 
-namespace SLMS.Application.Features.Queries.SocialNetwork
+namespace SLMS.Application.Features.SocialNetwork.Posts.Queries
 {
     public class GetPostListRequestHandler : IRequestHandler<GetPostListRequest,PagedResult<PostSummaryDto>>
     {
