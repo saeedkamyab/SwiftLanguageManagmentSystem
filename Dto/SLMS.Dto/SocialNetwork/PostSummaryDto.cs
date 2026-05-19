@@ -24,5 +24,8 @@ namespace SLMS.Dto.SocialNetwork
         public bool IsLikedByCurrentUser { get; set; }
         public bool IsBookmarkedByCurrentUser { get; set; }
 
+        [NotMapped]
+        public bool ShowComments { get; set; }
+
     }
 }
