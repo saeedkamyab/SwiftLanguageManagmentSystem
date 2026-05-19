@@ -6,7 +6,8 @@ namespace SLMS.Application.Contracts.Persistance
     public interface IBaseRepository<TEntity> where TEntity : BaseEntity
     {
         Task<TEntity?> GetByIdAsync(Guid id,CancellationToken cancellationToken=default);
-        Task<IReadOnlyList<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
+        Task<IReadOnlyList<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken = default,
+            Func<IQueryable<TEntity>, IQueryable<TEntity>>? include = null);
        
         
         void Add(TEntity entity);

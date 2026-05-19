@@ -2,6 +2,7 @@
 using SLMS.ApplicationCore.Domain.SocialNetwork;
 using SLMS.ApplicationCore.Domain.User;
 using SLMS.Dto.SocialNetwork;
+using SLMS.Dto.SocialNetwork.Comments;
 using SLMS.Dto.User;
 
 namespace SLMS.Application
@@ -29,10 +30,13 @@ namespace SLMS.Application
                 .ForMember(postSummary => postSummary.CommentsCount, opt => opt.MapFrom(post => post.Comments.Count(c => !c.IsDeleted)))
                 .ForMember(postSummary => postSummary.IsLikedByCurrentUser, opt => opt.Ignore())
                 .ForMember(postSummary => postSummary.IsBookmarkedByCurrentUser, opt => opt.Ignore())
+                .ForMember(postSummary => postSummary.IsCommentsLoaded, opt => opt.Ignore())
+                .ForMember(postSummary => postSummary.Comments, opt => opt.Ignore())
                /* .ForMember(postSummary => postSummary.OwnerFullName, opt => opt.Ignore())*/.ReverseMap()
 
                 ;
-
+            CreateMap<CreateCommentDto, Comment>();
+            CreateMap<CommentDto, Comment>().ReverseMap();
             #endregion
         }
     }

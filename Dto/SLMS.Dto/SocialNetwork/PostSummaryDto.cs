@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using SLMS.Dto.SocialNetwork.Comments;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SLMS.Dto.SocialNetwork
 {
@@ -26,6 +27,12 @@ namespace SLMS.Dto.SocialNetwork
 
         [NotMapped]
         public bool ShowComments { get; set; }
+
+        [NotMapped]
+        public List<CommentDto> Comments { get; set; } = new();
+       
+        [NotMapped]
+        public bool IsCommentsLoaded { get; set; }
 
     }
 }

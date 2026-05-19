@@ -13,6 +13,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<ICommentService,CommentService>();
 builder.Services.AddHttpClient<BaseApiService>(client =>
 {
     client.BaseAddress = new Uri("https://localhost:7218");

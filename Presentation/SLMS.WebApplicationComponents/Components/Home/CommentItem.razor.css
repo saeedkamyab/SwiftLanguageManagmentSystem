@@ -1,0 +1,48 @@
+﻿
+
+
+.comment {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 2rem;
+}
+.comment__image {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    margin-top: 0.5rem;
+}
+.comment__content {
+    width: 100%;
+    padding: 1rem;
+    align-items: center;
+    background-color: var(--lightGrey);
+    border-radius: 1.1rem;
+}
+
+.comment__meta {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    gap: 2rem;
+}
+
+.comment__UserFirstLastName {
+    margin-left: 1rem;
+}
+
+.comment__datetime {
+    margin-left: 1rem;
+}
+
+.comment__context {
+}
+
+.comment__actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.comment__action {
+    display: flex;
+}

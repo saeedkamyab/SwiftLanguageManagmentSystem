@@ -1,4 +1,5 @@
-﻿using SLMS.Dto.User;
+﻿using SLMS.Dto.SocialNetwork.Comments;
+using SLMS.Dto.User;
 
 namespace SLMS.Dto.SocialNetwork
 {

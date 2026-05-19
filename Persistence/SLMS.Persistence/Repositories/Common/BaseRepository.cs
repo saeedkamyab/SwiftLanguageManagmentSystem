@@ -2,6 +2,7 @@
 using SLMS.Application.Contracts.Persistance;
 using SLMS.ApplicationCore;
 using System.Linq.Expressions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SLMS.Persistence.Repositories.Common
 {
@@ -22,12 +23,20 @@ namespace SLMS.Persistence.Repositories.Common
                 .Where(x => !x.IsDeleted)
                 .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
-        public virtual async Task<IReadOnlyList<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate,
-        CancellationToken cancellationToken = default)
+        public virtual async Task<IReadOnlyList<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate=null,
+        CancellationToken cancellationToken = default,
+            Func<IQueryable<TEntity>, IQueryable<TEntity>>? include = null)
         {
-            return await _dbSet
-                .Where(predicate)
-                .ToListAsync(cancellationToken);
+            IQueryable<TEntity> query = _dbSet.Where(x => !x.IsDeleted);
+
+            if (predicate != null)
+                query = query.Where(predicate);
+
+            if (include != null)
+                query = include(query);
+
+            return await query.ToListAsync(cancellationToken);
+
         }
         public virtual void Add(TEntity entity)
         {
