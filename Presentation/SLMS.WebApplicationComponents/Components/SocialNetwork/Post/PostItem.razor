@@ -1,0 +1,40 @@
+﻿@using SLMS.Dto.SocialNetwork
+@using SLMS.WebApplicationComponents.Components.SocialNetwork.Comment
+@using SLMS.WebApplicationComponents.Services.SocialNetwork.Interface
+@inject ICommentService CommentService
+
+<div class="post">
+    <PostHeader Post="Post" />
+    <PostContent Post="Post" />
+    <PostActions Post="Post" OnCommentsClick="ToggleComments" />
+
+    @if (Post.ShowComments)
+    {
+
+        <div class="post__comments">
+            <CommentsSection Post="Post" OnCommentAddedToPost="HandleCommentAddedToPost" />
+        </div>
+    }
+</div>
+
+
+@code {
+    [Parameter]
+    public PostSummaryDto Post { get; set; }
+
+    private async Task ToggleComments()
+    {
+        Post.ShowComments = !Post.ShowComments;
+
+        if (Post.ShowComments && !Post.IsCommentsLoaded)
+        {
+            Post.Comments = await CommentService.GetAllCommentsAsync(Post.Id);
+            Post.IsCommentsLoaded = true;
+        }
+    }
+    private async Task HandleCommentAddedToPost()
+    {
+        Post.CommentsCount++;
+        await InvokeAsync(StateHasChanged);
+    }
+}

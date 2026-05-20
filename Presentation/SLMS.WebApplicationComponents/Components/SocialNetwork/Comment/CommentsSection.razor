@@ -1,0 +1,37 @@
+﻿@using SLMS.Dto.SocialNetwork
+@using SLMS.WebApplicationComponents.Services.SocialNetwork.Interface
+@inject ICommentService CommentService
+
+<AddComment Post="@Post" OnCommentAdded="HandleCommentAdded" />
+<div class="comments">
+
+    @if (!Post.IsCommentsLoaded)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        @foreach (var comment in Post.Comments)
+        {
+            <CommentItem Comment="@comment" />
+        }
+    }
+</div>
+
+
+
+@code {
+    [Parameter]
+    public PostSummaryDto Post { get; set; }
+    [Parameter]
+    public EventCallback OnCommentAddedToPost { get; set; }
+
+
+    private async Task HandleCommentAdded()
+    {
+        Post.Comments = await CommentService.GetAllCommentsAsync(Post.Id);
+        Post.IsCommentsLoaded = true;
+        if (OnCommentAddedToPost.HasDelegate)
+            await OnCommentAddedToPost.InvokeAsync();
+    }
+}

@@ -1,12 +1,15 @@
 ﻿@page "/"
 @rendermode InteractiveServer
 @using SLMS.WebApplicationComponents.Components.Home
+@using SLMS.WebApplicationComponents.Components.SocialNetwork.Post
+
+
 <div class="home-container">
     <section class="feed">
         <div class="new-post">
             <AddPostComponent />
         </div>
-        <PostComponent />
+        <FeedComponent />
     </section>
     <aside class="left-sidebar">
         <TheBestTeachersComponent />

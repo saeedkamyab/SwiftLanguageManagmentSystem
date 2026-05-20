@@ -5,5 +5,6 @@ namespace SLMS.WebApplicationComponents.Services.SocialNetwork.Interface
     public interface ICommentService
     {
         Task<List<CommentDto>> GetAllCommentsAsync(Guid postId);
+        Task<bool> SendComment(CreateCommentDto comment);
     }
 }

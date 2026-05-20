@@ -26,6 +26,9 @@ namespace SLMS.Dto.SocialNetwork
         public bool IsBookmarkedByCurrentUser { get; set; }
 
         [NotMapped]
+        public CreateCommentDto NewComment { get; set; } = new();
+
+        [NotMapped]
         public bool ShowComments { get; set; }
 
         [NotMapped]

@@ -1,0 +1,25 @@
+﻿
+.post__owner {
+    display: flex;
+}
+
+.post__avatar {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    margin: 0 0.5rem;
+}
+
+.post__owner-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.post__owner-name {
+    font-weight: 600;
+}
+
+.post__meta {
+    color: var(--black);
+    font-size: 0.9rem;
+}

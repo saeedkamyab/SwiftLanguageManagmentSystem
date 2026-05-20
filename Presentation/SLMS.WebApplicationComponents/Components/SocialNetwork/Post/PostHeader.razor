@@ -1,0 +1,20 @@
+﻿@using SLMS.Dto.SocialNetwork
+@using SLMS.Shared.Extensions
+
+<div class="post__owner">
+    <img class="post__avatar" src="images/profiles/@((Post.OwnerAvatarUrl != null) ? Post.OwnerAvatarUrl : "profile.png")" />
+
+    <div class="post__owner-info">
+        <span class="post__owner-name">@Post.OwnerFullName</span>
+
+                    
+        <div class="post__meta">
+            <span class="post__languages">زبان فرانسه، انگلیسی</span>
+            <span class="post__time">@Post.CreateDate.ToTimeAgo()</span>
+        </div>
+    </div>
+</div>
+@code {
+    [Parameter]
+    public PostSummaryDto Post { get; set; }
+}

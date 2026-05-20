@@ -1,0 +1,32 @@
+﻿
+.post__actions {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+}
+
+.post__action {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+}
+
+    .post__action:hover {
+        color: var(--primary);
+    }
+
+.post__action--active {
+    color: var(--primary);
+}
+/*.post__icon {
+    pointer-events: none;
+}*/
+
+.post__count {
+    font-size: 1.5rem;
+}
+
+.post__action--bookmark {
+    margin-right: auto;
+}

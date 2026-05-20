@@ -18,7 +18,11 @@ namespace SLMS.WebApplicationComponents.Services.SocialNetwork
         {
             return await _baseApiService.GetAllAsync<List<CommentDto>>($"/api/v1/Comment/{postId}");
         }
-     
+
+        public async Task<bool> SendComment(CreateCommentDto comment)
+        {
+            return await _baseApiService.PostAsync("/api/v1/Comment",comment);
+        }
     }
 
 

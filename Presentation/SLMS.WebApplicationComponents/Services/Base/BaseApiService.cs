@@ -22,5 +22,10 @@ namespace SLMS.WebApplicationComponents.Services.Base
             var response = await _httpClient.PostAsync(endpoint, null);
             response.EnsureSuccessStatusCode();
         }
+        public async Task<bool>PostAsync<T>(string endpoint, T data)
+        {
+            var response=await _httpClient.PostAsJsonAsync(endpoint,data);
+            return response.IsSuccessStatusCode;
+        }
     }
 }

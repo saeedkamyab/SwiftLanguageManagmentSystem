@@ -1,0 +1,24 @@
+﻿@using SLMS.Dto.SocialNetwork
+@using SLMS.WebApplicationComponents.Services.SocialNetwork.Interface
+@inject IPostService PostService
+
+
+@if (posts == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    @foreach (var post in posts.Items)
+    {
+        <PostItem Post="post" />
+    }
+}
+
+@code {
+    private PagedResult<PostSummaryDto> posts;
+    protected override async Task OnInitializedAsync()
+    {
+        posts = await PostService.GetAllPostsAsync();
+    }
+}

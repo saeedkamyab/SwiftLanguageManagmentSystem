@@ -1,0 +1,17 @@
+﻿.post__content {
+    margin-top: 0.8rem;
+}
+
+.post__title {
+    font-weight: 600;
+}
+
+.post__caption {
+    margin-top: 0.3rem;
+}
+
+.post__image {
+    width: 100%;
+    border-radius: 0.8rem;
+    margin-top: 0.5rem;
+}

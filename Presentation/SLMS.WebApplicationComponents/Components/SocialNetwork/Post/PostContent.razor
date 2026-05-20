@@ -1,0 +1,15 @@
+﻿@using SLMS.Dto.SocialNetwork
+<div class="post__content">
+    <h3 class="post__title">@Post.Title</h3>
+    <div class="post__caption">@Post.Caption</div>
+
+
+    @if (Post.ImageUrl != null)
+    {
+        <img class="post__image" src="images/profiles/@Post.ImageUrl" />
+    }
+</div>
+@code {
+    [Parameter]
+    public PostSummaryDto Post { get; set; }
+}
