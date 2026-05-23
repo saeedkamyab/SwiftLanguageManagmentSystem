@@ -21,6 +21,7 @@ namespace SLMS.Dto.SocialNetwork
         public int LikesCount { get; set; }
         public int SharesCount { get; set; }
         public int CommentsCount { get; set; }
+        public int BookmarksCount { get; set; }
 
         public bool IsLikedByCurrentUser { get; set; }
         public bool IsBookmarkedByCurrentUser { get; set; }

@@ -30,7 +30,7 @@
     display: none;
 }
 
-.mobile-add-post-btn {
+/*.mobile-add-post-btn {
     display: flex;
     position: fixed;
     bottom: 20px;
@@ -46,7 +46,7 @@
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(0,0,0,.3);
     z-index: 3000;
-}
+}*/
 
 @media (min-width: 402px) {
 }
@@ -74,6 +74,9 @@
 
     .new-post {
         display: block;
+        background-color: var(--white);
+        border-radius: 1.1rem;
+        box-shadow: var(--boxshadow);
     }
 
     .left-sidebar {
@@ -81,9 +84,9 @@
         display: block;
     }
 
-    .mobile-add-post-btn {
+    /*    .mobile-add-post-btn {
         display: none;
-    }
+    }*/
 }
 
 @media (min-width: 1280px) {

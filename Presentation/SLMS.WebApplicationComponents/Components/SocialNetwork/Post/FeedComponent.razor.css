@@ -1,0 +1,48 @@
+﻿.post-filters {
+    display: flex;
+    gap: 0.2rem
+}
+
+.post-filter__action {
+    margin: 1rem;
+    border-radius:1.1rem;
+    padding:0.5rem;
+    cursor:pointer;
+    transition:all 0.3s ease-in-out;
+}
+
+    .post-filter__action:hover {
+        color:white;
+        background-color:var(--primary);
+    }
+    .post-filter__action--active {
+        color: white;
+        background-color: var(--primary);
+    }
+
+.post-filter__action-text {
+}
+
+.mobile-add-post-btn {
+    display: flex;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 5rem;
+    height: 5rem;
+    border: none;
+    border-radius: 50%;
+    background: var(--mainBlue);
+    color: var(--white);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,.3);
+    z-index: 3000;
+}
+
+@media (min-width: 1024px) {
+    .mobile-add-post-btn {
+        display: none;
+    }
+}

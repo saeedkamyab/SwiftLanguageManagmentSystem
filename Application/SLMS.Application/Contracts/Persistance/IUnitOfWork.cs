@@ -19,6 +19,7 @@ namespace SLMS.Application.Contracts.Persistance
         ILikeRepository LikeRepository { get; }
         //IBaseRepository<Post> PostRepository { get;  }
         IPostRepository PostRepository { get;  }
+        IBookmarkRepository BookmarkRepository { get;  }
 
         #endregion
 

@@ -39,23 +39,30 @@ namespace SLMS.Application.Features.SocialNetwork.Posts.Queries
            .ProjectTo<PostSummaryDto>(_mapper.ConfigurationProvider)
            .ToListAsync(cancellationToken);
 
-                // 5️⃣ تنظیم فیلدهای پویا (مثل IsLikedByCurrentUser)
+
                 var postIds = items.Select(p => p.Id).ToList();
                 var likes = await _unitofwork.LikeRepository.GetAllAsync(x=>postIds.Contains(x.PostId));
+                var bookmarks = await _unitofwork.BookmarkRepository.GetAllAsync(x=>postIds.Contains(x.PostId));
                 var likedPostIds = likes
                     //.Where(l => postIds.Contains(l.PostId))
                     .Select(l => l.PostId).ToList();
+                var bookmarkedPostIds = bookmarks
+                //.Where(l => postIds.Contains(l.PostId))
+                .Select(l => l.PostId).ToList();
+
 
                 foreach (var item in items)
                 {
                     item.IsLikedByCurrentUser = likedPostIds.Contains(item.Id);
+                    item.IsBookmarkedByCurrentUser = bookmarkedPostIds.Contains(item.Id);
                 }
                 // 6️⃣ برگرداندن نتیجه Paged
                 return new PagedResult<PostSummaryDto>(
                     items,
                     totalCount,
                     request.PageNumber,
-                    request.PageSize);
+                    request.PageSize,
+                    request.OnlyMyFollowings);
             }
             catch
             {

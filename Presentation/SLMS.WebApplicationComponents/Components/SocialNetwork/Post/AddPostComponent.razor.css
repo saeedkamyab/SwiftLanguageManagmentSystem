@@ -1,6 +1,64 @@
-﻿.container {
-    height: 20rem;
-    background-color: var(--white);
+﻿.add-post {
+}
+
+.add-post__body {
+    display: flex;
+    padding: 2rem;
+}
+
+.add-post__avatar {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    margin: 0.5rem 1rem;
+}
+
+.add-post__input {
+    border: 1px solid var(--black23);
+    color: var(--darkgray100);
+    width: 100%;
     border-radius: 1.1rem;
-    box-shadow: var(--boxshadow);
+    padding: 1rem;
+}
+
+.add-post__Seprater {
+    margin: 0 2rem;
+    height: 1rem;
+    border-bottom: 0.2rem solid var(--black23);
+}
+
+.add-post__actions {
+    display: flex;
+    padding: 0 2rem;
+}
+
+.add-post__action {
+    display: flex;
+    margin: 2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+    .add-post__action:hover {
+        color: var(--primary);
+    }
+
+.post__action--Share {
+    margin-right: auto;
+    border-radius: 1.1rem;
+    border: 0.2rem solid var(--black23);
+
+}
+
+    .post__action--Share:hover {
+        background-color: var(--primary);
+        color: white;
+    }
+
+.add-post__icon {
+    margin: 0rem 1rem;
+}
+
+.add-post__action-text {
 }

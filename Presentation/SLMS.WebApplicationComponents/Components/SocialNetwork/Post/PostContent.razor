@@ -2,11 +2,9 @@
 <div class="post__content">
     <h3 class="post__title">@Post.Title</h3>
     <div class="post__caption">@Post.Caption</div>
-
-
     @if (Post.ImageUrl != null)
     {
-        <img class="post__image" src="images/profiles/@Post.ImageUrl" />
+        <img class="post__image" src="images/posts/@Post.ImageUrl" />
     }
 </div>
 @code {

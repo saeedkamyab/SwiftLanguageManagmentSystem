@@ -1,0 +1,13 @@
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SLMS.ApplicationCore.Domain.SocialNetwork
+{
+    [Table("Bookmark", Schema = "SocialNetwork")]
+    public class Bookmark:BaseEntity
+    {
+        public Guid PostId { get; set; }
+        public Post Post { get; set; }
+        public Guid UserId { get; set; }
+        public Domain.User.User User { get; set; }
+    }
+}

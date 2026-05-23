@@ -24,6 +24,7 @@ namespace SLMS.Persistence
         //private readonly Lazy<IBaseRepository<Like>> _LikeRepository;
         private readonly Lazy<ILikeRepository> _LikeRepository;
         private readonly Lazy<IPostRepository> _PostRepository;
+        private readonly Lazy<IBookmarkRepository> _BookmarkRepository;
         //private readonly Lazy<IBaseRepository<Post>> _PostRepository;
         #endregion
 
@@ -56,6 +57,7 @@ namespace SLMS.Persistence
         //public IBaseRepository<Like> LikeRepository => _LikeRepository.Value;
         public ILikeRepository LikeRepository => _LikeRepository.Value;
         public IPostRepository PostRepository => _PostRepository.Value;
+        public IBookmarkRepository BookmarkRepository => _BookmarkRepository.Value;
         //public IBaseRepository<Post> PostRepository => _PostRepository.Value;
         #endregion
 
@@ -93,6 +95,7 @@ namespace SLMS.Persistence
             _LikeRepository = new Lazy<ILikeRepository>(() => new LikeRepository(_context));
             //_PostRepository = new Lazy<IBaseRepository<Post>>(() => new BaseRepository<Post>(_context));
             _PostRepository = new Lazy<IPostRepository>(() => new PostRepository(_context));
+            _BookmarkRepository = new Lazy<IBookmarkRepository>(() => new BookmarkRepository(_context));
             #endregion
 
             #region InstituteManagment

@@ -19,6 +19,7 @@ namespace SLMS.ApplicationCore.Domain.SocialNetwork
 
 
         public ICollection<Like> Likes { get; set; }
+        public ICollection<Bookmark> Bookmarks { get; set; }
         public ICollection<Comment> Comments { get; set; }
 
     }

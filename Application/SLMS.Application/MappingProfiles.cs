@@ -25,6 +25,7 @@ namespace SLMS.Application
                 .ForMember(postSummary => postSummary.OwnerLastName, opt => opt.MapFrom(post => post.PostOwner.LastName))
                 .ForMember(postSummary => postSummary.ImageUrl, opt => opt.MapFrom(post => post.ImageUrl))
                 .ForMember(postSummary => postSummary.LikesCount, opt => opt.MapFrom(post => post.Likes.Count))
+                .ForMember(postSummary => postSummary.BookmarksCount, opt => opt.MapFrom(post => post.Bookmarks.Count))
                 .ForMember(postSummary => postSummary.OwnerAvatarUrl, opt => opt.MapFrom(post => post.PostOwner.ProfileImageUrl))
                 //.ForMember(postSummary => postSummary.SharesCount, opt => opt.MapFrom(post => post.PostOwner.sh.Count))
                 .ForMember(postSummary => postSummary.CommentsCount, opt => opt.MapFrom(post => post.Comments.Count(c => !c.IsDeleted)))

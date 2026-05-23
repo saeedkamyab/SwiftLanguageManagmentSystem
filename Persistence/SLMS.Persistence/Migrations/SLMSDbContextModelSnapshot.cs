@@ -531,6 +531,36 @@ namespace SLMS.Persistence.Migrations
                     b.ToTable("Message", "Messaging");
                 });
 
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.SocialNetwork.Bookmark", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Bookmark", "SocialNetwork");
+                });
+
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.SocialNetwork.Comment", b =>
                 {
                     b.Property<Guid>("Id")
@@ -944,6 +974,25 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("SenderUser");
                 });
 
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.SocialNetwork.Bookmark", b =>
+                {
+                    b.HasOne("SLMS.ApplicationCore.Domain.SocialNetwork.Post", "Post")
+                        .WithMany("Bookmarks")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SLMS.ApplicationCore.Domain.User.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.SocialNetwork.Comment", b =>
                 {
                     b.HasOne("SLMS.ApplicationCore.Domain.SocialNetwork.Comment", "Parent")
@@ -1074,6 +1123,8 @@ namespace SLMS.Persistence.Migrations
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.SocialNetwork.Post", b =>
                 {
+                    b.Navigation("Bookmarks");
+
                     b.Navigation("Comments");
 
                     b.Navigation("Likes");

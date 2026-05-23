@@ -4,8 +4,8 @@
     background-color: var(--white);
     border-radius: 1.1rem;
     box-shadow: var(--boxshadow);
-    margin: 1rem;
-    padding: 1rem;
+    margin: 1rem 0;
+    padding: 2rem;
 }
 .post__comments {
     display: block;

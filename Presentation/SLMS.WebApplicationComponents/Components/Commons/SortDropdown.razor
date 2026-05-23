@@ -1,0 +1,38 @@
+﻿<div class="sort-dropdown">
+    <!-- دکمه اصلی -->
+    <button class="sort-dropdown__button @(IsVisible ? "sort-dropdown__button--active" : "")" @onclick="ToggleMenu">
+        <span>@SelectedLabel</span>
+        <span class="sort-dropdown__arrow">▼</span>
+    </button>
+
+    <!-- منوی کشویی -->
+    @if (IsVisible)
+    {
+        <div class="sort-dropdown__menu">
+            <div class="sort-dropdown__item" @onclick='() => Select("newest")'>جدیدترین‌ها</div>
+            <div class="sort-dropdown__item" @onclick='() => Select("oldest")'>قدیمی‌ترین‌ها</div>
+            <div class="sort-dropdown__item" @onclick='() => Select("popular")'>محبوب‌ترین‌ها</div>
+        </div>
+    }
+</div>
+
+@code {
+    private bool IsVisible;
+    private string SelectedLabel = "جدیدترین‌ها";
+
+    private void ToggleMenu() => IsVisible = !IsVisible;
+
+    private void Select(string value)
+    {
+        SelectedLabel = value switch
+        {
+            "newest" => "جدیدترین‌ها",
+            "oldest" => "قدیمی‌ترین‌ها",
+            "popular" => "محبوب‌ترین‌ها",
+            _ => "مرتب‌سازی"
+        };
+        IsVisible = false;
+        // اینجا می‌توانید متد فیلتر کردن اصلی را صدا بزنید
+    }
+}
+
