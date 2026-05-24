@@ -14,8 +14,7 @@
 }
 
 .add-post__input {
-    border: 1px solid var(--black23);
-    color: var(--darkgray100);
+    border: 1px solid var(--border-light);
     width: 100%;
     border-radius: 1.1rem;
     padding: 1rem;
@@ -24,7 +23,7 @@
 .add-post__Seprater {
     margin: 0 2rem;
     height: 1rem;
-    border-bottom: 0.2rem solid var(--black23);
+    border-bottom: 0.2rem solid var( --border-light);
 }
 
 .add-post__actions {
@@ -47,8 +46,7 @@
 .post__action--Share {
     margin-right: auto;
     border-radius: 1.1rem;
-    border: 0.2rem solid var(--black23);
-
+    border: 0.2rem solid var( --border-light);
 }
 
     .post__action--Share:hover {

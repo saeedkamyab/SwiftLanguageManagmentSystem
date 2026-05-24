@@ -1,6 +1,8 @@
 ﻿using SLMS.Dto.SocialNetwork;
+using SLMS.Dto.SocialNetwork.Post;
 using SLMS.WebApplicationComponents.Services.Base;
 using SLMS.WebApplicationComponents.Services.SocialNetwork.Interface;
+using System.Xml.Linq;
 
 namespace SLMS.WebApplicationComponents.Services.SocialNetwork
 {
@@ -17,6 +19,10 @@ namespace SLMS.WebApplicationComponents.Services.SocialNetwork
         {
             var url = BuildUrl("/api/v1/Post", postListQuery);
             return await _baseApiService.GetAllAsync<PagedResult<PostSummaryDto>>(url);
+        }
+        public async Task<bool> CreatePost(CreatePostDto post)
+        {
+            return await _baseApiService.PostAsync("/api/v1/Post", post);
         }
         public async Task ToggleLikeAsync(Guid postId)
         {
@@ -42,6 +48,7 @@ namespace SLMS.WebApplicationComponents.Services.SocialNetwork
 
         }
 
+       
     }
 
 

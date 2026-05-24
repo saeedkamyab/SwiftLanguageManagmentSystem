@@ -6,72 +6,19 @@
     padding: 2rem 1rem 1rem 0;
     gap: 0.5rem;
 }
-
+    
 .post__comment-avatar {
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
     margin-top: 0.5rem;
 }
-
-.post__comment-input {
-    display: flex;
-    width: 100%;
-    height: 5rem;
-    padding: 1rem;
-    border: 1px solid var(--blackgrey100);
-    color: var(--blackgrey100);
-    border-radius: 1.1rem;
-    align-items: center;
-    position: relative; /* این بسیار مهم است */
-}
-
-.input-comment {
-    width: 100%;
-}
-
-.post__comment-Emoji {
-}
-
-.emoji-popup {
-    position: absolute;
-    bottom: 100%; /* بالای دکمه باز شود */
-    left: 0; /* گوشه سمت چپ */
-    z-index: 9999;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    border-radius: 8px;
-    background: white;
-}
-.emoji-toggle {
-    cursor: pointer;
-    background: none;
-    border: none;
-    font-size: 20px;
-}
-emoji-picker {
-    /* بزرگ کردن اندازه ایموجی‌ها */
-    --emoji-size: 2rem;
-    /* تنظیم ابعاد کلی picker */
-    width: 300px;
-    height: 350px;
-}
-
-    /* بزرگتر کردن دکمه‌های دسته بندی پایین */
-    emoji-picker::part(nav) {
-        font-size: 1.2rem;
-    }
-
-    /* فاصله بیشتر بین ایموجی‌ها برای کلیک راحت‌تر */
-    emoji-picker::part(emoji) {
-        padding: 0.5rem;
-    }
-
 .post__comment-send {
-    display:flex;
-    margin-right:auto;
+    display: flex;
+    margin-right: auto;
     padding: 0.5rem 1rem;
     border-radius: 1.1rem;
-    border: 1px solid var(--blackgrey100);
+    border: 1px solid var(--border-light);
     transition: all 0.5s ease-in-out;
 }
 

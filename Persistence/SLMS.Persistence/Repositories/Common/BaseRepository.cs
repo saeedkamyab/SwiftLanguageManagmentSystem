@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SLMS.Application.Contracts.Persistance;
 using SLMS.ApplicationCore;
+using SLMS.ApplicationCore.Domain.SocialNetwork;
 using System.Linq.Expressions;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -37,6 +38,11 @@ namespace SLMS.Persistence.Repositories.Common
 
             return await query.ToListAsync(cancellationToken);
 
+        }
+        public IQueryable<TEntity> GetQueryable()
+        {
+            return _context.Set<TEntity>()
+                .AsNoTracking();
         }
         public virtual void Add(TEntity entity)
         {

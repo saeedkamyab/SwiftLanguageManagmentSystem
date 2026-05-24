@@ -1,7 +1,7 @@
 ﻿@using Microsoft.JSInterop
 @using SLMS.Dto.SocialNetwork
+@using SLMS.WebApplicationComponents.Components.Commons
 @using SLMS.WebApplicationComponents.Services.SocialNetwork.Interface
-@inject IJSRuntime JS
 @inject ICommentService CommentService
 
 
@@ -10,23 +10,7 @@
 
     <img class="post__comment-avatar" src="images/profiles/profile.jpg" />
 
-
-    <div class="post__comment-input">
-
-        <input type="text" class="input-comment" placeholder="نظر خود را بنویسید...." @bind="Post.NewComment.CommentContext" />
-
-        <button class="post__comment-Emoji" type="button" @onclick="ToggleEmojiPicker">
-            <svg viewBox="0 0 26 26" width="20" height="20" fill="currentColor">
-                <path d="M13 0.1875C5.925781 0.1875 0.1875 5.925781 0.1875 13C0.1875 20.074219 5.925781 25.8125 13 25.8125C20.074219 25.8125 25.8125 20.074219 25.8125 13C25.8125 5.925781 20.074219 0.1875 13 0.1875 Z M 13 2.1875C18.960938 2.1875 23.8125 7.039063 23.8125 13C23.8125 18.960938 18.960938 23.8125 13 23.8125C7.039063 23.8125 2.1875 18.960938 2.1875 13C2.1875 7.039063 7.039063 2.1875 13 2.1875 Z M 9 9C7.894531 9 7 9.894531 7 11C7 12.105469 7.894531 13 9 13C10.105469 13 11 12.105469 11 11C11 9.894531 10.105469 9 9 9 Z M 17 9C15.894531 9 15 9.894531 15 11C15 12.105469 15.894531 13 17 13C18.105469 13 19 12.105469 19 11C19 9.894531 18.105469 9 17 9 Z M 5.75 16.09375C7.351563 18.371094 10.003906 19.84375 13 19.84375C15.996094 19.84375 18.648438 18.371094 20.25 16.09375C18.207031 17.5625 15.707031 18.4375 13 18.4375C10.292969 18.4375 7.792969 17.5625 5.75 16.09375Z" fill="currentColor" />
-            </svg>
-        </button>
-        @if (ShowEmojiPicker)
-        {
-            <div class="emoji-popup">
-                <emoji-picker id="emojiPicker"></emoji-picker>
-            </div>
-        }
-    </div>
+    <EmojiTextInput @bind-Value="Post.NewComment.CommentContext" Placeholder="نظر خود را بنویسید......" />
 </div>
 
 <button class="post__comment-send" @onclick="() => SendComment()">
@@ -35,49 +19,12 @@
 
 @code {
 
-    private bool ShowEmojiPicker;
+   
 
     [Parameter]
     public PostSummaryDto Post { get; set; }
     [Parameter]
     public EventCallback OnCommentAdded { get; set; }
-
-
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            var objRef = DotNetObjectReference.Create(this);
-            await JS.InvokeVoidAsync("registerEmojiHandler", "emojiPicker", objRef);
-        }
-    }
-
-
-    private async Task ToggleEmojiPicker()
-    {
-        ShowEmojiPicker = !ShowEmojiPicker;
-       
-        if (ShowEmojiPicker)
-        {
-  
-            StateHasChanged();
-            await Task.Delay(50); 
-
-            var objRef = DotNetObjectReference.Create(this);
-            await JS.InvokeVoidAsync("registerEmojiHandler", "emojiPicker", objRef);
-        }
-    }
-
-   
-    [JSInvokable]
-    public async Task OnEmojiClick(string emoji)
-    {
-        Post.NewComment.CommentContext += emoji;
-        ShowEmojiPicker = false;
-
-        StateHasChanged();
-    }
 
 
 

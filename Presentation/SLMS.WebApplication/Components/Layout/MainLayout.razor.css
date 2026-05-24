@@ -45,8 +45,7 @@
     background: none;
     padding: 0.5rem;
     cursor: pointer;
-    border: 1px solid var(--blackgrey54);
-    color: var(--blackgrey54);
+    color: var(--text-muted);
     position: absolute;
     z-index: 2000;
     left: 0;
@@ -59,15 +58,14 @@
     gap: 1rem;
     padding: 0 1rem;
     background-color: var(--white);
-    border: 1px solid var(--black23);
+    border: 1px solid var( --border-light);
 }
 .search {
     width: 100%;
     display: flex;
-    padding: 0.5rem 1rem;   
+    padding: 0.5rem 1rem;
     height: 4rem;
-    background-color: var(--lightGrey);
-    color: var(--blackgrey100);
+    background-color: var(--background-light-gray);
     align-items: center;
     border-radius: 1.1rem;
 }
@@ -76,7 +74,6 @@
     width: 100%;
     padding: 1rem 1.5rem;
     height: 3rem;
-    color: var(--blackgrey100);
 }
 .profile {
     display: none;
@@ -162,7 +159,6 @@
         display: flex;
         align-items: center;
         gap: 1rem;
-        color: var(--darkgray100);
     }
 
     .profile-image {

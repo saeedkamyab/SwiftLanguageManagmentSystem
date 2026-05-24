@@ -5,7 +5,7 @@
     width: 16rem;
     background-color: var(--white);
     padding: 3rem 1rem;
-    color: var(--black)
+    color: var(--text-main)
 }
 
 .menu {
@@ -24,14 +24,14 @@
 }
 
     .menu__item:hover {
-        background-color: var(--mainBlue10);
-        color: var(--mainBlue);
+        background-color: var(--primary-light);
+        color: var(--primary);
     }
 .menu__link {
 
 }
 
 .menu__item:has(.menu__link.active) {
-    background-color: var(--mainBlue10);
-    color: var(--mainBlue);
+    background-color: var(--primary-light);
+    color: var(--primary);
 }

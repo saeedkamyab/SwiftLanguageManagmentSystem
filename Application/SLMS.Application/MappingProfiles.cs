@@ -3,6 +3,7 @@ using SLMS.ApplicationCore.Domain.SocialNetwork;
 using SLMS.ApplicationCore.Domain.User;
 using SLMS.Dto.SocialNetwork;
 using SLMS.Dto.SocialNetwork.Comments;
+using SLMS.Dto.SocialNetwork.Post;
 using SLMS.Dto.User;
 
 namespace SLMS.Application
@@ -38,6 +39,7 @@ namespace SLMS.Application
                 ;
             CreateMap<CreateCommentDto, Comment>();
             CreateMap<CommentDto, Comment>().ReverseMap();
+            CreateMap<CreatePostDto, Post>().ReverseMap();
             #endregion
         }
     }

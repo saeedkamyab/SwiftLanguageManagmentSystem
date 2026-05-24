@@ -1,4 +1,6 @@
-﻿using SLMS.ApplicationCore;
+﻿using Microsoft.EntityFrameworkCore;
+using SLMS.ApplicationCore;
+using SLMS.ApplicationCore.Domain.SocialNetwork;
 using System.Linq.Expressions;
 
 namespace SLMS.Application.Contracts.Persistance
@@ -8,8 +10,10 @@ namespace SLMS.Application.Contracts.Persistance
         Task<TEntity?> GetByIdAsync(Guid id,CancellationToken cancellationToken=default);
         Task<IReadOnlyList<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken = default,
             Func<IQueryable<TEntity>, IQueryable<TEntity>>? include = null);
-       
-        
+
+        public IQueryable<TEntity> GetQueryable();
+  
+
         void Add(TEntity entity);
         void Update(TEntity entity);
         void Remove(TEntity entity);

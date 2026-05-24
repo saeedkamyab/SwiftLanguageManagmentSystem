@@ -1,7 +1,7 @@
 ﻿using SLMS.Dto.SocialNetwork.Comments;
 using SLMS.Dto.User;
 
-namespace SLMS.Dto.SocialNetwork
+namespace SLMS.Dto.SocialNetwork.Post
 {
     public class PostDto : BaseDto
     {

@@ -16,10 +16,10 @@
 }
 
 .post__owner-name {
-    font-weight: 600;
+  
 }
 
 .post__meta {
-    color: var(--black);
-    font-size: 0.9rem;
+    color: var(--text-main);
+    font-size: 1.5rem;
 }

@@ -1,10 +1,25 @@
-﻿<div class="add-post">
+﻿@using Microsoft.JSInterop
+@using SLMS.Dto.SocialNetwork.Post
+@using SLMS.WebApplicationComponents.Components.Commons
+@using SLMS.WebApplicationComponents.Services.Base
+@using SLMS.WebApplicationComponents.Services.SocialNetwork.Interface
+@inject IJSRuntime JS
+@inject IPostService PostService
+@inject FeedStateService FeedState
+
+<div class="add-post">
 
     <div class="add-post__body">
         <img class="add-post__avatar" src="/images/profiles/profile.jpg" />
-        <input type="text" class="add-post__input" placeholder="آنچه به ذهنتان میرسد را به اشتراک بگذارید...." />
+        <EmojiTextInput @bind-Value="Post.Caption" 
+        Placeholder="آنچه به ذهنتان میرسد را به اشتراک بگذارید...." />
+
+        
+
     </div>
+
     <div class="add-post__Seprater"></div>
+
     <div class="add-post__actions">
 
         <button class="add-post__action">
@@ -28,7 +43,7 @@
             <span class="add-post__action-text">نظرسنجی</span>
         </button>
 
-        <button class="add-post__action post__action--Share">
+        <button class="add-post__action post__action--Share" @onclick="CreatePost">
             <span class="add-post__action-text">اشتراک گذاری</span>
         </button>
 
@@ -38,5 +53,20 @@
 </div>
 
 @code {
+    public CreatePostDto Post { get; set; } = new();
+
+    private async Task CreatePost()
+    {
+        var post = Post;
+        post.PostOwnerId = Guid.Parse("007ed1b0-50a4-4585-a8af-9f36bb896010");
+        var success = await PostService.CreatePost(post);
+
+        if (!success)
+            return;
+
+        await FeedState.NotifyPostAddedAsync();
+        Post = new();
+
+    }
 
 }

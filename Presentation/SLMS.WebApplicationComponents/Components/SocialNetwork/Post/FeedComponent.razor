@@ -2,11 +2,11 @@
 @using SLMS.Shared.Enums
 @using SLMS.WebApplication.Services
 @using SLMS.WebApplicationComponents.Components.Commons
+@using SLMS.WebApplicationComponents.Services.Base
 @using SLMS.WebApplicationComponents.Services.SocialNetwork.Interface
 @inject IPostService PostService
-@implements IDisposable
 @inject SearchStateService SearchService
-
+@inject FeedStateService FeedState
 
 <div class="post-filters">
     <button class="post-filter__action @(currentFilter == PostFilter.All ? "post-filter__action--active" : "")" @onclick="() => LoadPosts(PostFilter.All)">
@@ -15,7 +15,7 @@
     <button class="post-filter__action @(currentFilter == PostFilter.Followings ? "post-filter__action--active" : "")" @onclick="() => LoadPosts(PostFilter.Followings)">
         <span class="post-filter__action-text">دنبال شوندگان</span>
     </button>
-@*     <button class="post-filter__action @(currentFilter == PostFilter.Ads ? "post-filter__action--active" : "")" @onclick="() => LoadPosts(PostFilter.Ads)">
+    @*     <button class="post-filter__action @(currentFilter == PostFilter.Ads ? "post-filter__action--active" : "")" @onclick="() => LoadPosts(PostFilter.Ads)">
         <span class="post-filter__action-text">آگهی ها</span>
     </button> *@
 
@@ -53,6 +53,8 @@ else
     protected override async Task OnInitializedAsync()
     {
         await LoadPosts(PostFilter.All);
+        FeedState.OnPostAdded += HandlePostAdded;
+
     }
     protected async Task LoadPosts(PostFilter postFilter)
     {
@@ -65,12 +67,18 @@ else
     {
         // آپدیت کوئری با کلمه جدید
         _query.SearchTerm = SearchService.SearchTerm;
-        _query.PageNumber = 1; 
+        _query.PageNumber = 1;
         await LoadPosts(PostFilter.All);
-        StateHasChanged(); 
+        StateHasChanged();
     }
-    public void Dispose()
+    private async Task HandlePostAdded()
     {
+        await LoadPosts(PostFilter.All);
+        StateHasChanged(); // آپدیت UI
+    }
+    public async ValueTask DisposeAsync()
+    {
+        FeedState.OnPostAdded -= HandlePostAdded; // جلوگیری از memory leak
         // برای جلوگیری از Memory Leak
         SearchService.OnChange -= HandleSearchChanged;
     }

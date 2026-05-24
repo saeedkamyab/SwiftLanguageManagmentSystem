@@ -1,4 +1,5 @@
-﻿using SLMS.Dto.User;
+﻿using SLMS.Dto.SocialNetwork.Post;
+using SLMS.Dto.User;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 

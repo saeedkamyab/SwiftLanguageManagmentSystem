@@ -1,8 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using SLMS.Application.Features.SocialNetwork.Comments.Commands;
 using SLMS.Application.Features.SocialNetwork.Posts.Commands;
 using SLMS.Application.Features.SocialNetwork.Posts.Queries;
 using SLMS.Dto.SocialNetwork;
+using SLMS.Dto.SocialNetwork.Post;
 
 namespace SLMS.Api.Controllers.v1.SocialNetwork
 {
@@ -22,7 +24,7 @@ namespace SLMS.Api.Controllers.v1.SocialNetwork
         public async Task<IActionResult> GetHomePagePosts(
     [FromQuery] int pageNumber = 1,
     [FromQuery] int pageSize = 10,
-    [FromQuery] bool? onlyMyFollowings = null,
+    [FromQuery] bool onlyMyFollowings = false,
     [FromQuery] string? searchTerm = null)
         {
             //var currentUserId = User.GetUserId(); // Extension Method
@@ -38,6 +40,14 @@ namespace SLMS.Api.Controllers.v1.SocialNetwork
 
             var result = await _mediator.Send(query);
             return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Create([FromBody] CreatePostDto post)
+        {
+            var command = new CreatePostRequest { Post = post };
+            var response = await _mediator.Send(command);
+            return Ok(response);
         }
 
         [HttpPost("/api/v1/Post/{postId}/toggle-like")]
