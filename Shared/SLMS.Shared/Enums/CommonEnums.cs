@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SLMS.Shared.Enums
+﻿namespace SLMS.Shared.Enums
 {
-
-    public enum PostFilter
+    public enum MediaType : byte
     {
-        None=0,
-        All,
-        Followings,
-        Ads
-    }
+        Unknown = 0,
 
+    }
 }

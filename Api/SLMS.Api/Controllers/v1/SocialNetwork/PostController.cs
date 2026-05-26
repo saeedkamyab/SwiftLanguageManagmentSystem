@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SLMS.Application.Features.SocialNetwork.Comments.Commands;
 using SLMS.Application.Features.SocialNetwork.Posts.Commands;
 using SLMS.Application.Features.SocialNetwork.Posts.Queries;
 using SLMS.Dto.SocialNetwork;

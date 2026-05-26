@@ -1,4 +1,5 @@
 
+using Microsoft.Extensions.FileProviders;
 using SLMS.Application;
 using SLMS.Persistence;
 
@@ -27,6 +28,11 @@ builder.Services.ConfigurePersistenceServices(builder.Configuration);
 
 var app = builder.Build();
 
+//upload files directory
+string uploadsPath = builder.Configuration["FileStorage:UploadFolder"] ?? @"C:\SlmsUploads"; // یا یک مسیر مطلق مثل @"C:\MyProjectUploads"
+if(!Directory.Exists(uploadsPath)) Directory.CreateDirectory(uploadsPath);
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -38,6 +44,11 @@ app.UseSwaggerUI(options =>
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "Api V1");
 });
 app.UseHttpsRedirection();
+
+app.UseStaticFiles(new StaticFileOptions{
+    FileProvider=new PhysicalFileProvider(uploadsPath),
+    RequestPath= "/cdn"
+});
 
 app.UseAuthorization();
 
