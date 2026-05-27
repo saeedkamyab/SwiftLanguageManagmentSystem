@@ -2,14 +2,14 @@
 
 namespace SLMS.ApplicationCore
 {
-    public class BaseEntity
+    public abstract class BaseEntity
     {
         [Key]
         public Guid Id { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime CreateDate { get; set; }
         public Guid CreatedById { get; set; }
-        public DateTime LastUpdate { get; set; }
-        public Guid LastUpdateById { get; set; }
+        public DateTime? LastUpdate { get; set; }
+        public Guid? LastUpdatedById { get; set; }
     }
 }

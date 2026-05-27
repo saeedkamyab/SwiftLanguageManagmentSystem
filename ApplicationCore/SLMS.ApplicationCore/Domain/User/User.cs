@@ -14,7 +14,7 @@ namespace SLMS.ApplicationCore.Domain.User
         public string PhoneNumber { get; set; } = string.Empty;
 
 
-        //Nullable properties---------------------
+    
         [EmailAddress]
         public string? Email { get; set; } 
         public string? FirstName { get; set; } 

@@ -34,6 +34,9 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
 
@@ -44,8 +47,11 @@ namespace SLMS.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("SessionNumber")
                         .HasColumnType("integer");
@@ -72,6 +78,9 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("Final")
                         .HasColumnType("integer");
 
@@ -80,6 +89,9 @@ namespace SLMS.Persistence.Migrations
 
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("Listening")
                         .HasColumnType("integer");
@@ -119,11 +131,17 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("TermCourseId")
                         .HasColumnType("uuid");
@@ -151,6 +169,9 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Description")
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)");
@@ -161,8 +182,11 @@ namespace SLMS.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -185,6 +209,9 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Description")
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)");
@@ -196,8 +223,11 @@ namespace SLMS.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -218,14 +248,20 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("InstituteId")
                         .HasColumnType("uuid");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("LevelId")
                         .HasColumnType("uuid");
@@ -256,6 +292,9 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("GroupId")
                         .HasColumnType("uuid");
 
@@ -265,8 +304,11 @@ namespace SLMS.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -286,14 +328,20 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("InstituteId")
                         .HasColumnType("uuid");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -316,14 +364,20 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("InstituteId")
                         .HasColumnType("uuid");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("RequestDate")
                         .HasColumnType("timestamp with time zone");
@@ -349,6 +403,9 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Description")
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)");
@@ -359,8 +416,11 @@ namespace SLMS.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -383,6 +443,9 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<DateOnly>("EndDate")
                         .HasColumnType("date");
 
@@ -395,8 +458,11 @@ namespace SLMS.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("LevelId")
                         .HasColumnType("uuid");
@@ -437,6 +503,9 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Extension")
                         .IsRequired()
                         .HasColumnType("text");
@@ -455,8 +524,11 @@ namespace SLMS.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<byte>("MediaType")
                         .HasColumnType("smallint");
@@ -470,7 +542,7 @@ namespace SLMS.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MediaAsset");
+                    b.ToTable("MediaAsset", "Media");
                 });
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.Messaging.ChatMessageMedia", b =>
@@ -482,11 +554,17 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("MediaAssetId")
                         .HasColumnType("uuid");
@@ -500,7 +578,7 @@ namespace SLMS.Persistence.Migrations
 
                     b.HasIndex("MessageId");
 
-                    b.ToTable("ChatMessageMedias");
+                    b.ToTable("ChatMessageMedia", "Messaging");
                 });
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.Messaging.Conversation", b =>
@@ -512,14 +590,20 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime>("LastMessageTimestamp")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -538,14 +622,20 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("LastReadMessageTimestamp")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -576,6 +666,9 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("ImageUrl")
                         .HasMaxLength(1500)
                         .HasColumnType("character varying(1500)");
@@ -583,8 +676,11 @@ namespace SLMS.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("SenderUserId")
                         .HasColumnType("uuid");
@@ -619,11 +715,17 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("PostId")
                         .HasColumnType("uuid");
@@ -654,11 +756,17 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid?>("ParentId")
                         .HasColumnType("uuid");
@@ -689,6 +797,9 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("FollowerUserId")
                         .HasColumnType("uuid");
 
@@ -698,8 +809,11 @@ namespace SLMS.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -719,11 +833,17 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("PostId")
                         .HasColumnType("uuid");
@@ -760,11 +880,17 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("LikesCount")
                         .HasColumnType("integer");
@@ -796,11 +922,17 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("MediaAssetId")
                         .HasColumnType("uuid");
@@ -817,7 +949,7 @@ namespace SLMS.Persistence.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("PostMedias");
+                    b.ToTable("PostMedia", "SocialNetwork");
                 });
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.User.User", b =>
@@ -829,49 +961,47 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Email")
-                        .HasMaxLength(250)
-                        .HasColumnType("character varying(250)");
+                        .HasColumnType("text");
 
                     b.Property<string>("FatherName")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("FirstName")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
                     b.Property<string>("LastName")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("NationalCode")
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(1500)
-                        .HasColumnType("character varying(1500)");
+                        .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("character varying(11)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ProfileImageUrl")
                         .HasColumnType("text");
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("character varying(250)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
