@@ -6,9 +6,9 @@ namespace SLMS.ApplicationCore.Domain.SocialNetwork
     public class Like:BaseEntity
     {
         public Guid PostId { get; set; }
-        public Post Post { get; set; }
+        public Post Post { get; set; } = null!;
        
         public Guid UserId { get; set; }
-        public Domain.User.User User { get; set; }
+        public Domain.User.User User { get; set; } = null!;
     }
 }

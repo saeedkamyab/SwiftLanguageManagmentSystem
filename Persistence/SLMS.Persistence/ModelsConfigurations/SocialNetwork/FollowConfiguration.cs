@@ -1,12 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SLMS.ApplicationCore.Domain.SocialNetwork;
 
 namespace SLMS.Persistence.ModelsConfigurations.SocialNetwork
 {
-    public class FollowConfiguration : IEntityTypeConfiguration<Follow>
+    public class FollowConfiguration : BaseEntityConfiguration<Follow>
     {
-        public void Configure(EntityTypeBuilder<Follow> follow)
+        public override void Configure(EntityTypeBuilder<Follow> follow)
         {
             follow.HasOne(f => f.FollowerUser)
                 .WithMany(u => u.Followers)

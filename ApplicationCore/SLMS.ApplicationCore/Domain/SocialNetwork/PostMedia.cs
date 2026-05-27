@@ -7,9 +7,9 @@ namespace SLMS.ApplicationCore.Domain.SocialNetwork
     public class PostMedia : BaseEntity
     {
         public Guid PostId { get; set; }
-        public virtual Post Post { get; set; }
+        public Post Post { get; set; } = null!;
         public Guid MediaAssetId { get; set; }
-        public virtual MediaAsset MediaAsset { get; set; }
+        public MediaAsset MediaAsset { get; set; } = null!;
         public int SortOrder { get; set; }
     }
 }

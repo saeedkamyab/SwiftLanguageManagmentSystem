@@ -29,6 +29,7 @@ namespace SLMS.ApplicationCore.Domain.User
         public ICollection<Follow> Followers { get; set; } = [];
         public ICollection<Post> Posts { get; set; } = [];
         public ICollection<Like> Likes { get; set; } = [];
+        public ICollection<Bookmark> Bookmarks { get; set; } = [];
         public ICollection<Comment> Comments { get; set; } = [];
         public ICollection<Message> Messages { get; set; } = [];
         public ICollection<ConversationMember> ConversationMembers { get; set; } = [];

@@ -6,8 +6,8 @@ namespace SLMS.ApplicationCore.Domain.SocialNetwork
     public class Follow:BaseEntity
     {
         public Guid FollowerUserId {  get; set; }
-        public Domain.User.User FollowerUser {  get; set; }
+        public Domain.User.User FollowerUser {  get; set; } = null!;
         public Guid FollowingUserId {  get; set; }
-        public Domain.User.User FollowingUser {  get; set; }
+        public Domain.User.User FollowingUser {  get; set; } = null!;
     }
 }

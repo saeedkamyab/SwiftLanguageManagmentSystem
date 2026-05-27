@@ -1,12 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SLMS.ApplicationCore.Domain.SocialNetwork;
 
 namespace SLMS.Persistence.ModelsConfigurations.SocialNetwork
 {
-    public class LikeConfiguration : IEntityTypeConfiguration<Like>
+    public class LikeConfiguration : BaseEntityConfiguration<Like>
     {
-        public void Configure(EntityTypeBuilder<Like> Like)
+        public override void Configure(EntityTypeBuilder<Like> Like)
         {
             Like.HasOne(l => l.Post)
                 .WithMany(p => p.Likes)
