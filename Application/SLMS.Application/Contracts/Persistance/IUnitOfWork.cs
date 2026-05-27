@@ -1,5 +1,6 @@
 ﻿using SLMS.Application.Contracts.SocialNetwork;
 using SLMS.ApplicationCore.Domain.InstituteManagement;
+using SLMS.ApplicationCore.Domain.Media;
 using SLMS.ApplicationCore.Domain.Messaging;
 using SLMS.ApplicationCore.Domain.SocialNetwork;
 using SLMS.ApplicationCore.Domain.User;
@@ -15,13 +16,16 @@ namespace SLMS.Application.Contracts.Persistance
         IBaseRepository<ConversationMember> ConversationMemberRepository { get; }
         IBaseRepository<Follow> FollowRepository { get; }
         IBaseRepository<Message> MessageRepository { get; }
-        //IBaseRepository<Like> LikeRepository { get; }
         ILikeRepository LikeRepository { get; }
-        //IBaseRepository<Post> PostRepository { get;  }
         IPostRepository PostRepository { get;  }
         IBookmarkRepository BookmarkRepository { get;  }
 
         #endregion
+
+        #region Media
+        IBaseRepository<MediaAsset> MediaAssetRepository { get; }
+        #endregion
+
 
         #region InstituteManagement
         IBaseRepository<AbsentPresent> AbsentPresentRepository { get; }

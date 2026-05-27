@@ -1,6 +1,7 @@
 ﻿using SLMS.Application.Contracts.Persistance;
 using SLMS.Application.Contracts.SocialNetwork;
 using SLMS.ApplicationCore.Domain.InstituteManagement;
+using SLMS.ApplicationCore.Domain.Media;
 using SLMS.ApplicationCore.Domain.Messaging;
 using SLMS.ApplicationCore.Domain.SocialNetwork;
 using SLMS.ApplicationCore.Domain.User;
@@ -28,6 +29,12 @@ namespace SLMS.Persistence
         //private readonly Lazy<IBaseRepository<Post>> _PostRepository;
         #endregion
 
+
+        #region Media
+        private readonly Lazy<IBaseRepository<MediaAsset>> _MediaAssetRepository;
+
+        #endregion
+
         #region InstituteManagement
         private readonly Lazy<IBaseRepository<AbsentPresent>> _AbsentPresentRepository;
         private readonly Lazy<IBaseRepository<Certificate>> _CertificateRepository;
@@ -47,6 +54,7 @@ namespace SLMS.Persistence
         #endregion
 
         #region Properties -------------------------------------------------------
+
         #region UserManagement
         public IBaseRepository<User> UserRepository => _UserRepository.Value;
         public IBaseRepository<Comment> CommentRepository => _CommentRepository.Value;
@@ -59,6 +67,12 @@ namespace SLMS.Persistence
         public IPostRepository PostRepository => _PostRepository.Value;
         public IBookmarkRepository BookmarkRepository => _BookmarkRepository.Value;
         //public IBaseRepository<Post> PostRepository => _PostRepository.Value;
+        #endregion
+
+
+        #region Media
+        public IBaseRepository<MediaAsset> MediaAssetRepository => _MediaAssetRepository.Value;
+
         #endregion
 
         #region InstituteManagement
@@ -97,6 +111,12 @@ namespace SLMS.Persistence
             _PostRepository = new Lazy<IPostRepository>(() => new PostRepository(_context));
             _BookmarkRepository = new Lazy<IBookmarkRepository>(() => new BookmarkRepository(_context));
             #endregion
+
+            #region UserManagment
+            _MediaAssetRepository = new Lazy<IBaseRepository<MediaAsset>>(() => new BaseRepository<MediaAsset>(_context));
+            #endregion
+
+
 
             #region InstituteManagment
             _AbsentPresentRepository = new Lazy<IBaseRepository<AbsentPresent>>(() => new BaseRepository<AbsentPresent>(_context));

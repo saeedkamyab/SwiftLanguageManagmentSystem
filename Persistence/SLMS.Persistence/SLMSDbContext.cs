@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SLMS.ApplicationCore;
 using SLMS.ApplicationCore.Domain.InstituteManagement;
+using SLMS.ApplicationCore.Domain.Media;
 using SLMS.ApplicationCore.Domain.Messaging;
 using SLMS.ApplicationCore.Domain.SocialNetwork;
 using SLMS.ApplicationCore.Domain.User;
@@ -32,15 +33,26 @@ namespace SLMS.Persistence
         public DbSet<TermCourse> TermCourses { get; set; }
         #endregion
 
-        #region UserManagement
-        public DbSet<User> Users { get; set; }
+        #region SocialNetwork
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<ConversationMember> ConversationMembers { get; set; }
         public DbSet<Follow> Follows { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<PostMedia> PostMedias { get; set; }
+        public DbSet<ChatMessageMedia> ChatMessageMedias { get; set; }
 
+        #endregion
+
+        #region Media
+        public DbSet<MediaAsset> MediaAsset { get; set; }
+
+        #endregion
+
+
+        #region User
+        public DbSet<User> Users { get; set; }
         #endregion
 
 

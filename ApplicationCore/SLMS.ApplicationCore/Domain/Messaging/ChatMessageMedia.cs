@@ -1,8 +1,10 @@
 ﻿using SLMS.ApplicationCore.Domain.Media;
 using SLMS.Shared.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SLMS.ApplicationCore.Domain.Messaging
 {
+    [Table("ChatMessageMedia", Schema = "Messaging")]
     public class ChatMessageMedia:BaseEntity
     {
         public Guid MessageId { get; set; }

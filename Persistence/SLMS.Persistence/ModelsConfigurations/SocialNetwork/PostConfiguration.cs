@@ -10,7 +10,7 @@ namespace SLMS.Persistence.ModelsConfigurations.SocialNetwork
         {
             post.Property(p=>p.Title).HasMaxLength(100);
             post.Property(p=>p.Caption).HasMaxLength(500);
-            post.Property(p=>p.ImageUrl).HasMaxLength(1500).IsRequired(false);
+            //post.Property(p=>p.ImageUrl).HasMaxLength(1500).IsRequired(false);
            
 
             post.HasOne(p=>p.PostOwner)

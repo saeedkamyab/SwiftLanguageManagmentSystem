@@ -424,6 +424,85 @@ namespace SLMS.Persistence.Migrations
                     b.ToTable("TermCourse", "InstituteManagement");
                 });
 
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.Media.MediaAsset", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Extension")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long>("FileSize")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("FileUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<byte>("MediaType")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("MetaData")
+                        .HasColumnType("text");
+
+                    b.Property<string>("StoredName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MediaAsset");
+                });
+
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.Messaging.ChatMessageMedia", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("MediaAssetId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("MessageId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MediaAssetId");
+
+                    b.HasIndex("MessageId");
+
+                    b.ToTable("ChatMessageMedias");
+                });
+
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.Messaging.Conversation", b =>
                 {
                     b.Property<Guid>("Id")
@@ -681,10 +760,6 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("ImageUrl")
-                        .HasMaxLength(1500)
-                        .HasColumnType("character varying(1500)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
@@ -710,6 +785,39 @@ namespace SLMS.Persistence.Migrations
                     b.HasIndex("PostOwnerId");
 
                     b.ToTable("Post", "SocialNetwork");
+                });
+
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.SocialNetwork.PostMedia", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("MediaAssetId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MediaAssetId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("PostMedias");
                 });
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.User.User", b =>
@@ -936,6 +1044,25 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("Room");
                 });
 
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.Messaging.ChatMessageMedia", b =>
+                {
+                    b.HasOne("SLMS.ApplicationCore.Domain.Media.MediaAsset", "MediaAsset")
+                        .WithMany()
+                        .HasForeignKey("MediaAssetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SLMS.ApplicationCore.Domain.Messaging.Message", "Message")
+                        .WithMany()
+                        .HasForeignKey("MessageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MediaAsset");
+
+                    b.Navigation("Message");
+                });
+
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.Messaging.ConversationMember", b =>
                 {
                     b.HasOne("SLMS.ApplicationCore.Domain.Messaging.Conversation", "Conversation")
@@ -1067,6 +1194,25 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("PostOwner");
                 });
 
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.SocialNetwork.PostMedia", b =>
+                {
+                    b.HasOne("SLMS.ApplicationCore.Domain.Media.MediaAsset", "MediaAsset")
+                        .WithMany()
+                        .HasForeignKey("MediaAssetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SLMS.ApplicationCore.Domain.SocialNetwork.Post", "Post")
+                        .WithMany("PostMedias")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MediaAsset");
+
+                    b.Navigation("Post");
+                });
+
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Classification", b =>
                 {
                     b.Navigation("AbsentPresents");
@@ -1128,6 +1274,8 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Likes");
+
+                    b.Navigation("PostMedias");
                 });
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.User.User", b =>

@@ -7,7 +7,6 @@ namespace SLMS.ApplicationCore.Domain.SocialNetwork
     {
         public string Title { get; set; } = string.Empty;
         public string Caption { get; set; } = string.Empty;
-        public string ImageUrl { get; set; } = string.Empty;
 
         public Guid PostOwnerId { get; set; }
         public Domain.User.User PostOwner { get; set; }
@@ -21,6 +20,7 @@ namespace SLMS.ApplicationCore.Domain.SocialNetwork
         public ICollection<Like> Likes { get; set; }
         public ICollection<Bookmark> Bookmarks { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        public ICollection<PostMedia> PostMedias { get; set; }
 
     }
 }
