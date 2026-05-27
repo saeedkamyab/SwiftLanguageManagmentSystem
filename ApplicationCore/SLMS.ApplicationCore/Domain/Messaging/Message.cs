@@ -7,18 +7,15 @@ namespace SLMS.ApplicationCore.Domain.Messaging
     public class Message:BaseEntity
     {
         public string Content { get; set; } = string.Empty;
-        public string? ImageUrl { get; set; } 
-        public string? VideoUrl { get; set; }
-      
-        public DateTime SentAt { get; set; }
+        public MessageType MessageType { get; set; }
+        public Guid ConversationId { get; set; }
+        public Conversation Conversation { get; set; } = null!;
+        public Guid SenderUserId { get; set; }
+        public Domain.User.User SenderUser { get; set; } = null!;
          public MessageStatus Status { get; set; }
 
 
-        public Guid ConversationId { get; set; }
-        public Conversation Conversation { get; set; }
-
-        public Guid SenderUserId { get; set; }
-        public Domain.User.User SenderUser { get; set; }
+        public ICollection<ChatMessageMedia> ChatMessageMedias { get; set; } = [];
     }
 
 }

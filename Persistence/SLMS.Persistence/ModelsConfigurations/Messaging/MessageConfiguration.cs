@@ -10,8 +10,8 @@ namespace SLMS.Persistence.ModelsConfigurations.Messaging
         public void Configure(EntityTypeBuilder<Message> message)
         {
             message.Property(m=>m.Content).HasMaxLength(800);
-            message.Property(m=>m.ImageUrl).HasMaxLength(1500).IsRequired(false);
-            message.Property(m=>m.VideoUrl).HasMaxLength(1500).IsRequired(false);
+            //message.Property(m=>m.ImageUrl).HasMaxLength(1500).IsRequired(false);
+            //message.Property(m=>m.VideoUrl).HasMaxLength(1500).IsRequired(false);
             message.Property(m=>m.Status).HasDefaultValue(MessageStatus.Sent);
 
 

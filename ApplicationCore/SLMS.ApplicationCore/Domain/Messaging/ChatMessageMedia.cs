@@ -1,5 +1,4 @@
 ﻿using SLMS.ApplicationCore.Domain.Media;
-using SLMS.Shared.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SLMS.ApplicationCore.Domain.Messaging
@@ -8,8 +7,8 @@ namespace SLMS.ApplicationCore.Domain.Messaging
     public class ChatMessageMedia:BaseEntity
     {
         public Guid MessageId { get; set; }
-        public virtual Message Message { get; set; }
+        public Message Message { get; set; } = null!;
         public Guid MediaAssetId { get; set; }
-        public virtual MediaAsset MediaAsset { get; set; }
+        public MediaAsset MediaAsset { get; set; } = null!;
     }
 }
