@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using SLMS.Application.Features.Media.Commands;
 using SLMS.Dto.Media;
 using SLMS.Shared.Enums;
+using SLMS.Shared;
+using SLMS.Shared.Utilities;
 
 namespace SLMS.Api.Controllers.v1.Media
 {
@@ -60,14 +62,13 @@ namespace SLMS.Api.Controllers.v1.Media
                 FileName = file.FileName,
                 StoredName = storedName,
                 FileUrl = fileUrl,
-                ContentType = file.ContentType,
-
                 Extension = extension,
-                IsDeleted = false,
+                MediaType =FileHelper.GetMediaType(file.ContentType,file.FileName),
                 FileSize = file.Length,
+                ContentType = file.ContentType,
                 MetaData = "",
-                MediaType = MediaType.Unknown,
-                
+                IsDeleted = false,
+
             };
 
             var command = new CreateMediaAssetRequest { Media = media };

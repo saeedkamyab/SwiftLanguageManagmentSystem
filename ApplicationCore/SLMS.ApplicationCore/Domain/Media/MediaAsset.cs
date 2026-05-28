@@ -6,13 +6,13 @@ namespace SLMS.ApplicationCore.Domain.Media
     [Table("MediaAsset", Schema = "Media")]
     public class MediaAsset : BaseEntity
     {
-        public string FileName { get; set; }
-        public string StoredName { get; set; }
-        public string FileUrl { get; set; }
-        public string Extension { get; set; }
+        public string FileName { get; set; } = string.Empty;
+        public string StoredName { get; set; } = string.Empty;
+        public string FileUrl { get; set; } = string.Empty;
+        public string Extension { get; set; } = string.Empty;
         public MediaType MediaType { get; set; }
         public long FileSize { get; set; }
-        public string ContentType { get; set; }
+        public string ContentType { get; set; } = string.Empty;
         public string? MetaData { get; set; }
     }
 }

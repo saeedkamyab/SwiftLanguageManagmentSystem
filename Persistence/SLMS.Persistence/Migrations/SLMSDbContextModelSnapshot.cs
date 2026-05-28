@@ -596,6 +596,9 @@ namespace SLMS.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
+                    b.Property<bool>("IsGroup")
+                        .HasColumnType("boolean");
+
                     b.Property<DateTime>("LastMessageTimestamp")
                         .HasColumnType("timestamp with time zone");
 
@@ -669,10 +672,6 @@ namespace SLMS.Persistence.Migrations
                     b.Property<Guid>("CreatedById")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ImageUrl")
-                        .HasMaxLength(1500)
-                        .HasColumnType("character varying(1500)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
@@ -682,20 +681,16 @@ namespace SLMS.Persistence.Migrations
                     b.Property<Guid?>("LastUpdatedById")
                         .HasColumnType("uuid");
 
+                    b.Property<byte>("MessageType")
+                        .HasColumnType("smallint");
+
                     b.Property<Guid>("SenderUserId")
                         .HasColumnType("uuid");
-
-                    b.Property<DateTime>("SentAt")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<byte>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("smallint")
                         .HasDefaultValue((byte)1);
-
-                    b.Property<string>("VideoUrl")
-                        .HasMaxLength(1500)
-                        .HasColumnType("character varying(1500)");
 
                     b.HasKey("Id");
 
@@ -965,19 +960,23 @@ namespace SLMS.Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Email")
-                        .HasColumnType("text");
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.Property<string>("FatherName")
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
@@ -986,22 +985,27 @@ namespace SLMS.Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("NationalCode")
-                        .HasColumnType("text");
+                        .HasMaxLength(10)
+                        .HasColumnType("character(10)")
+                        .IsFixedLength();
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(1500)
+                        .HasColumnType("character varying(1500)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(11)
+                        .HasColumnType("character varying(11)");
 
                     b.Property<string>("ProfileImageUrl")
                         .HasColumnType("text");
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.HasKey("Id");
 
@@ -1183,7 +1187,7 @@ namespace SLMS.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("SLMS.ApplicationCore.Domain.Messaging.Message", "Message")
-                        .WithMany()
+                        .WithMany("ChatMessageMedias")
                         .HasForeignKey("MessageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1240,7 +1244,7 @@ namespace SLMS.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("SLMS.ApplicationCore.Domain.User.User", "User")
-                        .WithMany()
+                        .WithMany("Bookmarks")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1392,6 +1396,11 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("Messages");
                 });
 
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.Messaging.Message", b =>
+                {
+                    b.Navigation("ChatMessageMedias");
+                });
+
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.SocialNetwork.Comment", b =>
                 {
                     b.Navigation("ChildComments");
@@ -1410,6 +1419,8 @@ namespace SLMS.Persistence.Migrations
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.User.User", b =>
                 {
+                    b.Navigation("Bookmarks");
+
                     b.Navigation("Comments");
 
                     b.Navigation("ConversationMembers");

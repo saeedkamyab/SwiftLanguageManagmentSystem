@@ -77,10 +77,10 @@ namespace SLMS.Persistence
                 {
                     entry.Entity.CreateDate = DateTime.UtcNow;
                     entry.Entity.IsDeleted = false;
-                    if (entry.Entity is Message message)
-                    {
-                        message.SentAt = DateTime.UtcNow;
-                    }
+                    //if (entry.Entity is Message message)
+                    //{
+                    //    message.cre = DateTime.UtcNow;
+                    //}
                 }
                 else if (entry.State == EntityState.Modified)
                 {
