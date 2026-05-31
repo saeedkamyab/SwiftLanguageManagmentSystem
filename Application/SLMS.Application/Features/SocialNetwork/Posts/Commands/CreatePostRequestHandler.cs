@@ -22,6 +22,7 @@ namespace SLMS.Application.Features.SocialNetwork.Posts.Commands
                 var Post = _mapper.Map<ApplicationCore.Domain.SocialNetwork.Post>(request.Post);
                 _unitOfWork.PostRepository.Add(Post);
                 await _unitOfWork.CommitAsync();
+
                 return true;
             }
             catch 

@@ -20,6 +20,12 @@
     padding: 1rem;
 }
 
+.add-post__Media-preview {
+
+    border: 1px solid #000;
+    margin: 0 2rem;
+}
+
 .add-post__Seprater {
     margin: 0 2rem;
     height: 1rem;
@@ -36,6 +42,8 @@
     margin: 2rem;
     cursor: pointer;
     padding: 0.5rem;
+    height: 4.5rem;
+    align-items: center;
     transition: all 0.3s ease-in-out;
 }
 
@@ -60,3 +68,53 @@
 
 .add-post__action-text {
 }
+
+
+[data-tooltip] {
+    position: relative;
+    cursor: pointer;
+}
+
+    /* استایل کلی تولتیپ */
+    [data-tooltip]::after {
+        content: attr(data-tooltip); /* متن را از ویژگی data-tooltip می‌خواند */
+        position: absolute;
+        bottom: 120%; /* کمی بالاتر از دکمه */
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 1rem;
+        background-color: #333;
+        color: #fff;
+        border-radius: 1.1rem;
+        white-space: nowrap;
+        opacity: 0; /* مخفی در حالت عادی */
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+        z-index: 1000;
+    }
+
+    /* ظاهر شدن در حالت هاور */
+    [data-tooltip]:hover::after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* (اختیاری) اضافه کردن مثلث کوچک پایین تولتیپ */
+    [data-tooltip]::before {
+        content: "";
+        position: absolute;
+        bottom: 110%;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 5px;
+        border-style: solid;
+        border-color: #333 transparent transparent transparent;
+        opacity: 0;
+        visibility: visible;
+        transition: opacity 0.2s ease;
+    }
+
+    [data-tooltip]:hover::before {
+        opacity: 1;
+        visibility: visible;
+    }

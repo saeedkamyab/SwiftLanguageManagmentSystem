@@ -1,42 +1,67 @@
-﻿@using Microsoft.JSInterop
+﻿@using System.Net.Http.Headers
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.JSInterop
+@using SLMS.Dto.Media
 @using SLMS.Dto.SocialNetwork.Post
 @using SLMS.WebApplicationComponents.Components.Commons
 @using SLMS.WebApplicationComponents.Services.Base
+@using SLMS.WebApplicationComponents.Services.Base.Interfaces
+@using SLMS.WebApplicationComponents.Services.Media.Interface
 @using SLMS.WebApplicationComponents.Services.SocialNetwork.Interface
 @inject IJSRuntime JS
 @inject IPostService PostService
+@inject IMediaService MediaService
 @inject FeedStateService FeedState
+@inject IMediaUrlResolver MediaUrl
 
 <div class="add-post">
 
     <div class="add-post__body">
         <img class="add-post__avatar" src="/images/profiles/profile.jpg" />
-        <EmojiTextInput @bind-Value="Post.Caption" 
-        Placeholder="آنچه به ذهنتان میرسد را به اشتراک بگذارید...." />
+        <EmojiTextInput @bind-Value="Post.Caption"
+                        Placeholder="آنچه به ذهنتان میرسد را به اشتراک بگذارید...." />
 
         
 
     </div>
+    <div class="add-post__Media-preview">
+        @if (isUploading)
+        {
+            <p>در حال آپلود... @uploadProgress%</p>
+        }
+        else if (uploadedMedia.ContentType.StartsWith("video/"))
+        {
+            <video class="media-img"
+                   muted
+                   playsinline
+                   onmouseover="this.play()"
+                   onmouseout="this.pause(); this.currentTime=0;">
+                <source src="@MediaUrl.Resolve(uploadedMedia.FileUrl)" type="@uploadedMedia.ContentType">
+            </video>
+        }
+        else if (uploadedMedia.ContentType.StartsWith("image/"))
+        {
+            <img src="@MediaUrl.Resolve(uploadedMedia.FileUrl)" />
 
+        }
+    </div>
     <div class="add-post__Seprater"></div>
 
     <div class="add-post__actions">
 
-        <button class="add-post__action">
+        <label for="postImageInput" class="add-post__action" data-tooltip="تصویر/ویدیو">
             <svg class="add-post__icon" viewBox="0 0 26 26" width="20" height="20">
-                <path d="M7 0C4.796875 0 3 1.796875 3 4L3 22C3 24.203125 4.796875 26 7 26L19 26C21.203125 26 23 24.203125 23 22L23 8C23 6.9375 22.027344 5.929688 20.28125 4.21875C20.039063 3.980469 19.777344 3.714844 19.53125 3.46875C19.285156 3.222656 19.019531 2.992188 18.78125 2.75C17.070313 1.003906 16.0625 0 15 0 Z M 7 2L14.28125 2C15.003906 2.183594 15 3.050781 15 3.9375L15 7C15 7.550781 15.449219 8 16 8L19 8C19.996094 8 21 8.003906 21 9L21 22C21 23.105469 20.105469 24 19 24L7 24C5.894531 24 5 23.105469 5 22L5 4C5 2.894531 5.894531 2 7 2 Z M 10 9C8.894531 9 8 9.894531 8 11C8 12.105469 8.894531 13 10 13C11.105469 13 12 12.105469 12 11C12 9.894531 11.105469 9 10 9 Z M 15.96875 12.15625C14.78125 12.15625 14.363281 17.0625 12.71875 17.0625C11.5 17.0625 11.027344 15.0625 10 15.0625C8.972656 15.0625 7.125 19.25 7.125 19.25C6.746094 19.671875 7.3125 20 7.75 20L18.3125 20C18.667969 20 19.125 19.546875 18.84375 18.9375C18.84375 18.9375 17.15625 12.15625 15.96875 12.15625Z" fill="currentcolor" />
+                <path d="M19.71875 2.0625C19.328125 2.074219 18.9375 2.15625 18.5625 2.28125C17.0625 2.785156 15.777344 3.941406 14.5 5.21875L6.25 13.46875C5.515625 14.203125 4.953125 15.097656 4.78125 16.15625C4.609375 17.214844 4.929688 18.425781 5.84375 19.34375C6.78125 20.28125 8.035156 20.5625 9.09375 20.375C10.152344 20.1875 11.039063 19.617188 11.71875 18.9375L20.78125 9.875C21.078125 9.632813 21.214844 9.246094 21.128906 8.871094C21.042969 8.5 20.75 8.207031 20.378906 8.121094C20.003906 8.035156 19.617188 8.171875 19.375 8.46875L10.3125 17.53125C9.882813 17.960938 9.289063 18.308594 8.75 18.40625C8.210938 18.503906 7.753906 18.441406 7.25 17.9375C6.726563 17.414063 6.667969 16.972656 6.75 16.46875C6.832031 15.964844 7.148438 15.382813 7.65625 14.875L15.90625 6.625C17.113281 5.417969 18.273438 4.496094 19.1875 4.1875C20.101563 3.878906 20.757813 3.945313 21.8125 5C22.601563 5.785156 23.4375 6.496094 23.65625 7.21875C23.765625 7.578125 23.765625 7.9375 23.53125 8.53125C23.296875 9.125 22.785156 9.933594 21.8125 10.90625C17.664063 15.054688 14.480469 18.238281 12.75 19.96875C11.214844 21.503906 9.761719 22.53125 8.46875 22.8125C7.175781 23.09375 5.949219 22.792969 4.34375 21.1875C2.738281 19.582031 2.175781 18.023438 2.34375 16.40625C2.511719 14.789063 3.496094 13.035156 5.3125 11.21875C7.507813 9.023438 12.09375 4.8125 12.09375 4.8125C12.398438 4.585938 12.546875 4.203125 12.476563 3.828125C12.40625 3.453125 12.128906 3.152344 11.765625 3.050781C11.398438 2.945313 11.003906 3.0625 10.75 3.34375C10.75 3.34375 6.160156 7.5 3.875 9.78125C1.851563 11.804688 0.578125 13.976563 0.34375 16.21875C0.109375 18.460938 1.015625 20.671875 2.9375 22.59375C4.855469 24.515625 6.929688 25.203125 8.875 24.78125C10.820313 24.359375 12.503906 23.027344 14.15625 21.375C15.886719 19.644531 19.070313 16.460938 23.21875 12.3125C24.320313 11.210938 25.03125 10.230469 25.40625 9.28125C25.78125 8.332031 25.796875 7.398438 25.5625 6.625C25.097656 5.078125 23.84375 4.214844 23.21875 3.59375C22.503906 2.878906 21.710938 2.425781 20.90625 2.21875C20.503906 2.113281 20.109375 2.050781 19.71875 2.0625Z" fill="currentcolor" />
             </svg>
-            <span class="add-post__action-text">تصویر</span>
-        </button>
+            <span class="add-post__action-text">تصویر/ویدیو</span>
+        </label>
 
-        <button class="add-post__action">
-            <svg class="add-post__icon" viewBox="0 0 26 26" width="20" height="20">
-                <path d="M7 0C4.796875 0 3 1.796875 3 4L3 22C3 24.203125 4.796875 26 7 26L19 26C21.203125 26 23 24.203125 23 22L23 8C23 6.9375 22.027344 5.929688 20.28125 4.21875C20.039063 3.980469 19.777344 3.714844 19.53125 3.46875C19.285156 3.222656 19.019531 2.992188 18.78125 2.75C17.070313 1.003906 16.0625 0 15 0 Z M 7 2L14.28125 2C15.003906 2.183594 15 3.050781 15 3.9375L15 7C15 7.550781 15.449219 8 16 8L19 8C19.996094 8 21 8.003906 21 9L21 22C21 23.105469 20.105469 24 19 24L7 24C5.894531 24 5 23.105469 5 22L5 4C5 2.894531 5.894531 2 7 2 Z M 10.65625 10.96875C10.546875 10.972656 10.410156 11.003906 10.3125 11.0625C10.121094 11.179688 10 11.371094 10 11.59375L10 18.25C10 18.472656 10.117188 18.664063 10.3125 18.78125C10.421875 18.84375 10.539063 18.875 10.65625 18.875C10.757813 18.875 10.875 18.859375 10.96875 18.8125L16.65625 15.5C16.878906 15.390625 17 15.183594 17 14.9375C17 14.691406 16.878906 14.453125 16.65625 14.34375L10.96875 11.03125C10.867188 10.980469 10.765625 10.964844 10.65625 10.96875Z" fill="currentcolor" />
-            </svg>
-            <span class="add-post__action-text">ویدیو</span>
-        </button>
+        <InputFile id="postImageInput" style="display:none" accept="image/*,video/*"
+                   multiple OnChange="HandleFileSelected" />
 
-        <button class="add-post__action">
+     
+        <button class="add-post__action" data-tooltip="نظرسنجی">
             <svg class="add-post__icon" viewBox="0 0 26 26" width="20" height="20">
                 <path d="M13 0.1875C6 0.1875 0.1875 5.25 0.1875 11.625C0.1875 14.621094 1.59375 17.257813 3.6875 19.28125C3.605469 20.441406 3.023438 21.132813 2.21875 21.8125C1.785156 22.175781 1.308594 22.515625 0.875 22.9375C0.441406 23.359375 0 23.929688 0 24.71875C0 25.175781 0.308594 25.574219 0.75 25.6875C2.628906 26.191406 4.648438 25.820313 6.5 25.15625C8.164063 24.558594 9.574219 23.671875 10.6875 22.8125C11.441406 22.9375 12.203125 23.03125 13 23.03125C20 23.03125 25.8125 17.996094 25.8125 11.625C25.8125 5.253906 20 0.1875 13 0.1875 Z M 13 2.1875C19.046875 2.1875 23.8125 6.476563 23.8125 11.625C23.8125 16.773438 19.046875 21.03125 13 21.03125C12.214844 21.03125 11.460938 20.984375 10.71875 20.84375C10.421875 20.773438 10.113281 20.84375 9.875 21.03125C8.972656 21.789063 7.457031 22.703125 5.84375 23.28125C4.851563 23.636719 3.84375 23.800781 2.90625 23.84375C3.117188 23.675781 3.28125 23.554688 3.53125 23.34375C4.539063 22.496094 5.75 21.128906 5.75 19.0625C5.75 18.773438 5.625 18.5 5.40625 18.3125C3.40625 16.585938 2.1875 14.234375 2.1875 11.625C2.1875 6.476563 6.953125 2.1875 13 2.1875 Z M 12 6C11.449219 6 11 6.449219 11 7L11 15C11 15.550781 11.449219 16 12 16L14 16C14.550781 16 15 15.550781 15 15L15 7C15 6.449219 14.550781 6 14 6 Z M 12 7L14 7L14 15L12 15 Z M 17 8C16.449219 8 16 8.449219 16 9L16 15C16 15.550781 16.449219 16 17 16L19 16C19.550781 16 20 15.550781 20 15L20 9C20 8.449219 19.550781 8 19 8 Z M 7 10C6.449219 10 6 10.449219 6 11L6 15C6 15.550781 6.449219 16 7 16L9 16C9.550781 16 10 15.550781 10 15L10 11C10 10.449219 9.550781 10 9 10Z" fill="currentcolor" />
             </svg>
@@ -49,11 +74,50 @@
 
     </div>
 
+  
 
 </div>
 
 @code {
     public CreatePostDto Post { get; set; } = new();
+    private bool isUploading;
+    private int uploadProgress;
+    // private List<MediaAssetDto> uploadedMedias = new();
+    private MediaAssetDto uploadedMedia = new();
+
+    private async Task HandleFileSelected(InputFileChangeEventArgs e)
+    {
+        isUploading = true;
+        // var files = e.GetMultipleFiles(3);
+        var file = e.File;
+
+        // foreach (var file in files)
+        // {
+        var content = new MultipartFormDataContent();
+        var fileContent = new StreamContent(file.OpenReadStream(maxAllowedSize: 500 * 1024 * 1024));
+        fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+        content.Add(fileContent, "file", file.Name);
+        var response = await MediaService.UploadFileAsync(content);
+        if (response.IsSuccessStatusCode)
+        {
+            var mediaDto = await response.Content.ReadFromJsonAsync<MediaAssetDto>();
+            if (mediaDto != null)
+            {
+                //uploadedMedias.Add(mediaDto);
+                uploadedMedia = mediaDto;
+            }
+        }
+        else
+        {
+            var error = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"Upload failed: {response.StatusCode} - {error}");
+        }
+        // }
+        isUploading = false;
+    }
+
+   
+
 
     private async Task CreatePost()
     {

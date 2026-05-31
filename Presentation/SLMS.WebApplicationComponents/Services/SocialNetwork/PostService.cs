@@ -1,36 +1,40 @@
 ﻿using SLMS.Dto.SocialNetwork;
 using SLMS.Dto.SocialNetwork.Post;
-using SLMS.WebApplicationComponents.Services.Base;
 using SLMS.WebApplicationComponents.Services.SocialNetwork.Interface;
-using System.Xml.Linq;
+using System.Net.Http.Json;
 
 namespace SLMS.WebApplicationComponents.Services.SocialNetwork
 {
 
     public class PostService : IPostService
     {
-        private readonly BaseApiService _baseApiService;
-        public PostService(BaseApiService baseApiService)
+        private readonly HttpClient _httpClient;
+
+        public PostService(HttpClient httpClient)
         {
-            _baseApiService = baseApiService;
+            _httpClient = httpClient;
         }
 
-        public async Task<PagedResult<PostSummaryDto>> GetAllPostsAsync(PostListQuery postListQuery)
+        public async Task<PagedResult<PostSummaryDto>> GetAllPostsAsync(PostListQuery query)
         {
-            var url = BuildUrl("/api/v1/Post", postListQuery);
-            return await _baseApiService.GetAllAsync<PagedResult<PostSummaryDto>>(url);
+            var url = BuildUrl("api/v1/Post", query);
+            var result = await _httpClient.GetFromJsonAsync<PagedResult<PostSummaryDto>>(url);
+            return result ?? throw new InvalidOperationException("API returned empty response.");
         }
         public async Task<bool> CreatePost(CreatePostDto post)
         {
-            return await _baseApiService.PostAsync("/api/v1/Post", post);
+            var response = await _httpClient.PostAsJsonAsync("api/v1/Post", post);
+            return response.IsSuccessStatusCode;
         }
         public async Task ToggleLikeAsync(Guid postId)
         {
-            await _baseApiService.PostAsync($"api/v1/Post/{postId}/toggle-like");
+            var response = await _httpClient.PostAsync($"api/v1/Post/{postId}/toggle-like", null);
+            response.EnsureSuccessStatusCode();
         }
         public async Task ToggleBookmarkAsync(Guid postId)
         {
-            await _baseApiService.PostAsync($"api/v1/Post/{postId}/toggle-bookmark");
+            var response = await _httpClient.PostAsync($"api/v1/Post/{postId}/toggle-bookmark", null);
+            response.EnsureSuccessStatusCode();
         }
 
         private static string BuildUrl(string baseUrl, PostListQuery query)

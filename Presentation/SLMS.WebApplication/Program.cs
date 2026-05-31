@@ -2,25 +2,26 @@ using SLMS.WebApplication;
 using SLMS.WebApplication.Components;
 using SLMS.WebApplication.Services;
 using SLMS.WebApplicationComponents.Services.Base;
-using SLMS.WebApplicationComponents.Services.SocialNetwork;
-using SLMS.WebApplicationComponents.Services.SocialNetwork.Interface;
-using SLMS.WebApplicationComponents.Services.Users;
-using SLMS.WebApplicationComponents.Services.Users.Interface;
+using SLMS.WebApplicationComponents.Services.Base.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IPostService, PostService>();
-builder.Services.AddScoped<ICommentService, CommentService>();
+
+
+builder.Services.AddApiClients(builder.Configuration);
 builder.Services.AddScoped<SearchStateService>();
 builder.Services.AddScoped<FeedStateService>();
-builder.Services.AddHttpClient<BaseApiService>(client =>
+builder.Services.AddSingleton<IMediaUrlResolver, MediaUrlResolver>();
+
+
+builder.Services.AddServerSideBlazor().AddHubOptions(options =>
 {
-    client.BaseAddress = new Uri("https://localhost:7218");
+    options.MaximumReceiveMessageSize = 512 * 1024 * 1024; // 512MB
 });
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

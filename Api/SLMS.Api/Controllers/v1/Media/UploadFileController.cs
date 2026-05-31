@@ -23,6 +23,7 @@ namespace SLMS.Api.Controllers.v1.Media
 
 
         [HttpPost("upload")]
+        [Consumes("multipart/form-data")]
         [RequestSizeLimit(500 * 1024 * 1024)]
         [RequestFormLimits(MultipartBodyLengthLimit = 500 * 1024 * 1024)]
         public async Task<IActionResult> UploadFile(IFormFile file)
