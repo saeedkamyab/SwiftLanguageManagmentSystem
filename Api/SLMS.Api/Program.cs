@@ -1,6 +1,8 @@
 
 using Microsoft.Extensions.FileProviders;
+using SLMS.Api.Exceptions;
 using SLMS.Application;
+using SLMS.Infrastructure;
 using SLMS.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +24,7 @@ builder.Services.AddSwaggerGen(op =>
     });
 });
 builder.Services.ConfigureApplicationServices();
+builder.Services.ConfigureInfrastructureServices();
 builder.Services.ConfigurePersistenceServices(builder.Configuration);
 
 
@@ -51,7 +54,7 @@ app.UseStaticFiles(new StaticFileOptions{
 });
 
 app.UseAuthorization();
-
+app.UseMiddleware<GlobalExceptionMiddleware>();
 app.MapControllers();
 
 app.Run();

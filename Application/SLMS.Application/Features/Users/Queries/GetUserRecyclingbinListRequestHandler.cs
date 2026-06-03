@@ -20,7 +20,7 @@ namespace SLMS.Application.Features.Users.Queries
         {
             try
             {
-                var UserList = await _unitofwork.UserRepository.GetAllAsync(x=>x.IsDeleted==true);
+                var UserList = await _unitofwork.UserRepository.ListAsync(x=>x.IsDeleted==true);
                 return _mapper.Map<List<UserDto>>(UserList);
             }
             catch

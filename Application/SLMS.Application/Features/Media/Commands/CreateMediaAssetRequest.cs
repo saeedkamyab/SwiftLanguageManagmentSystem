@@ -3,8 +3,8 @@ using SLMS.Dto.Media;
 
 namespace SLMS.Application.Features.Media.Commands
 {
-    public class CreateMediaAssetRequest : IRequest<bool>
+    public class CreateMediaAssetRequest : IRequest<MediaAssetDto>
     {
-        public required MediaAssetDto Media { get; set; }
+        public required CreateMediaAssetDto Media { get; set; }
     }
 }

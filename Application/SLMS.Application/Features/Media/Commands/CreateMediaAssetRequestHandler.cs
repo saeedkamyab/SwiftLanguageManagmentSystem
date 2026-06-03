@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
 using SLMS.Application.Contracts.Persistance;
+using SLMS.Dto.Media;
 
 namespace SLMS.Application.Features.Media.Commands
 {
-    public class CreateMediaAssetRequestHandler : IRequestHandler<CreateMediaAssetRequest, bool>
+    public class CreateMediaAssetRequestHandler : IRequestHandler<CreateMediaAssetRequest, MediaAssetDto>
     {
         IUnitOfWork _unitOfWork;
         IMapper _mapper;
@@ -15,16 +16,16 @@ namespace SLMS.Application.Features.Media.Commands
             _mapper = mapper;
         }
 
-        public async Task<bool> Handle(CreateMediaAssetRequest request, CancellationToken cancellationToken)
+        public async Task<MediaAssetDto> Handle(CreateMediaAssetRequest request, CancellationToken cancellationToken)
         {
             try
             {
-                var MediaAsset = _mapper.Map<ApplicationCore.Domain.Media.MediaAsset>(request.Media);
-                _unitOfWork.MediaAssetRepository.Add(MediaAsset);
+                var mediaAsset = _mapper.Map<ApplicationCore.Domain.Media.MediaAsset>(request.Media);
+                var result = await _unitOfWork.MediaAssetRepository.AddAsync(mediaAsset, cancellationToken);
                 await _unitOfWork.CommitAsync();
-                return true;
+                return _mapper.Map<MediaAssetDto>(result);
             }
-            catch 
+            catch
             {
                 throw;
             }

@@ -14,5 +14,6 @@ namespace SLMS.ApplicationCore.Domain.Media
         public long FileSize { get; set; }
         public string ContentType { get; set; } = string.Empty;
         public string? MetaData { get; set; }
+        public bool IsAttached { get; set; }
     }
 }

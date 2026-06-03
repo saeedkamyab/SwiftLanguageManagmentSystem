@@ -1,10 +1,10 @@
 ﻿using SLMS.Dto.SocialNetwork;
 using SLMS.Dto.SocialNetwork.Comments;
+using SLMS.WebApplicationComponents.Services.Api.SocialNetwork.Interface;
 using SLMS.WebApplicationComponents.Services.Base;
-using SLMS.WebApplicationComponents.Services.SocialNetwork.Interface;
 using System.Net.Http.Json;
 
-namespace SLMS.WebApplicationComponents.Services.SocialNetwork
+namespace SLMS.WebApplicationComponents.Services.Api.SocialNetwork
 {
 
     public class CommentService : ICommentService

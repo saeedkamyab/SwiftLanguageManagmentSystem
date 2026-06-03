@@ -3,10 +3,8 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SLMS.Application.Contracts.Persistance;
-using SLMS.ApplicationCore.Domain.SocialNetwork;
+using SLMS.Dto;
 using SLMS.Dto.SocialNetwork;
-using System.Linq.Expressions;
-using System.Runtime.InteropServices;
 
 namespace SLMS.Application.Features.SocialNetwork.Posts.Queries
 {
@@ -27,9 +25,11 @@ namespace SLMS.Application.Features.SocialNetwork.Posts.Queries
             {
                 var currentUserId = Guid.Parse("007ed1b0-50a4-4585-a8af-9f36bb896010");
                 var query = _unitofwork.PostRepository.GetQueryable(x => x.IsDeleted == false);
+                 
                 if (request.OnlyMyFollowings)
                 {
                     var followingUserIds = await _unitofwork.FollowRepository.GetQueryable()
+
                             .Where(x => x.FollowerUserId == currentUserId)
                             .Select(x => x.FollowingUserId)
                             .ToListAsync(cancellationToken);
@@ -44,8 +44,8 @@ namespace SLMS.Application.Features.SocialNetwork.Posts.Queries
                             new List<PostSummaryDto>(),
                             0,
                             request.PageNumber,
-                            request.PageSize,
-                            request.OnlyMyFollowings);
+                            request.PageSize
+                           );
                     }
                 }
 
@@ -114,8 +114,8 @@ namespace SLMS.Application.Features.SocialNetwork.Posts.Queries
                     items,
                     totalCount,
                     request.PageNumber,
-                    request.PageSize,
-                    request.OnlyMyFollowings);
+                    request.PageSize
+                    );
             }
             catch
             {

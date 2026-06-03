@@ -1,6 +1,6 @@
 ﻿using SLMS.Dto.SocialNetwork.Comments;
 
-namespace SLMS.WebApplicationComponents.Services.SocialNetwork.Interface
+namespace SLMS.WebApplicationComponents.Services.Api.SocialNetwork.Interface
 {
     public interface ICommentService
     {

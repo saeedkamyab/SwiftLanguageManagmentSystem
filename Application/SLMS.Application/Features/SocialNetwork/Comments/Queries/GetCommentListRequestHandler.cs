@@ -22,7 +22,7 @@ namespace SLMS.Application.Features.SocialNetwork.Comments.Queries
         {
             try
             {
-                var comments =await _unitofwork.CommentRepository.GetAllAsync(
+                var comments =await _unitofwork.CommentRepository.ListAsync(
                     x => x.PostId == request.PostId && !x.IsDeleted,
                       cancellationToken,
                        include => include

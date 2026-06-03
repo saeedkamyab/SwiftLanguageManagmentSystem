@@ -25,16 +25,16 @@ namespace SLMS.Application.Features.SocialNetwork.Posts.Commands
                 var like =await _unitOfWork.LikeRepository.GetByUserAndPostAsync(request.PostId, userid);
                 if (like == null)
                 {
-                     _unitOfWork.LikeRepository.Add(new Like
+                    var result= _unitOfWork.LikeRepository.AddAsync(new Like
                     {
                         PostId = request.PostId,
                         UserId = userid
-                    });
+                    },cancellationToken);
                     post.LikesCount++;
                 }
                 else
                 {
-                    _unitOfWork.LikeRepository.Remove(like);
+                    _unitOfWork.LikeRepository.HardDelete(like);
                     post.LikesCount--;
                 }
                 await _unitOfWork.CommitAsync();

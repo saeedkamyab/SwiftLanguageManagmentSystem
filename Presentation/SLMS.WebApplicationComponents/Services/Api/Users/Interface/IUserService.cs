@@ -1,6 +1,6 @@
 ﻿using SLMS.Dto.User;
 
-namespace SLMS.WebApplicationComponents.Services.Users.Interface
+namespace SLMS.WebApplicationComponents.Services.Api.Users.Interface
 {
     public interface IUserService
     {

@@ -1,9 +1,10 @@
-﻿using SLMS.Dto.SocialNetwork;
+﻿using SLMS.Dto;
+using SLMS.Dto.SocialNetwork;
 using SLMS.Dto.SocialNetwork.Post;
-using SLMS.WebApplicationComponents.Services.SocialNetwork.Interface;
+using SLMS.WebApplicationComponents.Services.Api.SocialNetwork.Interface;
 using System.Net.Http.Json;
 
-namespace SLMS.WebApplicationComponents.Services.SocialNetwork
+namespace SLMS.WebApplicationComponents.Services.Api.SocialNetwork
 {
 
     public class PostService : IPostService

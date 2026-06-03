@@ -1,8 +1,11 @@
 using SLMS.WebApplication;
 using SLMS.WebApplication.Components;
 using SLMS.WebApplication.Services;
+using SLMS.WebApplicationComponents.Services.Api.Media;
+using SLMS.WebApplicationComponents.Services.Api.Media.Interface;
 using SLMS.WebApplicationComponents.Services.Base;
 using SLMS.WebApplicationComponents.Services.Base.Interfaces;
+using SLMS.WebApplicationComponents.Services.Upload;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddApiClients(builder.Configuration);
 builder.Services.AddScoped<SearchStateService>();
 builder.Services.AddScoped<FeedStateService>();
+builder.Services.AddScoped<IMediaUploadClientService, MediaUploadClientService>();
 builder.Services.AddSingleton<IMediaUrlResolver, MediaUrlResolver>();
 
 

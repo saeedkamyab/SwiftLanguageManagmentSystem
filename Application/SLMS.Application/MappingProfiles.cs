@@ -17,36 +17,43 @@ namespace SLMS.Application
             #region  UserManagment
             CreateMap<CreateUserDto, User>();
             CreateMap<UpdateUserDto, User>();
-            CreateMap<User, UserDto>().ReverseMap();
+
+            CreateMap<User, UserDto>();
             #endregion
 
             #region  SocialNetwork
-            //CreateMap<PostDto, Post>().ReverseMap();
+            CreateMap<CreatePostDto, Post>();
+            CreateMap<CreatePostMediaDto, PostMedia>();
+            CreateMap<CreateCommentDto, Comment>();
+            
+            
             CreateMap<Post, PostSummaryDto>()
                 .ForMember(postSummary => postSummary.OwnerId, opt => opt.MapFrom(post => post.PostOwner.Id))
                 .ForMember(postSummary => postSummary.OwnerFirstName, opt => opt.MapFrom(post => post.PostOwner.FirstName))
                 .ForMember(postSummary => postSummary.OwnerLastName, opt => opt.MapFrom(post => post.PostOwner.LastName))
-                //.ForMember(postSummary => postSummary.ImageUrl, opt => opt.MapFrom(post => post.ImageUrl))
                 .ForMember(postSummary => postSummary.LikesCount, opt => opt.MapFrom(post => post.Likes.Count))
                 .ForMember(postSummary => postSummary.BookmarksCount, opt => opt.MapFrom(post => post.Bookmarks.Count))
                 .ForMember(postSummary => postSummary.OwnerAvatarUrl, opt => opt.MapFrom(post => post.PostOwner.ProfileImageUrl))
-                //.ForMember(postSummary => postSummary.SharesCount, opt => opt.MapFrom(post => post.PostOwner.sh.Count))
                 .ForMember(postSummary => postSummary.CommentsCount, opt => opt.MapFrom(post => post.Comments.Count(c => !c.IsDeleted)))
                 .ForMember(postSummary => postSummary.IsLikedByCurrentUser, opt => opt.Ignore())
                 .ForMember(postSummary => postSummary.IsBookmarkedByCurrentUser, opt => opt.Ignore())
                 .ForMember(postSummary => postSummary.IsCommentsLoaded, opt => opt.Ignore())
                 .ForMember(postSummary => postSummary.Comments, opt => opt.Ignore())
-               /* .ForMember(postSummary => postSummary.OwnerFullName, opt => opt.Ignore())*/.ReverseMap()
+                .ForMember(postSummary => postSummary.PostMedia, opt => opt.MapFrom(post => post.PostMedia));
 
-                ;
-            CreateMap<CreateCommentDto, Comment>();
-            CreateMap<CommentDto, Comment>().ReverseMap();
-            CreateMap<CreatePostDto, Post>().ReverseMap();
+
+            CreateMap<PostMedia, PostMediaDto>()
+      .ForMember(d => d.MediaAsset, o => o.MapFrom(s => s.MediaAsset));
+
+            CreateMap<PostMediaDto, PostMedia>();
+            CreateMap<Comment, CommentDto>();
+
             #endregion
 
 
             #region  Media
-            CreateMap<MediaAssetDto, MediaAsset>().ReverseMap();
+            CreateMap<MediaAsset, MediaAssetDto>().ReverseMap();
+            CreateMap<CreateMediaAssetDto, MediaAsset>();
 
             #endregion
         }

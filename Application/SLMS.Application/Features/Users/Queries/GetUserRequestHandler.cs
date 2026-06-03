@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using MediatR;
 using SLMS.Application.Contracts.Persistance;
+using SLMS.Application.Exceptions;
+using SLMS.ApplicationCore.Domain.User;
 using SLMS.Dto.User;
 
 namespace SLMS.Application.Features.Users.Queries
 {
-    public class GetUserRequestHandler:IRequestHandler<GetUserRequest,UserDto>
+    public class GetUserRequestHandler : IRequestHandler<GetUserRequest, UserDto>
     {
         IMapper _mapper;
         IUnitOfWork _unitofwork;
@@ -18,15 +20,11 @@ namespace SLMS.Application.Features.Users.Queries
 
         public async Task<UserDto> Handle(GetUserRequest request, CancellationToken cancellationToken)
         {
-            try
-            {
-                var User = await _unitofwork.UserRepository.GetByIdAsync(request.Id);
-                return _mapper.Map<UserDto>(User);
-            }
-            catch
-            {
-                throw;
-            }
+            var user = await _unitofwork.UserRepository.GetByIdAsync(request.Id);
+            if (user == null)
+                throw new NotFoundException(nameof(User), request.Id);
+
+            return _mapper.Map<UserDto>(user);
         }
     }
 }

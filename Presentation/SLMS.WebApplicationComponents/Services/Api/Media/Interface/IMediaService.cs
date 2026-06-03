@@ -1,6 +1,6 @@
 ﻿using SLMS.Dto.User;
 
-namespace SLMS.WebApplicationComponents.Services.Media.Interface
+namespace SLMS.WebApplicationComponents.Services.Api.Media.Interface
 {
     public interface IMediaService
     {

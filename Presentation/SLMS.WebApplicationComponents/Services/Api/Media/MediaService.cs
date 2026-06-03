@@ -1,6 +1,6 @@
-﻿using SLMS.WebApplicationComponents.Services.Media.Interface;
+﻿using SLMS.WebApplicationComponents.Services.Api.Media.Interface;
 
-namespace SLMS.WebApplicationComponents.Services.Media
+namespace SLMS.WebApplicationComponents.Services.Api.Media
 {
 
     public class MediaService : IMediaService
@@ -14,7 +14,7 @@ namespace SLMS.WebApplicationComponents.Services.Media
 
         public async Task<HttpResponseMessage> UploadFileAsync(MultipartFormDataContent content)
         {
-            var response = await _httpClient.PostAsync("api/v1/UploadFile/upload", content);
+            var response = await _httpClient.PostAsync("api/v1/File/upload", content);
             return response;
         }
     }

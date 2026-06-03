@@ -25,16 +25,16 @@ namespace SLMS.Application.Features.SocialNetwork.Posts.Commands
                 var Bookmark =await _unitOfWork.BookmarkRepository.GetByUserAndPostAsync(request.PostId, userid);
                 if (Bookmark == null)
                 {
-                     _unitOfWork.BookmarkRepository.Add(new Bookmark
+                   var result=  _unitOfWork.BookmarkRepository.AddAsync(new Bookmark
                     {
                         PostId = request.PostId,
                         UserId = userid
-                    });
+                    },cancellationToken);
                     post.BookmarksCount++;
                 }
                 else
                 {
-                    _unitOfWork.BookmarkRepository.Remove(Bookmark);
+                    _unitOfWork.BookmarkRepository.HardDelete(Bookmark);
                     post.BookmarksCount--;
                 }
                 await _unitOfWork.CommitAsync();

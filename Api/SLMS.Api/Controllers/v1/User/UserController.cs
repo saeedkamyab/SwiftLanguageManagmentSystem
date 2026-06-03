@@ -35,7 +35,7 @@ namespace SLMS.Api.Controllers.v1.User
         public async Task<ActionResult<UserDto>> Get(Guid id)
         {
             var result = await _mediator.Send(new GetUserRequest { Id = id });
-            return result;
+            return Ok(result);
         }
 
         [HttpPost]

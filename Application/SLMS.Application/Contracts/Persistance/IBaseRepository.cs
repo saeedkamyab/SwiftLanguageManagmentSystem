@@ -8,20 +8,20 @@ namespace SLMS.Application.Contracts.Persistance
     public interface IBaseRepository<TEntity> where TEntity : BaseEntity
     {
         Task<TEntity?> GetByIdAsync(Guid id,CancellationToken cancellationToken=default);
-        Task<IReadOnlyList<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken = default,
+        Task<IReadOnlyList<TEntity>> ListAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken = default,
             Func<IQueryable<TEntity>, IQueryable<TEntity>>? include = null);
 
         public IQueryable<TEntity> GetQueryable();
-  
-
-        void Add(TEntity entity);
-        void Update(TEntity entity);
-        void Remove(TEntity entity);
-        void RemoveRange(IEnumerable<TEntity> entities);
 
 
+        Task<TEntity> AddAsync(TEntity entity,CancellationToken cancellationToken);
+        TEntity Update(TEntity entity);
+        void HardDelete(TEntity entity);
+        void HardDeleteRange(IEnumerable<TEntity> entities);
 
-        Task SoftDelete(Guid id);
+
+
+        Task SoftDelete(Guid id, CancellationToken cancellationToken);
         void SoftDeleteRange(IEnumerable<TEntity> entities);
 
     }

@@ -1,8 +1,9 @@
-﻿using SLMS.Dto.SocialNetwork;
+﻿using SLMS.Dto;
+using SLMS.Dto.SocialNetwork;
 using SLMS.Dto.SocialNetwork.Comments;
 using SLMS.Dto.SocialNetwork.Post;
 
-namespace SLMS.WebApplicationComponents.Services.SocialNetwork.Interface
+namespace SLMS.WebApplicationComponents.Services.Api.SocialNetwork.Interface
 {
     public interface IPostService
     {

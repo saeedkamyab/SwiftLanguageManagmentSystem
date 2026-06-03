@@ -1,9 +1,9 @@
-﻿using SLMS.WebApplicationComponents.Services.Media;
-using SLMS.WebApplicationComponents.Services.Media.Interface;
-using SLMS.WebApplicationComponents.Services.SocialNetwork;
-using SLMS.WebApplicationComponents.Services.SocialNetwork.Interface;
-using SLMS.WebApplicationComponents.Services.Users;
-using SLMS.WebApplicationComponents.Services.Users.Interface;
+﻿using SLMS.WebApplicationComponents.Services.Api.Media;
+using SLMS.WebApplicationComponents.Services.Api.Media.Interface;
+using SLMS.WebApplicationComponents.Services.Api.SocialNetwork;
+using SLMS.WebApplicationComponents.Services.Api.SocialNetwork.Interface;
+using SLMS.WebApplicationComponents.Services.Api.Users;
+using SLMS.WebApplicationComponents.Services.Api.Users.Interface;
 
 namespace SLMS.WebApplication
 {

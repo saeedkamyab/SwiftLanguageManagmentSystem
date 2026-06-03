@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using SLMS.Dto;
 using SLMS.Dto.SocialNetwork;
 
 namespace SLMS.Application.Features.SocialNetwork.Posts.Queries

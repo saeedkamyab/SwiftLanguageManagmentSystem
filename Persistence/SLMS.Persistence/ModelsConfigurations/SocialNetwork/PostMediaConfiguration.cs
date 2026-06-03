@@ -7,15 +7,9 @@ namespace SLMS.Persistence.ModelsConfigurations.SocialNetwork
     {
         public override void Configure(EntityTypeBuilder<PostMedia> PostMedia)
         {
-            PostMedia.HasOne(p => p.Post)
-                .WithMany(pm => pm.PostMedias)
-                .HasForeignKey(p => p.PostId);
-
             PostMedia.HasOne(ma => ma.MediaAsset).WithMany()
                         .HasForeignKey(ma => ma.MediaAssetId);
 
-            PostMedia.Property(pm => pm.SortOrder)
-              .IsRequired();
         }
     }
 }

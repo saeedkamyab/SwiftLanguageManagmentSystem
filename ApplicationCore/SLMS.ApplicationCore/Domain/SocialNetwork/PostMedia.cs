@@ -10,6 +10,5 @@ namespace SLMS.ApplicationCore.Domain.SocialNetwork
         public Post Post { get; set; } = null!;
         public Guid MediaAssetId { get; set; }
         public MediaAsset MediaAsset { get; set; } = null!;
-        public int SortOrder { get; set; }
     }
 }

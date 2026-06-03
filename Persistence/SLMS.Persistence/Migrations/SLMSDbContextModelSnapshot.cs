@@ -521,6 +521,9 @@ namespace SLMS.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<bool>("IsAttached")
+                        .HasColumnType("boolean");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
@@ -896,11 +899,6 @@ namespace SLMS.Persistence.Migrations
                     b.Property<int>("SharesCount")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PostOwnerId");
@@ -935,14 +933,12 @@ namespace SLMS.Persistence.Migrations
                     b.Property<Guid>("PostId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("SortOrder")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("MediaAssetId");
 
-                    b.HasIndex("PostId");
+                    b.HasIndex("PostId")
+                        .IsUnique();
 
                     b.ToTable("PostMedia", "SocialNetwork");
                 });
@@ -1337,8 +1333,8 @@ namespace SLMS.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("SLMS.ApplicationCore.Domain.SocialNetwork.Post", "Post")
-                        .WithMany("PostMedias")
-                        .HasForeignKey("PostId")
+                        .WithOne("PostMedia")
+                        .HasForeignKey("SLMS.ApplicationCore.Domain.SocialNetwork.PostMedia", "PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1414,7 +1410,7 @@ namespace SLMS.Persistence.Migrations
 
                     b.Navigation("Likes");
 
-                    b.Navigation("PostMedias");
+                    b.Navigation("PostMedia");
                 });
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.User.User", b =>

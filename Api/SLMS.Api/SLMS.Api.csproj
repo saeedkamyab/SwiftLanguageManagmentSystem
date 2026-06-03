@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Application\SLMS.Application\SLMS.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\SLMS.Infrastructure\SLMS.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Persistence\SLMS.Persistence\SLMS.Persistence.csproj" />
     <ProjectReference Include="..\..\Shared\SLMS.Shared\SLMS.Shared.csproj" />
   </ItemGroup>

@@ -8,13 +8,19 @@ namespace SLMS.Persistence.ModelsConfigurations.SocialNetwork
     {
         public void Configure(EntityTypeBuilder<Post> post)
         {
-            post.Property(p=>p.Title).HasMaxLength(100);
-            post.Property(p=>p.Caption).HasMaxLength(500);
-          
+            post.Property(p => p.Caption).HasMaxLength(500);
 
-            post.HasOne(p=>p.PostOwner)
-                .WithMany(u=>u.Posts)
-                .HasForeignKey(p=>p.PostOwnerId)
-;        }
+
+            post.HasOne(p => p.PostOwner)
+                .WithMany(u => u.Posts)
+                .HasForeignKey(p => p.PostOwnerId);
+
+
+            post.HasOne(p => p.PostMedia)
+       .WithOne(pm => pm.Post)
+       .HasForeignKey<PostMedia>(pm => pm.PostId)
+    .OnDelete(DeleteBehavior.Cascade);
+
+        }
     }
 }

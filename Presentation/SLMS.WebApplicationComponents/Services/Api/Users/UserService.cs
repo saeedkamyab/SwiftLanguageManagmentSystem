@@ -1,10 +1,10 @@
 ﻿using SLMS.Dto.SocialNetwork.Comments;
 using SLMS.Dto.User;
+using SLMS.WebApplicationComponents.Services.Api.Users.Interface;
 using SLMS.WebApplicationComponents.Services.Base;
-using SLMS.WebApplicationComponents.Services.Users.Interface;
 using System.Net.Http.Json;
 
-namespace SLMS.WebApplicationComponents.Services.Users
+namespace SLMS.WebApplicationComponents.Services.Api.Users
 {
 
     public class UserService : IUserService

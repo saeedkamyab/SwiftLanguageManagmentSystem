@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SLMS.Application.Features.SocialNetwork.Posts.Commands;
 using SLMS.Application.Features.SocialNetwork.Posts.Queries;
+using SLMS.Dto;
 using SLMS.Dto.SocialNetwork;
 using SLMS.Dto.SocialNetwork.Post;
 

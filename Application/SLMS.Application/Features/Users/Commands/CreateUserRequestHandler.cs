@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
 using SLMS.Application.Contracts.Persistance;
+using SLMS.Dto.User;
 
 namespace SLMS.Application.Features.Users.Commands
 {
-    public class CreateUserRequestHandler : IRequestHandler<CreateUserRequest, bool>
+    public class CreateUserRequestHandler : IRequestHandler<CreateUserRequest, UserDto>
     {
         IUnitOfWork _unitOfWork;
         IMapper _mapper;
@@ -15,14 +16,14 @@ namespace SLMS.Application.Features.Users.Commands
             _mapper = mapper;
         }
 
-        public async Task<bool> Handle(CreateUserRequest request, CancellationToken cancellationToken)
+        public async Task<UserDto> Handle(CreateUserRequest request, CancellationToken cancellationToken)
         {
             try
             {
                 var User = _mapper.Map<ApplicationCore.Domain.User.User>(request.User);
-                _unitOfWork.UserRepository.Add(User);
+               var result= _unitOfWork.UserRepository.AddAsync(User,cancellationToken);
                 await _unitOfWork.CommitAsync();
-                return true;
+                return _mapper.Map<UserDto>(result);
             }
             catch 
             {

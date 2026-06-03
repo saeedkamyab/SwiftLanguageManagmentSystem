@@ -21,9 +21,8 @@
 }
 
 .add-post__Media-preview {
-
-    border: 1px solid #000;
-    margin: 0 2rem;
+    border-radius: 1.1rem;
+    padding: 0 4rem;
 }
 
 .add-post__Seprater {

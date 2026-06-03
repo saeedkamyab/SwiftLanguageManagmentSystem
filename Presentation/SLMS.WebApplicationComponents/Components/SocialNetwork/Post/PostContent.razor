@@ -1,11 +1,27 @@
 ﻿@using SLMS.Dto.SocialNetwork
+@using SLMS.WebApplicationComponents.Services.Base.Interfaces
+@inject IMediaUrlResolver MediaUrl
+
 <div class="post__content">
-    <h3 class="post__title">@Post.Title</h3>
     <div class="post__caption">@Post.Caption</div>
-    @if (!string.IsNullOrWhiteSpace(Post.ImageUrl))
+    @if (Post.PostMedia != null && Post.PostMedia.MediaAsset != null)
     {
-        <img class="post__image" src="images/posts/@Post.ImageUrl" />
+        if (Post.PostMedia.MediaAsset.ContentType.StartsWith("video/"))
+        {
+            <video class="post__image"
+                   muted
+                   playsinline
+                   controls>
+                <source src="@MediaUrl.Resolve(Post.PostMedia.MediaAsset.FileUrl)" type="@Post.PostMedia.MediaAsset.ContentType">
+            </video>
+        }
+        else if (Post.PostMedia.MediaAsset.ContentType.StartsWith("image/"))
+        {
+            <img class="post__image" src="@MediaUrl.Resolve(Post.PostMedia.MediaAsset.FileUrl)" />
+
+        }
     }
+
 </div>
 @code {
     [Parameter]
