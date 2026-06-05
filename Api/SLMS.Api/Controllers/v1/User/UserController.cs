@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SLMS.Application.Features.Users.Queries;
 using SLMS.Application.Features.Users.Commands;
+using SLMS.Application.Features.Users.Queries;
+using SLMS.Dto;
+using SLMS.Dto.SocialNetwork;
 using SLMS.Dto.User;
 
 namespace SLMS.Api.Controllers.v1.User
@@ -18,17 +20,36 @@ namespace SLMS.Api.Controllers.v1.User
         }
 
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetList()
+        [ProducesResponseType(typeof(PagedResult<UserDto>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetList([FromQuery] int pageNumber = 1,
+    [FromQuery] int pageSize = 10,
+    [FromQuery] string? searchTerm = null)
         {
-            var result = await _mediator.Send(new GetUserListRequest());
+            var query = new GetUserListRequest()
+            {
+                //CurrentUserId = currentUserId,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                SearchTerm = searchTerm
+            };
+
+            var result = await _mediator.Send(query);
             return Ok(result);
         }
         [HttpGet("Recycling-bin")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetRecyclingbinList()
+        [ProducesResponseType(typeof(PagedResult<UserDto>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetRecyclingbinList([FromQuery] int pageNumber = 1,
+    [FromQuery] int pageSize = 10,
+    [FromQuery] string? searchTerm = null)
         {
-            var result = await _mediator.Send(new GetUserRecyclingbinListRequest());
+            var query = new GetUserListRequest()
+            {
+                //CurrentUserId = currentUserId,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                SearchTerm = searchTerm
+            };
+            var result = await _mediator.Send(query);
             return Ok(result);
         }
         [HttpGet("{id}")]

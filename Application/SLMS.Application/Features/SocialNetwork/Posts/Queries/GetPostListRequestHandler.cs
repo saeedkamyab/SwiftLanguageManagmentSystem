@@ -24,7 +24,7 @@ namespace SLMS.Application.Features.SocialNetwork.Posts.Queries
             try
             {
                 var currentUserId = Guid.Parse("007ed1b0-50a4-4585-a8af-9f36bb896010");
-                var query = _unitofwork.PostRepository.GetQueryable(x => x.IsDeleted == false);
+                var query = _unitofwork.PostRepository.GetQueryable();
                  
                 if (request.OnlyMyFollowings)
                 {
@@ -81,35 +81,13 @@ namespace SLMS.Application.Features.SocialNetwork.Posts.Queries
             .Select(b => b.PostId)
             .ToListAsync(cancellationToken);
 
-                    //if (request.OnlyMyFollowings == true)
-                    //{
-                    //    var followingUserIds = await _unitofwork.FollowRepository.GetQueryable()
-                    //        .Where(x => x.FollowerUserId == currentUserId)
-                    //        .Select(x => x.FollowingUserId)
-                    //        .ToListAsync(cancellationToken);
-                    //    if (followingUserIds.Any())
-                    //    {
-                    //        items = items.Where(x => followingUserIds.Contains(x.OwnerId)).ToList();
-                    //    }
-                    //}
-                    //var likes = await _unitofwork.LikeRepository.GetAllAsync(x => postIds.Contains(x.PostId));
-
-                    //var bookmarks = await _unitofwork.BookmarkRepository.GetAllAsync(x => postIds.Contains(x.PostId));
-
-                    //var likedPostIds = likes
-                    //    .Select(l => l.PostId).ToList();
-
-                    //var bookmarkedPostIds = bookmarks
-                    //.Select(l => l.PostId).ToList();
-
-
                     foreach (var item in items)
                     {
                         item.IsLikedByCurrentUser = likedPostIds.Contains(item.Id);
                         item.IsBookmarkedByCurrentUser = bookmarkedPostIds.Contains(item.Id);
                     }
                 }
-                // 6️⃣ برگرداندن نتیجه Paged
+               
                 return new PagedResult<PostSummaryDto>(
                     items,
                     totalCount,

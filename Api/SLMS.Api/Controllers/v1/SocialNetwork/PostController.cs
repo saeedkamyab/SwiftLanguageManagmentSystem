@@ -49,6 +49,13 @@ namespace SLMS.Api.Controllers.v1.SocialNetwork
             var response = await _mediator.Send(command);
             return Ok(response);
         }
+        [HttpPut]
+        public async Task<ActionResult> Update([FromBody] UpdatePostDto post)
+        {
+            var command = new UpdatePostRequest { Post = post };
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
 
 
         [HttpPost("/api/v1/Post/{postId}/toggle-like")]

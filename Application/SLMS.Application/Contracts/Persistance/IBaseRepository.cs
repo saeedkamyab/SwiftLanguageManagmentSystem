@@ -11,7 +11,7 @@ namespace SLMS.Application.Contracts.Persistance
         Task<IReadOnlyList<TEntity>> ListAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken = default,
             Func<IQueryable<TEntity>, IQueryable<TEntity>>? include = null);
 
-        public IQueryable<TEntity> GetQueryable();
+        IQueryable<TEntity> GetQueryable();
 
 
         Task<TEntity> AddAsync(TEntity entity,CancellationToken cancellationToken);
