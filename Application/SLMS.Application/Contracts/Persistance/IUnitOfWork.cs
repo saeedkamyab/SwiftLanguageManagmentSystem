@@ -1,4 +1,5 @@
-﻿using SLMS.Application.Contracts.SocialNetwork;
+﻿using SLMS.Application.Contracts.Identity;
+using SLMS.Application.Contracts.SocialNetwork;
 using SLMS.ApplicationCore.Domain.InstituteManagement;
 using SLMS.ApplicationCore.Domain.Media;
 using SLMS.ApplicationCore.Domain.Messaging;
@@ -10,7 +11,7 @@ namespace SLMS.Application.Contracts.Persistance
     public interface IUnitOfWork
     {
         #region UserManagement
-        IBaseRepository<User> UserRepository { get; }
+        IUserRepository UserRepository { get; }
         IBaseRepository<Comment> CommentRepository { get; }
         IBaseRepository<Conversation> ConversationRepository { get;  }
         IBaseRepository<ConversationMember> ConversationMemberRepository { get; }

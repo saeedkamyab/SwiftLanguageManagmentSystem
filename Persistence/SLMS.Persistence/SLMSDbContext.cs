@@ -51,8 +51,9 @@ namespace SLMS.Persistence
         #endregion
 
 
-        #region User
+        #region Identity
         public DbSet<User> Users { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         #endregion
 
 

@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using SLMS.Application.Features.Auth.Commands;
 using SLMS.Application.Features.Users.Commands;
 using SLMS.Application.Features.Users.Queries;
 using SLMS.Dto;
-using SLMS.Dto.SocialNetwork;
 using SLMS.Dto.User;
 
 namespace SLMS.Api.Controllers.v1.User
@@ -59,13 +59,13 @@ namespace SLMS.Api.Controllers.v1.User
             return Ok(result);
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Create([FromBody] CreateUserDto user)
-        {
-            var command = new CreateUserRequest { User = user };
-            var response = await _mediator.Send(command);
-            return Ok(response);
-        }
+        //[HttpPost]
+        //public async Task<ActionResult> Create([FromBody] RegisterRequestDto user)
+        //{
+        //    var command = new RegisterUserCommand { RegisterRequest = user };
+        //    var response = await _mediator.Send(command);
+        //    return Ok(response);
+        //}
 
         [HttpPut]
         public async Task<ActionResult> Update([FromBody] UpdateUserDto user)

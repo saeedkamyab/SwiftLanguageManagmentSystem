@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SLMS.Application.Exceptions;
-using System.ComponentModel.DataAnnotations;
 
 namespace SLMS.Api.Exceptions
 {
@@ -27,7 +26,7 @@ namespace SLMS.Api.Exceptions
                 await HandleExceptionAsync(context, ex);
             }
         }
-        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             var response = new ProblemDetails();
             switch (exception)
@@ -37,10 +36,20 @@ namespace SLMS.Api.Exceptions
                     response.Title = "Resource Not Found";
                     response.Detail = exception.Message;
                     break;
-                case Application.Exceptions.ValidationException:
+
+                case FluentValidation.ValidationException validationException:
                     context.Response.StatusCode = StatusCodes.Status400BadRequest;
                     response.Title = "Validation Error";
-                    response.Detail = exception.Message;
+                    response.Detail = "One or more validation errors occurred.";
+
+                    response.Extensions["errors"] =
+                        validationException.Errors
+                            .GroupBy(x => x.PropertyName)
+                            .ToDictionary(
+                                g => g.Key,
+                                g => g.Select(x => x.ErrorMessage).ToArray()
+                            );
+
                     break;
 
                 case ConflictException:
@@ -49,14 +58,18 @@ namespace SLMS.Api.Exceptions
                     response.Detail = exception.Message;
                     break;
 
+
                 default:
                     context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                     response.Title = "Server Error";
                     response.Detail = "An unexpected error occurred.";
                     break;
             }
+            response.Status = context.Response.StatusCode;
+
             context.Response.ContentType = "application/json";
-            return context.Response.WriteAsJsonAsync(response);
+
+            await context.Response.WriteAsJsonAsync(response);
         }
     }
 }

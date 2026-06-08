@@ -943,6 +943,50 @@ namespace SLMS.Persistence.Migrations
                     b.ToTable("PostMedia", "SocialNetwork");
                 });
 
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.User.RefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("ExpireDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("LastUpdate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("RevokedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RefreshTokens");
+                });
+
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.User.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -956,6 +1000,7 @@ namespace SLMS.Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)");
 
@@ -969,6 +1014,9 @@ namespace SLMS.Persistence.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("LastLoginDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(100)
@@ -985,18 +1033,20 @@ namespace SLMS.Persistence.Migrations
                         .HasColumnType("character(10)")
                         .IsFixedLength();
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasMaxLength(1500)
                         .HasColumnType("character varying(1500)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasMaxLength(11)
                         .HasColumnType("character varying(11)");
 
                     b.Property<string>("ProfileImageUrl")
                         .HasColumnType("text");
+
+                    b.Property<Guid>("SecurityStamp")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -1004,6 +1054,12 @@ namespace SLMS.Persistence.Migrations
                         .HasColumnType("character varying(250)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("UserName")
+                        .IsUnique();
 
                     b.ToTable("User", "UserManagment");
                 });
@@ -1343,6 +1399,17 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("Post");
                 });
 
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.User.RefreshToken", b =>
+                {
+                    b.HasOne("SLMS.ApplicationCore.Domain.User.User", "User")
+                        .WithMany("RefreshTokens")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Classification", b =>
                 {
                     b.Navigation("AbsentPresents");
@@ -1434,6 +1501,8 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("Messages");
 
                     b.Navigation("Posts");
+
+                    b.Navigation("RefreshTokens");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,11 +1,12 @@
-﻿using SLMS.Application.Contracts.Persistance;
+﻿using SLMS.Application.Contracts.Identity;
+using SLMS.Application.Contracts.Persistance;
 using SLMS.Application.Contracts.SocialNetwork;
 using SLMS.ApplicationCore.Domain.InstituteManagement;
 using SLMS.ApplicationCore.Domain.Media;
 using SLMS.ApplicationCore.Domain.Messaging;
 using SLMS.ApplicationCore.Domain.SocialNetwork;
-using SLMS.ApplicationCore.Domain.User;
 using SLMS.Persistence.Repositories.Common;
+using SLMS.Persistence.Repositories.Identity;
 using SLMS.Persistence.Repositories.SocialNetwork;
 
 namespace SLMS.Persistence
@@ -16,7 +17,7 @@ namespace SLMS.Persistence
         private bool _disposed;
         #region Fields -----------------------------------------------------------
         #region UserManagement
-        private readonly Lazy<IBaseRepository<User>> _UserRepository;
+        private readonly Lazy<IUserRepository> _UserRepository;
         private readonly Lazy<IBaseRepository<Comment>> _CommentRepository;
         private readonly Lazy<IBaseRepository<Conversation>> _ConversationRepository;
         private readonly Lazy<IBaseRepository<ConversationMember>> _ConversationMemberRepository;
@@ -56,7 +57,7 @@ namespace SLMS.Persistence
         #region Properties -------------------------------------------------------
 
         #region UserManagement
-        public IBaseRepository<User> UserRepository => _UserRepository.Value;
+        public IUserRepository UserRepository => _UserRepository.Value;
         public IBaseRepository<Comment> CommentRepository => _CommentRepository.Value;
         public IBaseRepository<Conversation> ConversationRepository => _ConversationRepository.Value;
         public IBaseRepository<ConversationMember> ConversationMemberRepository => _ConversationMemberRepository.Value;
@@ -99,7 +100,7 @@ namespace SLMS.Persistence
         {
             _context = context;
             #region UserManagment
-            _UserRepository = new Lazy<IBaseRepository<User>>(() => new BaseRepository<User>(_context));
+            _UserRepository = new Lazy<IUserRepository>(() => new UserRepository(_context));
             _CommentRepository = new Lazy<IBaseRepository<Comment>>(() => new BaseRepository<Comment>(_context));
             _ConversationRepository = new Lazy<IBaseRepository<Conversation>>(() => new BaseRepository<Conversation>(_context));
             _ConversationMemberRepository = new Lazy<IBaseRepository<ConversationMember>>(() => new BaseRepository<ConversationMember>(_context));

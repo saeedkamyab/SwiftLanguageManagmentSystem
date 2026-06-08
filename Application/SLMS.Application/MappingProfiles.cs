@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SLMS.Application.Features.Auth.Commands;
 using SLMS.ApplicationCore.Domain.Media;
 using SLMS.ApplicationCore.Domain.SocialNetwork;
 using SLMS.ApplicationCore.Domain.User;
@@ -15,10 +16,16 @@ namespace SLMS.Application
         public MappingProfiles()
         {
             #region  UserManagment
-            CreateMap<CreateUserDto, User>();
-            CreateMap<UpdateUserDto, User>();
+            CreateMap<RegisterRequestDto, RegisterUserCommand>();
+            CreateMap<User, RegisterUserResponse>();
+            CreateMap<RegisterUserCommand, User>();
 
-            CreateMap<User, UserDto>();
+
+            //CreateMap<RegisterRequestDto, User>();
+            //CreateMap<CreateUserDto, User>();
+            //CreateMap<UpdateUserDto, User>();
+
+            //CreateMap<User, UserDto>();
             #endregion
 
             #region  SocialNetwork
