@@ -11,12 +11,13 @@ namespace SLMS.Application.Features.Auth.Commands
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IPasswordHasher _passwordHasher;
-
-        public LoginCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IPasswordHasher passwordHasher)
+        private readonly IJwtTokenGenerator _jwtTokenGenerator;
+        public LoginCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IPasswordHasher passwordHasher, IJwtTokenGenerator jwtTokenGenerator)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _passwordHasher = passwordHasher;
+            _jwtTokenGenerator = jwtTokenGenerator;
         }
 
         public async Task<LoginResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
@@ -31,7 +32,12 @@ namespace SLMS.Application.Features.Auth.Commands
             {
                 throw new UnauthorizedException("نام کاربری یا گذرواژه اشتباه است.");
             }
-            return _mapper.Map<LoginResponse>(user);
+            var response = _mapper.Map<LoginResponse>(user);
+            var token =_jwtTokenGenerator.GenerateToken(user);
+           
+            response.Token = token;
+
+            return response;
         }
     }
 }

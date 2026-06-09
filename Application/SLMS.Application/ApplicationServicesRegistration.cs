@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using SLMS.Application.Behaviors;
 using SLMS.Application.Contracts.FileService;
+using SLMS.Application.Contracts.Identity;
 using SLMS.Application.Services;
 using System.Reflection;
 

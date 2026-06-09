@@ -22,12 +22,6 @@ namespace SLMS.Application
             CreateMap<User,Features.Auth.Commands.LoginResponse>();
             CreateMap<LoginRequestDto,LoginCommand>();
 
-
-            //CreateMap<RegisterRequestDto, User>();
-            //CreateMap<CreateUserDto, User>();
-            //CreateMap<UpdateUserDto, User>();
-
-            //CreateMap<User, UserDto>();
             #endregion
 
             #region  SocialNetwork
