@@ -19,6 +19,8 @@ namespace SLMS.Application
             CreateMap<RegisterRequestDto, RegisterUserCommand>();
             CreateMap<User, RegisterUserResponse>();
             CreateMap<RegisterUserCommand, User>();
+            CreateMap<User,Features.Auth.Commands.LoginResponse>();
+            CreateMap<LoginRequestDto,LoginCommand>();
 
 
             //CreateMap<RegisterRequestDto, User>();

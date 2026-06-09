@@ -25,6 +25,13 @@ namespace SLMS.Api.Controllers.v1.Identity
             var response = await _mediator.Send(command);
             return Ok(response);
         }
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequest)
+        {
+            var command = _mapper.Map<LoginCommand>(loginRequest);
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
 
     }
 }

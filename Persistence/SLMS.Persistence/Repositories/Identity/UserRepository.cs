@@ -14,20 +14,22 @@ namespace SLMS.Persistence.Repositories.Identity
             _context = context;
         }
 
-        public async Task<bool> ExistsByEmailAsync(string email)
+        public async Task<bool> ExistsByEmailAsync(string email, CancellationToken cancellationToken)
         {
-           var user= await _context.Set<User>().FirstOrDefaultAsync(x => x.Email == email);
-            if (user != null)
-                return true;
-            return false;
+            return await _context.Set<User>()
+        .AnyAsync(x => x.Email == email, cancellationToken);
         }
 
-        public async Task<bool> ExistsByUserNameAsync(string userName)
+        public async Task<bool> ExistsByUserNameAsync(string userName, CancellationToken cancellationToken)
         {
-            var user = await _context.Set<User>().FirstOrDefaultAsync(x=>x.UserName== userName);
-            if (user != null)
-                return true;
-            return false;
+            return await _context.Set<User>()
+     .AnyAsync(x => x.UserName == userName, cancellationToken);
+        }
+
+        public async Task<User?> GetByUserNameOrEmailAsync(string userNameOrEmail, CancellationToken cancellationToken)
+        {
+            return await _context.Set<User>().FirstOrDefaultAsync(u => u.UserName == userNameOrEmail ||
+            u.Email == userNameOrEmail, cancellationToken);
         }
     }
 }

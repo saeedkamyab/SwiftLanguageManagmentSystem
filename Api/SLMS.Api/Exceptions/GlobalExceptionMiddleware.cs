@@ -58,7 +58,11 @@ namespace SLMS.Api.Exceptions
                     response.Detail = exception.Message;
                     break;
 
-
+                case UnauthorizedException:
+                    context.Response.StatusCode = 401;
+                    response.Title = "UnAuthorized";
+                    response.Detail = exception.Message;
+                    break;
                 default:
                     context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                     response.Title = "Server Error";

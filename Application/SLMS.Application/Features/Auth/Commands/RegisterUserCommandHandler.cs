@@ -24,10 +24,10 @@ namespace SLMS.Application.Features.Auth.Commands
             
             var userExists =
     await _unitOfWork.UserRepository
-        .ExistsByUserNameAsync(request.UserName);
+        .ExistsByUserNameAsync(request.UserName,cancellationToken);
             var emailExists =
     await _unitOfWork.UserRepository
-        .ExistsByEmailAsync(request.Email);
+        .ExistsByEmailAsync(request.Email, cancellationToken);
 
             if (userExists)
             {
