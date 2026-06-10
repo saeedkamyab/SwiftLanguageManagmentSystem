@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using SLMS.Application.Contracts.Identity;
 using SLMS.Application.Contracts.Persistance;
 using SLMS.Dto;
 using SLMS.Dto.SocialNetwork;
@@ -10,22 +11,23 @@ namespace SLMS.Application.Features.SocialNetwork.Posts.Queries
 {
     public class GetPostListRequestHandler : IRequestHandler<GetPostListRequest, PagedResult<PostSummaryDto>>
     {
-        IMapper _mapper;
-        IUnitOfWork _unitofwork;
-
-        public GetPostListRequestHandler(IMapper mapper, IUnitOfWork unitofwork)
+        private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitofwork;
+        private readonly ICurrentUserService _currentUser;
+        public GetPostListRequestHandler(IMapper mapper, IUnitOfWork unitofwork, ICurrentUserService currentUser)
         {
             _mapper = mapper;
             _unitofwork = unitofwork;
+            _currentUser = currentUser;
         }
 
         public async Task<PagedResult<PostSummaryDto>> Handle(GetPostListRequest request, CancellationToken cancellationToken)
         {
             try
             {
-                var currentUserId = Guid.Parse("007ed1b0-50a4-4585-a8af-9f36bb896010");
+                var currentUserId = _currentUser.Id;
                 var query = _unitofwork.PostRepository.GetQueryable();
-                 
+
                 if (request.OnlyMyFollowings)
                 {
                     var followingUserIds = await _unitofwork.FollowRepository.GetQueryable()
@@ -87,7 +89,7 @@ namespace SLMS.Application.Features.SocialNetwork.Posts.Queries
                         item.IsBookmarkedByCurrentUser = bookmarkedPostIds.Contains(item.Id);
                     }
                 }
-               
+
                 return new PagedResult<PostSummaryDto>(
                     items,
                     totalCount,

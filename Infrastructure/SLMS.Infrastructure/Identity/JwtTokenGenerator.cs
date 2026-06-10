@@ -21,9 +21,9 @@ namespace SLMS.Infrastructure.Identity
         {
             var claims = new[]
                 {
-                     new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                     new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
+                     new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
+                     new Claim(ClaimTypes.Name, user.UserName),
+                     new Claim(ClaimTypes.Email, user.Email),
                 };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
 

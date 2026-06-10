@@ -1,21 +1,22 @@
 ﻿using AutoMapper;
 using MediatR;
+using SLMS.Application.Contracts.Identity;
 using SLMS.Application.Contracts.Persistance;
 using SLMS.ApplicationCore.Domain.Media;
-using SLMS.Dto.Media;
 using SLMS.Dto.SocialNetwork.Post;
 
 namespace SLMS.Application.Features.SocialNetwork.Posts.Commands
 {
     public class CreatePostRequestHandler : IRequestHandler<CreatePostRequest, PostDto>
     {
-        IUnitOfWork _unitOfWork;
-        IMapper _mapper;
-
-        public CreatePostRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+        private readonly ICurrentUserService _currentUser;
+        public CreatePostRequestHandler(IUnitOfWork unitOfWork, IMapper mapper, ICurrentUserService currentUser)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _currentUser = currentUser;
         }
 
         public async Task<PostDto> Handle(CreatePostRequest request, CancellationToken cancellationToken)
@@ -24,9 +25,9 @@ namespace SLMS.Application.Features.SocialNetwork.Posts.Commands
             {
                 MediaAsset mediaAsset = new();
 
-
+                request.Post.PostOwnerId = _currentUser.Id;
                 var Post = _mapper.Map<ApplicationCore.Domain.SocialNetwork.Post>(request.Post);
-                var result =await _unitOfWork.PostRepository.AddAsync(Post,cancellationToken);
+                var result = await _unitOfWork.PostRepository.AddAsync(Post, cancellationToken);
 
                 if (request.Post.PostMedia != null)
                 {

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SLMS.Application.Features.Auth.Commands;
 using SLMS.Dto.User;
@@ -32,6 +33,11 @@ namespace SLMS.Api.Controllers.v1.Identity
             var response = await _mediator.Send(command);
             return Ok(response);
         }
-
+        [Authorize]
+        [HttpGet("test")]
+        public IActionResult Test()
+        {
+            return Ok("Hi Authorized");
+        }
     }
 }

@@ -22,6 +22,8 @@ namespace SLMS.Application
             CreateMap<User,Features.Auth.Commands.LoginResponse>();
             CreateMap<LoginRequestDto,LoginCommand>();
 
+            CreateMap<UserDto,User>().ReverseMap();
+
             #endregion
 
             #region  SocialNetwork

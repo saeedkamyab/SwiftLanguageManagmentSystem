@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SLMS.Application.Features.SocialNetwork.Posts.Commands;
 using SLMS.Application.Features.SocialNetwork.Posts.Queries;
@@ -18,7 +19,7 @@ namespace SLMS.Api.Controllers.v1.SocialNetwork
         {
             _mediator = mediator;
         }
-
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(typeof(PagedResult<PostSummaryDto>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetHomePagePosts(

@@ -41,7 +41,6 @@ namespace SLMS.WebApplicationComponents.Components.SocialNetwork.Post
         }
         private async Task CreatePost()
         {
-            Post.PostOwnerId = Guid.Parse("007ed1b0-50a4-4585-a8af-9f36bb896010");
             Post.PostMedia = new CreatePostMediaDto() {
                 MediaAssetId = uploadedMedia.Id,
             };
