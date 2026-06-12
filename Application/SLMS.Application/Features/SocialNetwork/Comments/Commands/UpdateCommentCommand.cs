@@ -3,8 +3,8 @@ using SLMS.Dto.SocialNetwork.Comments;
 
 namespace SLMS.Application.Features.SocialNetwork.Comments.Commands
 {
-    public class CreateCommentRequest : IRequest<CommentDto>
+    public class UpdateCommentCommand : IRequest<CommentCommandResponse>
     {
-        public required CreateCommentDto Comment { get; set; }
+        public string CommentContext { get; set; } = string.Empty;
     }
 }

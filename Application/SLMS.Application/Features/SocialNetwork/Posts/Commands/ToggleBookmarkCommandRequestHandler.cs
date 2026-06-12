@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using SLMS.Application.Contracts.Identity;
 using SLMS.Application.Contracts.Persistance;
 using SLMS.ApplicationCore.Domain.SocialNetwork;
 
@@ -7,20 +8,21 @@ namespace SLMS.Application.Features.SocialNetwork.Posts.Commands
 {
     public class ToggleBookmarkCommandRequestHandler : IRequestHandler<ToggleBookmarkCommandRequest, bool>
     {
-        IUnitOfWork _unitOfWork;
-        IMapper _mapper;
-
-        public ToggleBookmarkCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+       private readonly IUnitOfWork _unitOfWork;
+       private readonly IMapper _mapper;
+        private readonly ICurrentUserService _currentUser;
+        public ToggleBookmarkCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper,ICurrentUserService currentUser)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _currentUser = currentUser;
         }
 
         public async Task<bool> Handle(ToggleBookmarkCommandRequest request, CancellationToken cancellationToken)
         {
             try
             {
-                var userid = Guid.Parse("3fa85f64-5717-4562-b3fc-2c963f66afa6");//مرجانه گلچین
+                var userid = _currentUser.Id ?? throw new UnauthorizedAccessException();
                 var post =await _unitOfWork.PostRepository.GetByIdAsync(request.PostId);
                 var Bookmark =await _unitOfWork.BookmarkRepository.GetByUserAndPostAsync(request.PostId, userid);
                 if (Bookmark == null)

@@ -5,6 +5,7 @@ using SLMS.Application.Features.Users.Commands;
 using SLMS.Application.Features.Users.Queries;
 using SLMS.Dto;
 using SLMS.Dto.User;
+using SLMS.Shared;
 
 namespace SLMS.Api.Controllers.v1.User
 {

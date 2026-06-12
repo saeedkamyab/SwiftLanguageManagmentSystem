@@ -1,38 +1,38 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SLMS.Application.Features.SocialNetwork.Posts.Commands;
 using SLMS.Application.Features.SocialNetwork.Posts.Queries;
-using SLMS.Dto;
-using SLMS.Dto.SocialNetwork;
 using SLMS.Dto.SocialNetwork.Post;
+using SLMS.Shared;
 
 namespace SLMS.Api.Controllers.v1.SocialNetwork
 {
+    //[Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class PostController : ControllerBase
     {
         protected readonly IMediator _mediator;
+        protected readonly IMapper _mapper;
 
-        public PostController(IMediator mediator)
+        public PostController(IMediator mediator,IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;
         }
-        [Authorize]
+       
+      
         [HttpGet]
-        [ProducesResponseType(typeof(PagedResult<PostSummaryDto>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetHomePagePosts(
+        [ProducesResponseType(typeof(PagedResult<GetPostListQueryResponse>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<PagedResult<GetPostListQueryResponse>>> GetHomePagePosts(
     [FromQuery] int pageNumber = 1,
     [FromQuery] int pageSize = 10,
     [FromQuery] bool onlyMyFollowings = false,
     [FromQuery] string? searchTerm = null)
         {
-            //var currentUserId = User.GetUserId(); // Extension Method
-
-            var query = new GetPostListRequest()
+            var query = new GetPostListQuery()
             {
-                //CurrentUserId = currentUserId,
                 PageNumber = pageNumber,
                 PageSize = pageSize,
                 OnlyMyFollowings = onlyMyFollowings,
@@ -46,14 +46,15 @@ namespace SLMS.Api.Controllers.v1.SocialNetwork
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CreatePostDto post)
         {
-            var command = new CreatePostRequest { Post = post };
+            var command = _mapper.Map<CreatePostCommand>(post);
             var response = await _mediator.Send(command);
             return Ok(response);
         }
+
         [HttpPut]
         public async Task<ActionResult> Update([FromBody] UpdatePostDto post)
         {
-            var command = new UpdatePostRequest { Post = post };
+            var command = _mapper.Map<UpdatePostCommand>(post);
             var response = await _mediator.Send(command);
             return Ok(response);
         }
@@ -63,7 +64,7 @@ namespace SLMS.Api.Controllers.v1.SocialNetwork
         public async Task<IActionResult> ToggleLike(Guid postId)
         {
             var userid = Guid.Parse("3fa85f64-5717-4562-b3fc-2c963f66afa6");
-            var res = await _mediator.Send(new ToggleLikeCommandRequest { PostId=postId,UserId=userid});
+            var res = await _mediator.Send(new ToggleLikeCommand { PostId=postId,UserId=userid});
             return Ok(res);
         }
 

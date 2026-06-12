@@ -41,9 +41,7 @@ namespace SLMS.WebApplicationComponents.Components.SocialNetwork.Post
         }
         private async Task CreatePost()
         {
-            Post.PostMedia = new CreatePostMediaDto() {
-                MediaAssetId = uploadedMedia.Id,
-            };
+            Post.MediaAssetId =  uploadedMedia.Id;
             var success = await PostService.CreatePost(Post);
 
             if (!success)

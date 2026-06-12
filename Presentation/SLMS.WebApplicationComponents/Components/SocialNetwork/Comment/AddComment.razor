@@ -31,7 +31,6 @@
     {
         var comment = Post.NewComment;
         comment.PostId = Post.Id;
-        comment.UserId = Guid.Parse("007ed1b0-50a4-4585-a8af-9f36bb896010");
         var success = await CommentService.SendComment(comment);
 
         if (!success)

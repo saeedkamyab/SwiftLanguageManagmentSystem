@@ -13,12 +13,12 @@ namespace SLMS.Api.Services
             _contextAccessor = contextAccessor;
         }
 
-        public Guid Id
+        public Guid? Id
         {
             get
             {
                 var userId = _contextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                return Guid.TryParse(userId, out var id) ? id : Guid.Empty;
+                return Guid.TryParse(userId, out var id) ? id : null;
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using SLMS.Dto;
 using SLMS.Dto.SocialNetwork;
 using SLMS.Dto.SocialNetwork.Post;
+using SLMS.Shared;
 using SLMS.WebApplicationComponents.Services.Api.SocialNetwork.Interface;
 using System.Net.Http.Json;
 

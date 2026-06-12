@@ -17,6 +17,7 @@ namespace SLMS.Application.Contracts.Persistance
         IBaseRepository<ConversationMember> ConversationMemberRepository { get; }
         IBaseRepository<Follow> FollowRepository { get; }
         IBaseRepository<Message> MessageRepository { get; }
+        IBaseRepository<PostMedia> PostMediaRepository { get; }
         ILikeRepository LikeRepository { get; }
         IPostRepository PostRepository { get;  }
         IBookmarkRepository BookmarkRepository { get;  }

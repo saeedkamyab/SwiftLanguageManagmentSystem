@@ -2,12 +2,14 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
+using SLMS.Api;
 using SLMS.Api.Exceptions;
 using SLMS.Api.Services;
 using SLMS.Application;
 using SLMS.Application.Contracts.Identity;
 using SLMS.Infrastructure;
 using SLMS.Persistence;
+using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,11 +30,18 @@ builder.Services.AddSwaggerGen(op =>
 
   
 });
+builder.Services.AddAutoMapper(cfg =>
+{
+}, Assembly.GetExecutingAssembly());
+
 builder.Services.ConfigureApplicationServices();
 builder.Services.ConfigureInfrastructureServices(builder.Configuration);
 builder.Services.ConfigurePersistenceServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+
+
+
 
 
 var jwtSettings =

@@ -33,6 +33,7 @@ namespace SLMS.Api.Controllers.v1.Identity
             var response = await _mediator.Send(command);
             return Ok(response);
         }
+       
         [Authorize]
         [HttpGet("test")]
         public IActionResult Test()

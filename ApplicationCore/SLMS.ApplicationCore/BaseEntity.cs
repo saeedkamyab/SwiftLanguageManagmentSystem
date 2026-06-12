@@ -5,7 +5,7 @@ namespace SLMS.ApplicationCore
     public abstract class BaseEntity
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public bool IsDeleted { get; set; }
         public DateTime CreateDate { get; set; }
         public Guid CreatedById { get; set; }

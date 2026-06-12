@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using SLMS.Dto;
 using SLMS.Dto.User;
+using SLMS.Shared;
 
 namespace SLMS.Application.Features.Users.Queries
 {

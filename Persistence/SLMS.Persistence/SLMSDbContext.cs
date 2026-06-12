@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SLMS.Application.Contracts.Identity;
 using SLMS.ApplicationCore;
 using SLMS.ApplicationCore.Domain.InstituteManagement;
 using SLMS.ApplicationCore.Domain.Media;
@@ -10,13 +11,15 @@ namespace SLMS.Persistence
 {
     public class SLMSDbContext : DbContext
     {
+        private readonly ICurrentUserService _currentUserService;
         public SLMSDbContext()
         {
 
         }
-        public SLMSDbContext(DbContextOptions<SLMSDbContext> options) : base(options)
+        public SLMSDbContext(DbContextOptions<SLMSDbContext> options, 
+            ICurrentUserService currentUserService) : base(options)
         {
-
+            _currentUserService = currentUserService;
         }
 
         #region InstituteManagement
@@ -76,16 +79,15 @@ namespace SLMS.Persistence
             {
                 if (entry.State == EntityState.Added)
                 {
-                    entry.Entity.CreateDate = DateTime.UtcNow;
                     entry.Entity.IsDeleted = false;
-                    //if (entry.Entity is Message message)
-                    //{
-                    //    message.cre = DateTime.UtcNow;
-                    //}
+                    entry.Entity.CreateDate = DateTime.UtcNow;
+                    if (_currentUserService.Id.HasValue)
+                        entry.Entity.CreatedById = _currentUserService.Id.Value;
                 }
                 else if (entry.State == EntityState.Modified)
                 {
                     entry.Entity.LastUpdate = DateTime.UtcNow;
+                    entry.Entity.LastUpdatedById = _currentUserService.Id;
                 }
             }
         }

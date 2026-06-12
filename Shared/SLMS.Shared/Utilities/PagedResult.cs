@@ -1,4 +1,4 @@
-﻿namespace SLMS.Dto
+﻿namespace SLMS.Shared
 {
     public class PagedResult<T>
     {

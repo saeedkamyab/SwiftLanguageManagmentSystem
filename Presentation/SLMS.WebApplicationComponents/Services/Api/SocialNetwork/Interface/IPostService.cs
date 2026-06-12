@@ -2,6 +2,7 @@
 using SLMS.Dto.SocialNetwork;
 using SLMS.Dto.SocialNetwork.Comments;
 using SLMS.Dto.SocialNetwork.Post;
+using SLMS.Shared;
 
 namespace SLMS.WebApplicationComponents.Services.Api.SocialNetwork.Interface
 {
