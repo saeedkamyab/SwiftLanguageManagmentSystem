@@ -13,7 +13,7 @@ namespace SLMS.Api.Controllers.v1.SocialNetwork
     [ApiController]
     public class CommentController : ControllerBase
     {
-        protected readonly IMediator _mediator;
+        private readonly IMediator _mediator;
         private readonly IMapper _mapper;
         public CommentController(IMediator mediator, IMapper mapper)
         {

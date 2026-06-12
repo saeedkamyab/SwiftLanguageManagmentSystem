@@ -1,9 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SLMS.Application.Features.Auth.Commands;
 using SLMS.Application.Features.Users.Commands;
 using SLMS.Application.Features.Users.Queries;
-using SLMS.Dto;
 using SLMS.Dto.User;
 using SLMS.Shared;
 
@@ -28,7 +26,6 @@ namespace SLMS.Api.Controllers.v1.User
         {
             var query = new GetUserListRequest()
             {
-                //CurrentUserId = currentUserId,
                 PageNumber = pageNumber,
                 PageSize = pageSize,
                 SearchTerm = searchTerm
@@ -45,7 +42,6 @@ namespace SLMS.Api.Controllers.v1.User
         {
             var query = new GetUserListRequest()
             {
-                //CurrentUserId = currentUserId,
                 PageNumber = pageNumber,
                 PageSize = pageSize,
                 SearchTerm = searchTerm
@@ -59,15 +55,6 @@ namespace SLMS.Api.Controllers.v1.User
             var result = await _mediator.Send(new GetUserRequest { Id = id });
             return Ok(result);
         }
-
-        //[HttpPost]
-        //public async Task<ActionResult> Create([FromBody] RegisterRequestDto user)
-        //{
-        //    var command = new RegisterUserCommand { RegisterRequest = user };
-        //    var response = await _mediator.Send(command);
-        //    return Ok(response);
-        //}
-
         [HttpPut]
         public async Task<ActionResult> Update([FromBody] UpdateUserDto user)
         {

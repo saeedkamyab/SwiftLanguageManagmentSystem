@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SLMS.Application.Features.SocialNetwork.Posts.Commands;
 using SLMS.Application.Features.SocialNetwork.Posts.Queries;
@@ -8,13 +9,13 @@ using SLMS.Shared;
 
 namespace SLMS.Api.Controllers.v1.SocialNetwork
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class PostController : ControllerBase
     {
-        protected readonly IMediator _mediator;
-        protected readonly IMapper _mapper;
+        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
         public PostController(IMediator mediator,IMapper mapper)
         {
@@ -63,16 +64,14 @@ namespace SLMS.Api.Controllers.v1.SocialNetwork
         [HttpPost("/api/v1/Post/{postId}/toggle-like")]
         public async Task<IActionResult> ToggleLike(Guid postId)
         {
-            var userid = Guid.Parse("3fa85f64-5717-4562-b3fc-2c963f66afa6");
-            var res = await _mediator.Send(new ToggleLikeCommand { PostId=postId,UserId=userid});
+            var res = await _mediator.Send(new ToggleLikeCommand { PostId=postId});
             return Ok(res);
         }
 
         [HttpPost("/api/v1/Post/{postId}/toggle-bookmark")]
         public async Task<IActionResult> ToggleBookmark(Guid postId)
         {
-            var userid = Guid.Parse("3fa85f64-5717-4562-b3fc-2c963f66afa6");
-            var res = await _mediator.Send(new ToggleBookmarkCommandRequest { PostId = postId, UserId = userid });
+            var res = await _mediator.Send(new ToggleBookmarkCommandRequest { PostId = postId });
             return Ok(res);
         }
 
