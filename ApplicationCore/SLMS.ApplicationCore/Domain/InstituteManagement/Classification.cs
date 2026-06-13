@@ -9,9 +9,9 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
        
 
         public Guid TermCourseId {  get; set; }
-        public TermCourse TermCourse { get; set; }
+        public TermCourse? TermCourse { get; set; }
         public Guid ClassificationMemberId {  get; set; }//InstituteMembershipId
-        public InstituteMembership ClassificationMember { get; set; }
+        public InstituteMembership ClassificationMember { get; set; } = null!;
         public Certificate? Certificate { get; set; }
         public ICollection<AbsentPresent> AbsentPresents { get; set; } = [];
     }

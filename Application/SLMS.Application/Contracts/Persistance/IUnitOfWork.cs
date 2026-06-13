@@ -4,7 +4,6 @@ using SLMS.ApplicationCore.Domain.InstituteManagement;
 using SLMS.ApplicationCore.Domain.Media;
 using SLMS.ApplicationCore.Domain.Messaging;
 using SLMS.ApplicationCore.Domain.SocialNetwork;
-using SLMS.ApplicationCore.Domain.User;
 
 namespace SLMS.Application.Contracts.Persistance
 {

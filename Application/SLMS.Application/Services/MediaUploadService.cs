@@ -64,8 +64,7 @@ namespace SLMS.Application.Services
                 var command = new CreateMediaAssetRequest { Media = mediaDto };
                 var isSavedInDb = await _mediator.Send(command, cancellationToken);
 
-                // ۷. مدیریت خطا (Rollback)
-                // اگر در دیتابیس ذخیره نشد، فایلی که روی دیسک ذخیره شده را پاک می‌کنیم
+               
                 if (isSavedInDb==null)
                 {
                     await _fileStorage.DeleteAsync(physicalPath, cancellationToken);

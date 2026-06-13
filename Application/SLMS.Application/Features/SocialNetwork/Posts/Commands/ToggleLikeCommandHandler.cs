@@ -21,8 +21,8 @@ namespace SLMS.Application.Features.SocialNetwork.Posts.Commands
         public async Task<bool> Handle(ToggleLikeCommand request, CancellationToken cancellationToken)
         {
 
-            var userid = _currentUser.Id ?? throw new UnauthorizedAccessException();
-                var post =await _unitOfWork.PostRepository.GetByIdAsync(request.PostId);
+                var userid = _currentUser.Id ?? throw new UnauthorizedAccessException();
+                var post =await _unitOfWork.PostRepository.GetByIdAsync(request.PostId)??throw new Exceptions.NotFoundException();
                 var like =await _unitOfWork.LikeRepository.GetByUserAndPostAsync(request.PostId, userid);
                 if (like == null)
                 {

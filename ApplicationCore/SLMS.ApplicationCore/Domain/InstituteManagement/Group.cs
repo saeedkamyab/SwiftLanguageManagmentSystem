@@ -10,7 +10,7 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
 
 
         public Guid InstituteId { get; set; }
-        public Institute Institute { get; set; }
-        public ICollection<InstituteMembershipGroup> InstituteMembershipGroups { get; set; }
+        public Institute Institute { get; set; } = null!;
+        public ICollection<InstituteMembershipGroup> InstituteMembershipGroups { get; set; } = [];
     }
 }

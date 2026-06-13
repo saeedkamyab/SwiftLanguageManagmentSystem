@@ -2,5 +2,9 @@
 {
     public class ForbiddenException : Exception
     {
+        public ForbiddenException()
+        {
+            
+        }
     }
 }

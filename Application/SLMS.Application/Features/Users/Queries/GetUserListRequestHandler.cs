@@ -3,8 +3,6 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SLMS.Application.Contracts.Persistance;
-using SLMS.Dto;
-using SLMS.Dto.SocialNetwork;
 using SLMS.Dto.User;
 using SLMS.Shared;
 
@@ -30,11 +28,12 @@ namespace SLMS.Application.Features.Users.Queries
                 if (!string.IsNullOrWhiteSpace(request.SearchTerm))
                 {
                     request.SearchTerm = request.SearchTerm.Trim();
+                  
                     query = query.Where(p =>
-            p.UserName.Contains(request.SearchTerm) ||
-            p.FirstName.Contains(request.SearchTerm) ||
-            p.LastName.Contains(request.SearchTerm) ||
-            p.NationalCode.Contains(request.SearchTerm));
+                        p.UserName.Contains(request.SearchTerm) ||
+                    p.FirstName .Contains(request.SearchTerm) ||
+                    p.LastName .Contains(request.SearchTerm) ||
+                    p.NationalCode.Contains(request.SearchTerm));
                 }
                 var totalCount = await query.CountAsync(cancellationToken);
 

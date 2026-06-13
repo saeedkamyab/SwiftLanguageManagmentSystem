@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using SLMS.Application.Contracts.Identity;
 using SLMS.Application.Contracts.Persistance;
 
 namespace SLMS.Application.Features.SocialNetwork.Comments.Commands
@@ -9,12 +8,10 @@ namespace SLMS.Application.Features.SocialNetwork.Comments.Commands
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly ICurrentUserService _currentUserService;
-        public UpdateCommentCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, ICurrentUserService currentUserService)
+        public UpdateCommentCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _currentUserService = currentUserService;
         }
 
         public async Task<CommentCommandResponse> Handle(UpdateCommentCommand request, CancellationToken cancellationToken)

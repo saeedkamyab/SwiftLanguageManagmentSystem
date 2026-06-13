@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using SLMS.Dto.User;
 
 namespace SLMS.Application.Features.Auth.Commands
 {

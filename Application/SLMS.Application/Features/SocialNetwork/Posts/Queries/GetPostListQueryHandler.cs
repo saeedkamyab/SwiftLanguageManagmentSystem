@@ -68,14 +68,6 @@ namespace SLMS.Application.Features.SocialNetwork.Posts.Queries
 
             var totalCount = await query.CountAsync(cancellationToken);
 
-
-            var test = await query
-  .Include(x => x.PostOwner)
-  .FirstOrDefaultAsync(cancellationToken);
-
-
-            var name = test.PostOwner.FirstName;
-
             var items = await query
        .OrderByDescending(p => p.CreateDate)
        .Skip((request.PageNumber - 1) * request.PageSize)

@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using SLMS.Dto.SocialNetwork.Comments;
 
 namespace SLMS.Application.Features.SocialNetwork.Comments.Commands
 {

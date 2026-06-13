@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SLMS.ApplicationCore;
-using SLMS.ApplicationCore.Domain.SocialNetwork;
+﻿using SLMS.ApplicationCore;
 using System.Linq.Expressions;
 
 namespace SLMS.Application.Contracts.Persistance

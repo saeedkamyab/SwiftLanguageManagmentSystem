@@ -8,10 +8,10 @@ namespace SLMS.ApplicationCore.Domain.Messaging
         public DateTime? LastReadMessageTimestamp { get; set; }
         
         public Guid ConversationId { get; set; }
-        public Conversation Conversation { get; set; }
-      
+        public Conversation Conversation { get; set; } = null!;
+
         public Guid UserId { get; set; }
-        public Domain.User.User User { get; set; }
-        
+        public Domain.User.User User { get; set; } = null!;
+
     }
 }

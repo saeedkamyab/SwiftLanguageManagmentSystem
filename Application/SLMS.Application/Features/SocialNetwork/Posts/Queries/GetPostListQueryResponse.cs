@@ -9,9 +9,9 @@
 
         public Guid OwnerId { get; set; }
     
-        public string OwnerFirstName { get; set; }
-        public string OwnerLastName { get; set; }
-        public string OwnerAvatarUrl { get; set; }
+        public string OwnerFirstName { get; set; } = string.Empty;
+        public string OwnerLastName { get; set; } = string.Empty;
+        public string OwnerAvatarUrl { get; set; } = string.Empty;
         public string OwnerFullName => $"{OwnerFirstName} {OwnerLastName}";
 
         public int LikesCount { get; set; }

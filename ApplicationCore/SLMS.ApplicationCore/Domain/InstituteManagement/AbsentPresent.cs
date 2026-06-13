@@ -12,7 +12,7 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
 
         
         public Guid ClassifictionId { get; set; }
-        public Classification Classifiction { get; set; }
-        
+        public Classification Classifiction { get; set; } = null!;
+
     }
 }

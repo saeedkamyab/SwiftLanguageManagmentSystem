@@ -5,5 +5,9 @@
         public ConflictException(string message) : base(message)
         {
         }
+        public ConflictException()
+        {
+            
+        }
     }
 }

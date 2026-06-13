@@ -13,11 +13,11 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
         public bool IsActive { get; set; }
 
         public Guid LevelId { get; set; }
-        public Level Level { get; set; }
+        public Level Level { get; set; } = null!;
         public Guid InstituteId { get; set; }
-        public Institute Institute { get; set; }
+        public Institute? Institute { get; set; }
         public Guid RoomId { get; set; }
-        public Room Room { get; set; }
+        public Room Room { get; set; } = null!;
 
         public ICollection<Classification> Classifications { get; set; } = [];
     }

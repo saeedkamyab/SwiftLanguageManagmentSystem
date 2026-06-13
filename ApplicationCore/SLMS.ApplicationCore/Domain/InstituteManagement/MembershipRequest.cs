@@ -8,8 +8,8 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
         public DateTime RequestDate { get; set; }
 
         public Guid UserId { get; set; }
-        public Domain.User.User User { get; set; }
+        public Domain.User.User User { get; set; } = null!;
         public Guid InstituteId { get; set; }
-        public Institute Institute { get; set; }
+        public Institute Institute { get; set; } = null!;
     }
 }
