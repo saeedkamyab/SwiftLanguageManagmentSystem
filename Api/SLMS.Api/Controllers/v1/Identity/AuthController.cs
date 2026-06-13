@@ -20,14 +20,14 @@ namespace SLMS.Api.Controllers.v1.Identity
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterRequestDto registerUser)
+        public async Task<IActionResult> Register([FromBody] RegisterDto registerUser)
         {
             var command = _mapper.Map<RegisterUserCommand>(registerUser);
             var response = await _mediator.Send(command);
             return Ok(response);
         }
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequest)
+        public async Task<IActionResult> Login([FromBody] LoginDto loginRequest)
         {
             var command = _mapper.Map<LoginCommand>(loginRequest);
             var response = await _mediator.Send(command);

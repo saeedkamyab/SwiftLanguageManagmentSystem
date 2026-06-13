@@ -14,8 +14,8 @@ namespace SLMS.Api
         {
             #region  UserManagment
             //----------------------User---------------------------------
-            CreateMap<RegisterRequestDto, RegisterUserCommand>();
-            CreateMap<LoginRequestDto,LoginCommand>();
+            CreateMap<RegisterDto, RegisterUserCommand>();
+            CreateMap<LoginDto,LoginCommand>();
           
 
             #endregion

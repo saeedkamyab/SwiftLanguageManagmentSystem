@@ -6,8 +6,6 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
     public class Level : BaseEntity
     {
         public string Title { get; set; } = string.Empty;
-        
-        
         public Guid InstituteId { get; set; }
         public Institute Institute { get; set; } = null!;
     }

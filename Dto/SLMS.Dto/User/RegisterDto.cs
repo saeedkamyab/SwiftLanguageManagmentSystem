@@ -1,6 +1,6 @@
 ﻿namespace SLMS.Dto.User
 {
-    public sealed class RegisterRequestDto
+    public sealed class RegisterDto
     {
         public string UserName { get; set; }=string.Empty;
 
