@@ -12,9 +12,9 @@ namespace SLMS.Persistence
     public class SLMSDbContext : DbContext
     {
         private readonly ICurrentUserService _currentUserService;
-        public SLMSDbContext()
+        public SLMSDbContext(ICurrentUserService currentUserService)
         {
-
+            _currentUserService = currentUserService;
         }
         public SLMSDbContext(DbContextOptions<SLMSDbContext> options, 
             ICurrentUserService currentUserService) : base(options)

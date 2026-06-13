@@ -14,10 +14,10 @@ namespace SLMS.Dto.Messaging
 
 
         public Guid ConversationId { get; set; }
-        public ConversationDto Conversation { get; set; }
+        public ConversationDto Conversation { get; set; } = null!;
 
         public Guid SenderUserId { get; set; }
-        public UserDto SenderUser { get; set; }
+        public UserDto SenderUser { get; set; } = null!;
     }
 
 }

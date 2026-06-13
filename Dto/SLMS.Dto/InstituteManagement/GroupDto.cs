@@ -7,7 +7,8 @@
 
 
         public Guid InstituteId { get; set; }
-        public InstituteDto Institute { get; set; }
-        public ICollection<InstituteMembershipGroupDto> InstituteMembershipGroups { get; set; }
+        public InstituteDto Institute { get; set; } = null!;
+        public ICollection<InstituteMembershipGroupDto> InstituteMembershipGroups { get; set; } = [];
+        
     }
 }

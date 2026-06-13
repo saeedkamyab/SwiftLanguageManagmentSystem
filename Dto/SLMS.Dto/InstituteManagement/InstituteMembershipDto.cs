@@ -9,14 +9,14 @@ namespace SLMS.Dto.InstituteManagement
 
 
         public Guid InstituteId { get; set; }
-        public InstituteDto Institute { get; set; }
+        public InstituteDto Institute { get; set; } = null!;
         public Guid UserId { get; set; }
-        public UserDto User { get; set; }
+        public UserDto User { get; set; } = null!;
         public Guid LevelId { get; set; }
-        public LevelDto Level { get; set; }
+        public LevelDto Level { get; set; } = null!;
 
-       public ICollection<ClassificationDto> Classifications { get; set; }
-       public ICollection<InstituteMembershipGroupDto> InstituteMembershipGroups { get; set; }
+        public ICollection<ClassificationDto> Classifications { get; set; } = [];
+       public ICollection<InstituteMembershipGroupDto> InstituteMembershipGroups { get; set; } = [];
 
     }
 }

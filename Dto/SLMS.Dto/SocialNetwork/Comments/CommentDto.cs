@@ -11,19 +11,17 @@ namespace SLMS.Dto.SocialNetwork.Comments
         public string CommentContext { get; set; } = string.Empty;
 
         public Guid PostId { get; set; }
-        public PostDto Post { get; set; }
+        public PostDto Post { get; set; } = null!;
 
         public Guid? ParentId { get; set; }
         [JsonIgnore]
         public CommentDto? Parent { get; set; }
 
         public Guid UserId { get; set; }
-        public UserDto User { get; set; }
+        public UserDto User { get; set; } = null!;
 
 
-        public DateTime CreateDate { get; set; }
-        public DateTime LastUpdate { get; set; }
 
-        public ICollection<CommentDto> ChildComments { get; set; }
+        public ICollection<CommentDto> ChildComments { get; set; } = [];
     }
 }

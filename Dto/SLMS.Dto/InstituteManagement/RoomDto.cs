@@ -7,7 +7,7 @@
 
 
         public Guid InstituteId { get; set; }
-        public InstituteDto Institute {  get; set; }
-        public ICollection<TermCourseDto> TermCourses {  get; set; }
+        public InstituteDto Institute { get; set; } = null!;
+        public ICollection<TermCourseDto> TermCourses { get; set; } = [];
     }
 }

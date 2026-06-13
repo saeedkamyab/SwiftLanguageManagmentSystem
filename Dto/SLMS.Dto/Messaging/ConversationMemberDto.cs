@@ -7,10 +7,10 @@ namespace SLMS.Dto.Messaging
         public DateTime? LastReadMessageTimestamp { get; set; }
         
         public Guid ConversationId { get; set; }
-        public ConversationDto Conversation { get; set; }
+        public ConversationDto Conversation { get; set; } = null!;  
       
         public Guid UserId { get; set; }
-        public UserDto User { get; set; }
+        public UserDto User { get; set; } = null!;
         
     }
 }

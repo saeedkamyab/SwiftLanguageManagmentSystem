@@ -6,6 +6,6 @@
         
         
         public Guid InstituteId { get; set; }
-        public InstituteDto Institute { get; set; }
+        public InstituteDto Institute { get; set; } = null!; 
     }
 }

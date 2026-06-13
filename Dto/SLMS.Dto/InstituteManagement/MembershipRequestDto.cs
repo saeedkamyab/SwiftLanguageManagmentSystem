@@ -7,8 +7,8 @@ namespace SLMS.Dto.InstituteManagement
         public DateTime RequestDate { get; set; }
 
         public Guid UserId { get; set; }
-        public UserDto User { get; set; }
+        public UserDto User { get; set; } = null!;
         public Guid InstituteId { get; set; }
-        public InstituteDto Institute { get; set; }
+        public InstituteDto Institute { get; set; } = null!;
     }
 }

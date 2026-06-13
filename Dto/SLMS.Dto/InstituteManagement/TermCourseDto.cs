@@ -11,11 +11,11 @@ namespace SLMS.Dto.InstituteManagement
         public bool IsActive { get; set; }
 
         public Guid LevelId { get; set; }
-        public LevelDto Level { get; set; }
+        public LevelDto Level { get; set; } = null!;
         public Guid InstituteId { get; set; }
-        public InstituteDto Institute { get; set; }
+        public InstituteDto Institute { get; set; } = null!;
         public Guid RoomId { get; set; }
-        public RoomDto Room { get; set; }
+        public RoomDto Room { get; set; } = null!;
 
         public ICollection<ClassificationDto> Classifications { get; set; } = [];
     }

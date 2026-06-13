@@ -9,7 +9,7 @@
 
         
         public Guid ClassifictionId { get; set; }
-        public ClassificationDto Classifiction { get; set; }
+        public ClassificationDto Classifiction { get; set; } = null!;
         
     }
 }
