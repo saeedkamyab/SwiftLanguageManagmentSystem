@@ -24,8 +24,7 @@ namespace SLMS.Application.Features.InstituteManagement.Institute.Commands
             CancellationToken cancellationToken)
         {
 
-            //var userId = _currentUser.Id ?? throw new UnauthorizedAccessException();
-            var userId = Guid.Parse("1e9c4846-c5f0-4b93-9c0f-c6bfa6b01745");
+            var userId = _currentUser.Id ?? throw new UnauthorizedAccessException();
             var institute = _mapper.Map<ApplicationCore.Domain.InstituteManagement.Institute>(request);
             var result = await _unitOfWork.InstituteRepository.AddAsync(institute, cancellationToken);
 
