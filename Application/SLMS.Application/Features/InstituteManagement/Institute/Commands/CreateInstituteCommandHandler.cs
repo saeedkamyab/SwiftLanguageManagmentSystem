@@ -2,6 +2,7 @@
 using MediatR;
 using SLMS.Application.Contracts.Identity;
 using SLMS.Application.Contracts.Persistance;
+using SLMS.Application.Exceptions;
 using SLMS.ApplicationCore.Domain.InstituteManagement;
 
 namespace SLMS.Application.Features.InstituteManagement.Institute.Commands
@@ -23,18 +24,38 @@ namespace SLMS.Application.Features.InstituteManagement.Institute.Commands
             CancellationToken cancellationToken)
         {
 
-                var userId = _currentUser.Id ?? throw new UnauthorizedAccessException();
-                var institute = _mapper.Map<ApplicationCore.Domain.InstituteManagement.Institute>(request);
-                var result = await _unitOfWork.InstituteRepository.AddAsync(institute, cancellationToken);
-                await _unitOfWork.InstituteMembershipRepository.AddAsync(new InstituteMembership
+            //var userId = _currentUser.Id ?? throw new UnauthorizedAccessException();
+            var userId = Guid.Parse("1e9c4846-c5f0-4b93-9c0f-c6bfa6b01745");
+            var institute = _mapper.Map<ApplicationCore.Domain.InstituteManagement.Institute>(request);
+            var result = await _unitOfWork.InstituteRepository.AddAsync(institute, cancellationToken);
+
+            var fields = await _unitOfWork.FieldRepository
+    .GetByIdsAsync(request.FieldIds);
+
+            if (fields.Count != request.FieldIds.Count)
+            {
+                throw new NotFoundException();
+            }
+
+            foreach (var field in request.FieldIds)
+            {
+                await _unitOfWork.InstituteFieldRepository.AddAsync(new InstituteField
                 {
-                    MemberType = Shared.Enums.MemberType.Founder,
                     InstituteId = result.Id,
-                    UserId = userId
+                    FieldId = field
                 }, cancellationToken);
-                await _unitOfWork.CommitAsync();
-                return _mapper.Map<InstituteCommandResponse>(result);
-           
+            }
+
+            await _unitOfWork.InstituteMembershipRepository.AddAsync(new InstituteMembership
+            {
+                MemberType = Shared.Enums.MemberType.Founder,
+                InstituteId = result.Id,
+                UserId = userId
+            }, cancellationToken);
+
+            await _unitOfWork.CommitAsync();
+            return _mapper.Map<InstituteCommandResponse>(result);
+
         }
     }
 }

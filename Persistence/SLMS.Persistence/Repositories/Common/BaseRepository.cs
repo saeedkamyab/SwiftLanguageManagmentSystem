@@ -22,6 +22,12 @@ namespace SLMS.Persistence.Repositories.Common
                 .Where(x => !x.IsDeleted)
                 .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
+        public virtual async Task<List<TEntity>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken = default)
+        {
+            return await _dbSet
+       .Where(x => ids.Contains(x.Id) && !x.IsDeleted)
+       .ToListAsync(cancellationToken);
+        }
         public virtual async Task<IReadOnlyList<TEntity>> ListAsync(Expression<Func<TEntity, bool>>? predicate = null,
         CancellationToken cancellationToken = default,
             Func<IQueryable<TEntity>, IQueryable<TEntity>>? include = null)
@@ -42,7 +48,7 @@ namespace SLMS.Persistence.Repositories.Common
             return _dbSet.Where(x => !x.IsDeleted)
                 .AsNoTracking();
         }
-        public virtual async Task<TEntity> AddAsync(TEntity entity,CancellationToken cancellationToken)
+        public virtual async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken)
         {
             await _dbSet.AddAsync(entity, cancellationToken);
             return entity;
