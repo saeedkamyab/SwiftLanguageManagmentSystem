@@ -2,13 +2,13 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SLMS.ApplicationCore.Domain.InstituteManagement;
 
-namespace SLMS.Persistence.ModelsConfigurations.UserManagment
+namespace SLMS.Persistence.ModelsConfigurations.InstituteManagment
 {
     public class RoomConfiguration : IEntityTypeConfiguration<Room>
     {
         public void Configure(EntityTypeBuilder<Room> room)
         {
-            room.Property(r => r.Title).HasMaxLength(100);
+            room.Property(r => r.Title).HasMaxLength(100).IsRequired(true);
             room.Property(r => r.Description).HasMaxLength(250).IsRequired(false);
 
             room.HasOne(r => r.Institute)

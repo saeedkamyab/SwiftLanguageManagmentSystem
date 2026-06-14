@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SLMS.ApplicationCore.Domain.InstituteManagement;
 
-namespace SLMS.Persistence.ModelsConfigurations.UserManagment
+namespace SLMS.Persistence.ModelsConfigurations.InstituteManagment
 {
     public class InstituteMembershipConfiguration : IEntityTypeConfiguration<InstituteMembership>
     {
@@ -19,10 +19,7 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
                 .HasForeignKey(im => im.UserId)
 ;
 
-            instituteMembership.HasOne(im => im.Level)
-                .WithMany()
-                .HasForeignKey(im => im.LevelId)
-;
+          
         }
     }
 }

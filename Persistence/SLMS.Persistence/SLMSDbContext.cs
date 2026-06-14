@@ -12,9 +12,9 @@ namespace SLMS.Persistence
     public class SLMSDbContext : DbContext
     {
         private readonly ICurrentUserService _currentUserService;
-        public SLMSDbContext(ICurrentUserService currentUserService)
+        public SLMSDbContext()
         {
-            _currentUserService = currentUserService;
+        
         }
         public SLMSDbContext(DbContextOptions<SLMSDbContext> options, 
             ICurrentUserService currentUserService) : base(options)
@@ -26,10 +26,8 @@ namespace SLMS.Persistence
         public DbSet<AbsentPresent> AbsentPresents { get; set; }
         public DbSet<Certificate> Certificates { get; set; }
         public DbSet<Classification> Classifications { get; set; }
-        public DbSet<Group> Groups { get; set; }
         public DbSet<Institute> Institutes { get; set; }
         public DbSet<InstituteMembership> InstituteMemberships { get; set; }
-        public DbSet<InstituteMembershipGroup> InstituteMembershipGroups { get; set; }
         public DbSet<Level> Levels { get; set; }
         public DbSet<MembershipRequest> MembershipRequests { get; set; }
         public DbSet<Room> Rooms { get; set; }
@@ -81,13 +79,13 @@ namespace SLMS.Persistence
                 {
                     entry.Entity.IsDeleted = false;
                     entry.Entity.CreateDate = DateTime.UtcNow;
-                    if (_currentUserService.Id.HasValue)
-                        entry.Entity.CreatedById = _currentUserService.Id.Value;
+                    //if (_currentUserService.Id.HasValue)
+                    //    entry.Entity.CreatedById = _currentUserService.Id.Value;
                 }
                 else if (entry.State == EntityState.Modified)
                 {
                     entry.Entity.LastUpdate = DateTime.UtcNow;
-                    entry.Entity.LastUpdatedById = _currentUserService.Id;
+                    //entry.Entity.LastUpdatedById = _currentUserService.Id;
                 }
             }
         }

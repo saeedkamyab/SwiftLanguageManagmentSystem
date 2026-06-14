@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SLMS.ApplicationCore.Domain.InstituteManagement;
 
-namespace SLMS.Persistence.ModelsConfigurations.UserManagment
+namespace SLMS.Persistence.ModelsConfigurations.InstituteManagment
 {
     public class TermCourseConfiguration : IEntityTypeConfiguration<TermCourse>
     {

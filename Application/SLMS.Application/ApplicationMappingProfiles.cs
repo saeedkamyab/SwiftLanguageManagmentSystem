@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using SLMS.Application.Features.Auth.Commands;
+using SLMS.Application.Features.InstituteManagement.Institute.Commands;
 using SLMS.Application.Features.SocialNetwork.Comments.Commands;
 using SLMS.Application.Features.SocialNetwork.Posts.Commands;
 using SLMS.Application.Features.SocialNetwork.Posts.Queries;
+using SLMS.ApplicationCore.Domain.InstituteManagement;
 using SLMS.ApplicationCore.Domain.Media;
 using SLMS.ApplicationCore.Domain.SocialNetwork;
 using SLMS.ApplicationCore.Domain.User;
@@ -68,6 +70,13 @@ namespace SLMS.Application
             CreateMap<CreateMediaAssetDto, MediaAsset>();
 
             #endregion
+            #region  Institute Managment
+            CreateMap<CreateInstituteCommand, Institute>();
+            CreateMap<Institute, InstituteCommandResponse>();
+
+            #endregion
+
+
         }
     }
 }

@@ -2,14 +2,14 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SLMS.ApplicationCore.Domain.InstituteManagement;
 
-namespace SLMS.Persistence.ModelsConfigurations.UserManagment
+namespace SLMS.Persistence.ModelsConfigurations.InstituteManagment
 {
     public class ClassificationConfiguration : IEntityTypeConfiguration<Classification>
     {
         public void Configure(EntityTypeBuilder<Classification> classification)
         {
 
-            classification.Property(c => c.Title).HasMaxLength(100);
+            classification.Property(c => c.Title).HasMaxLength(100).IsRequired(true);
 
             classification.HasOne(c => c.TermCourse)
                 .WithMany(tc => tc.Classifications)

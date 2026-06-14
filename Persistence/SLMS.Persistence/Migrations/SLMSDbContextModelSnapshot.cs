@@ -17,7 +17,7 @@ namespace SLMS.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.5")
+                .HasAnnotation("ProductVersion", "10.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -66,6 +66,37 @@ namespace SLMS.Persistence.Migrations
                     b.ToTable("AbsentPresent", "InstituteManagement");
                 });
 
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("LastUpdate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category", "InstituteManagement");
+                });
+
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Certificate", b =>
                 {
                     b.Property<Guid>("Id")
@@ -87,7 +118,7 @@ namespace SLMS.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastUpdate")
+                    b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid?>("LastUpdatedById")
@@ -160,7 +191,43 @@ namespace SLMS.Persistence.Migrations
                     b.ToTable("Classification", "InstituteManagement");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Group", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Field", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("LastUpdate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Field", "InstituteManagement");
+                });
+
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Institute", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -173,11 +240,8 @@ namespace SLMS.Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(250)
-                        .HasColumnType("character varying(250)");
-
-                    b.Property<Guid>("InstituteId")
-                        .HasColumnType("uuid");
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
@@ -195,12 +259,10 @@ namespace SLMS.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InstituteId");
-
-                    b.ToTable("Group", "InstituteManagement");
+                    b.ToTable("Institute", "InstituteManagement");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Institute", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteField", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -212,13 +274,11 @@ namespace SLMS.Persistence.Migrations
                     b.Property<Guid>("CreatedById")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Description")
-                        .HasMaxLength(250)
-                        .HasColumnType("character varying(250)");
+                    b.Property<Guid>("FieldId")
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("Fields")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("InstituteId")
+                        .HasColumnType("uuid");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
@@ -229,14 +289,13 @@ namespace SLMS.Persistence.Migrations
                     b.Property<Guid?>("LastUpdatedById")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("character varying(300)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Institute", "InstituteManagement");
+                    b.HasIndex("FieldId");
+
+                    b.HasIndex("InstituteId");
+
+                    b.ToTable("InstituteField", "InstituteManagement");
                 });
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteMembership", b =>
@@ -263,9 +322,6 @@ namespace SLMS.Persistence.Migrations
                     b.Property<Guid?>("LastUpdatedById")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("LevelId")
-                        .HasColumnType("uuid");
-
                     b.Property<byte>("MemberType")
                         .HasColumnType("smallint");
 
@@ -276,47 +332,9 @@ namespace SLMS.Persistence.Migrations
 
                     b.HasIndex("InstituteId");
 
-                    b.HasIndex("LevelId");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("InstituteMembership", "InstituteManagement");
-                });
-
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteMembershipGroup", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("CreatedById")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("GroupId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("InstituteMembershipId")
-                        .HasColumnType("uuid");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime?>("LastUpdate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid?>("LastUpdatedById")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GroupId");
-
-                    b.HasIndex("InstituteMembershipId");
-
-                    b.ToTable("InstituteMembershipGroup", "InstituteManagement");
                 });
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Level", b =>
@@ -1105,13 +1123,32 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("TermCourse");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Group", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Field", b =>
                 {
+                    b.HasOne("SLMS.ApplicationCore.Domain.InstituteManagement.Category", "Category")
+                        .WithMany("Fields")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteField", b =>
+                {
+                    b.HasOne("SLMS.ApplicationCore.Domain.InstituteManagement.Field", "Field")
+                        .WithMany("InstituteFields")
+                        .HasForeignKey("FieldId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("SLMS.ApplicationCore.Domain.InstituteManagement.Institute", "Institute")
-                        .WithMany("Groups")
+                        .WithMany("InstituteFields")
                         .HasForeignKey("InstituteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Field");
 
                     b.Navigation("Institute");
                 });
@@ -1124,12 +1161,6 @@ namespace SLMS.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SLMS.ApplicationCore.Domain.InstituteManagement.Level", "Level")
-                        .WithMany()
-                        .HasForeignKey("LevelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("SLMS.ApplicationCore.Domain.User.User", "User")
                         .WithMany("InstituteMemberships")
                         .HasForeignKey("UserId")
@@ -1138,28 +1169,7 @@ namespace SLMS.Persistence.Migrations
 
                     b.Navigation("Institute");
 
-                    b.Navigation("Level");
-
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteMembershipGroup", b =>
-                {
-                    b.HasOne("SLMS.ApplicationCore.Domain.InstituteManagement.Group", "Group")
-                        .WithMany("InstituteMembershipGroups")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteMembership", "InstituteMembership")
-                        .WithMany("InstituteMembershipGroups")
-                        .HasForeignKey("InstituteMembershipId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Group");
-
-                    b.Navigation("InstituteMembership");
                 });
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Level", b =>
@@ -1410,6 +1420,11 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Category", b =>
+                {
+                    b.Navigation("Fields");
+                });
+
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Classification", b =>
                 {
                     b.Navigation("AbsentPresents");
@@ -1417,14 +1432,14 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("Certificate");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Group", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Field", b =>
                 {
-                    b.Navigation("InstituteMembershipGroups");
+                    b.Navigation("InstituteFields");
                 });
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Institute", b =>
                 {
-                    b.Navigation("Groups");
+                    b.Navigation("InstituteFields");
 
                     b.Navigation("InstituteMemberships");
 
@@ -1438,8 +1453,6 @@ namespace SLMS.Persistence.Migrations
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteMembership", b =>
                 {
                     b.Navigation("Classifications");
-
-                    b.Navigation("InstituteMembershipGroups");
                 });
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Room", b =>

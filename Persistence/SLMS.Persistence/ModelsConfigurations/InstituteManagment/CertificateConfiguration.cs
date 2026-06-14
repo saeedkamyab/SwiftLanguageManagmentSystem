@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SLMS.ApplicationCore.Domain.InstituteManagement;
 
-namespace SLMS.Persistence.ModelsConfigurations.UserManagment
+namespace SLMS.Persistence.ModelsConfigurations.InstituteManagment
 {
     public class CertificateConfiguration : IEntityTypeConfiguration<Certificate>
     {
@@ -11,9 +11,7 @@ namespace SLMS.Persistence.ModelsConfigurations.UserManagment
  
             certificate.HasOne(c => c.Classification)
                 .WithOne(cl => cl.Certificate)
-                .HasForeignKey<Certificate>(c => c.ClassificationId)
-;
-
+                .HasForeignKey<Certificate>(c => c.ClassificationId);
         }
     }
 }

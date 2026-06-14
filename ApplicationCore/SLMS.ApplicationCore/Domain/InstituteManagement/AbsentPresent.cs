@@ -8,7 +8,7 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
         public bool Status { get; set; }
         public DateTime Date { get; set; }
         public int SessionNumber { get; set; }
-        public string Description { get; set; } = string.Empty;
+        public string? Description { get; set; } 
 
         
         public Guid ClassifictionId { get; set; }

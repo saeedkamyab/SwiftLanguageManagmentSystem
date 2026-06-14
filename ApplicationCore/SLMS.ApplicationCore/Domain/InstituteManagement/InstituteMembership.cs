@@ -13,7 +13,6 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
         public Domain.User.User User { get; set; } = null!;
 
         public ICollection<Classification> Classifications { get; set; } = [];
-        public ICollection<InstituteMembershipGroup> InstituteMembershipGroups { get; set; } = [];
 
     }
 }

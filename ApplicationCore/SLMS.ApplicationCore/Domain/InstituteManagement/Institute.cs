@@ -7,14 +7,13 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
     {
 
         public string Title { get; set; } = string.Empty;
-        public string Fields { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
+        public string? Description { get; set; }
 
 
         public ICollection<InstituteMembership> InstituteMemberships { get; set; } = [];
         public ICollection<MembershipRequest> MembershipRequests { get; set; } = [];
-        public ICollection<Group> Groups { get; set; } = [];
         public ICollection<Level> Levels { get; set; } = [];
         public ICollection<Room> Rooms { get; set; } = [];
+        public ICollection<InstituteField> InstituteFields { get; set; } = [];
     }
 }
