@@ -1,4 +1,5 @@
 ﻿using SLMS.Application.Contracts.Identity;
+using SLMS.Application.Contracts.InstituteManagment;
 using SLMS.Application.Contracts.Persistance;
 using SLMS.Application.Contracts.SocialNetwork;
 using SLMS.ApplicationCore.Domain.InstituteManagement;
@@ -7,6 +8,7 @@ using SLMS.ApplicationCore.Domain.Messaging;
 using SLMS.ApplicationCore.Domain.SocialNetwork;
 using SLMS.Persistence.Repositories.Common;
 using SLMS.Persistence.Repositories.Identity;
+using SLMS.Persistence.Repositories.InstituteManagment;
 using SLMS.Persistence.Repositories.SocialNetwork;
 
 namespace SLMS.Persistence
@@ -44,7 +46,7 @@ namespace SLMS.Persistence
         private readonly Lazy<IBaseRepository<Institute>> _InstituteRepository;
         private readonly Lazy<IBaseRepository<InstituteMembership>> _InstituteMembershipRepository;
         private readonly Lazy<IBaseRepository<Level>> _LevelRepository;
-        private readonly Lazy<IBaseRepository<MembershipRequest>> _MembershipRequestRepository;
+        private readonly Lazy<IMembershipRequestRepository> _MembershipRequestRepository;
         private readonly Lazy<IBaseRepository<Room>> _RoomRepository;
         private readonly Lazy<IBaseRepository<TermCourse>> _TermCourseRepository;
         private readonly Lazy<IBaseRepository<Category>> _CategoryRepository;
@@ -86,7 +88,7 @@ namespace SLMS.Persistence
         public IBaseRepository<Institute> InstituteRepository => _InstituteRepository.Value;
         public IBaseRepository<InstituteMembership> InstituteMembershipRepository => _InstituteMembershipRepository.Value;
         public IBaseRepository<Level> LevelRepository => _LevelRepository.Value;
-        public IBaseRepository<MembershipRequest> MembershipRequestRepository => _MembershipRequestRepository.Value;
+        public IMembershipRequestRepository MembershipRequestRepository => _MembershipRequestRepository.Value;
         public IBaseRepository<Room> RoomRepository => _RoomRepository.Value;
         public IBaseRepository<TermCourse> TermCourseRepository => _TermCourseRepository.Value;
         public IBaseRepository<Category> CategoryRepository => _CategoryRepository.Value;
@@ -131,7 +133,7 @@ namespace SLMS.Persistence
             _InstituteRepository = new Lazy<IBaseRepository<Institute>>(() => new BaseRepository<Institute>(_context));
             _InstituteMembershipRepository = new Lazy<IBaseRepository<InstituteMembership>>(() => new BaseRepository<InstituteMembership>(_context));
             _LevelRepository = new Lazy<IBaseRepository<Level>>(() => new BaseRepository<Level>(_context));
-            _MembershipRequestRepository = new Lazy<IBaseRepository<MembershipRequest>>(() => new BaseRepository<MembershipRequest>(_context));
+            _MembershipRequestRepository = new Lazy<IMembershipRequestRepository>(() => new MembershipRequestRepository(_context));
             _RoomRepository = new Lazy<IBaseRepository<Room>>(() => new BaseRepository<Room>(_context));
             _TermCourseRepository = new Lazy<IBaseRepository<TermCourse>>(() => new BaseRepository<TermCourse>(_context));
             _CategoryRepository = new Lazy<IBaseRepository<Category>>(() => new BaseRepository<Category>(_context));

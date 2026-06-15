@@ -400,6 +400,9 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateTime>("RequestDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<byte>("Status")
+                        .HasColumnType("smallint");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 

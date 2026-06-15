@@ -31,7 +31,7 @@ namespace SLMS.Application.Features.SocialNetwork.Posts.Commands
             if (request.MediaAssetId.HasValue)
             {
                 var mediaAsset = await _unitOfWork.MediaAssetRepository
-                      .GetByIdAsync(request.MediaAssetId.Value);
+                      .GetByIdAsync(request.MediaAssetId.Value,cancellationToken);
 
                 if (mediaAsset is null)
                     throw new NotFoundException("MediaAsset not found", request.MediaAssetId.Value);

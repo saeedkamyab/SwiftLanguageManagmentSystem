@@ -3,15 +3,11 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SLMS.Application.Features.InstituteManagement.Institute.Commands;
-using SLMS.Application.Features.SocialNetwork.Posts.Commands;
-using SLMS.Application.Features.SocialNetwork.Posts.Queries;
 using SLMS.Dto.InstituteManagement;
-using SLMS.Dto.SocialNetwork.Post;
-using SLMS.Shared;
 
 namespace SLMS.Api.Controllers.v1.InstituteManagement
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class InstituteController : ControllerBase

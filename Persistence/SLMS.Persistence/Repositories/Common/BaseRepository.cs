@@ -48,6 +48,10 @@ namespace SLMS.Persistence.Repositories.Common
             return _dbSet.Where(x => !x.IsDeleted)
                 .AsNoTracking();
         }
+        public async Task<bool> ExistsAsync(Guid id, CancellationToken cancellationToken = default)
+        {
+            return await _dbSet.AnyAsync(x => x.Id == id);
+        }
         public virtual async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken)
         {
             await _dbSet.AddAsync(entity, cancellationToken);

@@ -79,13 +79,13 @@ namespace SLMS.Persistence
                 {
                     entry.Entity.IsDeleted = false;
                     entry.Entity.CreateDate = DateTime.UtcNow;
-                    //if (_currentUserService.Id.HasValue)
-                    //    entry.Entity.CreatedById = _currentUserService.Id.Value;
+                    if (_currentUserService.Id.HasValue)
+                        entry.Entity.CreatedById = _currentUserService.Id.Value;
                 }
                 else if (entry.State == EntityState.Modified)
                 {
                     entry.Entity.LastUpdate = DateTime.UtcNow;
-                    //entry.Entity.LastUpdatedById = _currentUserService.Id;
+                    entry.Entity.LastUpdatedById = _currentUserService.Id;
                 }
             }
         }

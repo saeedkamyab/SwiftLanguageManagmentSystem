@@ -20,7 +20,7 @@ namespace SLMS.Application.Features.Users.Queries
 
         public async Task<UserDto> Handle(GetUserRequest request, CancellationToken cancellationToken)
         {
-            var user = await _unitofwork.UserRepository.GetByIdAsync(request.Id);
+            var user = await _unitofwork.UserRepository.GetByIdAsync(request.Id, cancellationToken);
             if (user == null)
                 throw new NotFoundException(nameof(User), request.Id);
 

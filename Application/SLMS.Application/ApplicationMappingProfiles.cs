@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SLMS.Application.Features.Auth.Commands;
 using SLMS.Application.Features.InstituteManagement.Institute.Commands;
+using SLMS.Application.Features.InstituteManagement.MembershipRequest.Commands;
 using SLMS.Application.Features.SocialNetwork.Comments.Commands;
 using SLMS.Application.Features.SocialNetwork.Posts.Commands;
 using SLMS.Application.Features.SocialNetwork.Posts.Queries;
@@ -73,6 +74,10 @@ namespace SLMS.Application
             #region  Institute Managment
             CreateMap<CreateInstituteCommand, Institute>();
             CreateMap<Institute, InstituteCommandResponse>();
+
+
+            CreateMap<CreateMembershipRequestCommand, MembershipRequest>();
+            CreateMap<MembershipRequest, MembershipRequestCommandResponse>();
 
             #endregion
 

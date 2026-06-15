@@ -1,4 +1,5 @@
 ﻿using SLMS.Application.Contracts.Identity;
+using SLMS.Application.Contracts.InstituteManagment;
 using SLMS.Application.Contracts.SocialNetwork;
 using SLMS.ApplicationCore.Domain.InstituteManagement;
 using SLMS.ApplicationCore.Domain.Media;
@@ -35,7 +36,7 @@ namespace SLMS.Application.Contracts.Persistance
         IBaseRepository<Institute> InstituteRepository { get;  }
         IBaseRepository<InstituteMembership> InstituteMembershipRepository { get;  }
         IBaseRepository<Level> LevelRepository { get; }
-        IBaseRepository<MembershipRequest> MembershipRequestRepository { get;  }
+        IMembershipRequestRepository MembershipRequestRepository { get;  }
         IBaseRepository<Room> RoomRepository { get; }
         IBaseRepository<TermCourse> TermCourseRepository { get; }
         IBaseRepository<Category> CategoryRepository { get; }

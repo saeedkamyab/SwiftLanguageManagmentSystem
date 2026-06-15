@@ -25,4 +25,10 @@
         Passed = 1,
         Failed = 2,
     }
+    public enum MembershipRequestStatus : byte
+    {
+        Pending = 0,
+        Accepted = 1,
+        Rejected = 2,
+    }
 }

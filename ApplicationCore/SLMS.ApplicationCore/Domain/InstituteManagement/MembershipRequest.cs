@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using SLMS.Shared.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SLMS.ApplicationCore.Domain.InstituteManagement
 {
@@ -10,5 +11,6 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
         public Domain.User.User User { get; set; } = null!;
         public Guid InstituteId { get; set; }
         public Institute Institute { get; set; } = null!;
+        public MembershipRequestStatus Status { get; set; }
     }
 }
