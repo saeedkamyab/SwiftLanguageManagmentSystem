@@ -11,5 +11,9 @@
         {
             
         }
+        public NotFoundException(string message)
+        {
+
+        }
     }
 }

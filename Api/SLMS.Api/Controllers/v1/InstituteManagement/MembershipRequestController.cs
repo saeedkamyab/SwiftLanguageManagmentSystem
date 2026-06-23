@@ -15,7 +15,7 @@ namespace SLMS.Api.Controllers.v1.InstituteManagement
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
-        public MembershipRequestController(IMediator mediator,IMapper mapper)
+        public MembershipRequestController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
             _mapper = mapper;
@@ -29,7 +29,27 @@ namespace SLMS.Api.Controllers.v1.InstituteManagement
             return Ok(response);
         }
 
-     
+        [HttpPost("{id}/approve")]
+        public async Task<ActionResult> ApproveRequest(Guid id, ApproveMembershipRequestDto approveMembership)
+        {
+            var command = new ApproveMembershipRequestCommand
+            {
+                Id=id,
+                MemberType=approveMembership.MemberType,
+            };
+            var response= await _mediator.Send(command);
+            return Ok(response);
+        }
+        [HttpPost("{id}/reject")]
+        public async Task<ActionResult> RejectRequest(Guid id)
+        {
+            var command = new RejectMembershipRequestCommand
+            {
+                Id = id
+            };
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
 
     }
 }

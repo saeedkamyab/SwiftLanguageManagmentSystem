@@ -34,7 +34,7 @@ namespace SLMS.Application.Contracts.Persistance
         IBaseRepository<Certificate> CertificateRepository { get; }
         IBaseRepository<Classification> ClassificationRepository { get;}
         IBaseRepository<Institute> InstituteRepository { get;  }
-        IBaseRepository<InstituteMembership> InstituteMembershipRepository { get;  }
+        IInstituteMembershipRepository InstituteMembershipRepository { get;  }
         IBaseRepository<Level> LevelRepository { get; }
         IMembershipRequestRepository MembershipRequestRepository { get;  }
         IBaseRepository<Room> RoomRepository { get; }

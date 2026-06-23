@@ -41,6 +41,9 @@ namespace SLMS.Api
             //----------------------User---------------------------------
             CreateMap<CreateInstitudeDto, CreateInstituteCommand>();
             CreateMap<CreateMembershipRequestDto, CreateMembershipRequestCommand>();
+            
+            
+            CreateMap<ApproveMembershipRequestDto, ApproveMembershipRequestCommand>();
 
             #endregion
         }

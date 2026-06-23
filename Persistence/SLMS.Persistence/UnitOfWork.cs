@@ -44,7 +44,7 @@ namespace SLMS.Persistence
         private readonly Lazy<IBaseRepository<Certificate>> _CertificateRepository;
         private readonly Lazy<IBaseRepository<Classification>> _ClassificationRepository;
         private readonly Lazy<IBaseRepository<Institute>> _InstituteRepository;
-        private readonly Lazy<IBaseRepository<InstituteMembership>> _InstituteMembershipRepository;
+        private readonly Lazy<IInstituteMembershipRepository> _InstituteMembershipRepository;
         private readonly Lazy<IBaseRepository<Level>> _LevelRepository;
         private readonly Lazy<IMembershipRequestRepository> _MembershipRequestRepository;
         private readonly Lazy<IBaseRepository<Room>> _RoomRepository;
@@ -86,7 +86,7 @@ namespace SLMS.Persistence
         public IBaseRepository<Certificate> CertificateRepository => _CertificateRepository.Value;
         public IBaseRepository<Classification> ClassificationRepository => _ClassificationRepository.Value;
         public IBaseRepository<Institute> InstituteRepository => _InstituteRepository.Value;
-        public IBaseRepository<InstituteMembership> InstituteMembershipRepository => _InstituteMembershipRepository.Value;
+        public IInstituteMembershipRepository InstituteMembershipRepository => _InstituteMembershipRepository.Value;
         public IBaseRepository<Level> LevelRepository => _LevelRepository.Value;
         public IMembershipRequestRepository MembershipRequestRepository => _MembershipRequestRepository.Value;
         public IBaseRepository<Room> RoomRepository => _RoomRepository.Value;
@@ -131,7 +131,7 @@ namespace SLMS.Persistence
             _CertificateRepository = new Lazy<IBaseRepository<Certificate>>(() => new BaseRepository<Certificate>(_context));
             _ClassificationRepository = new Lazy<IBaseRepository<Classification>>(() => new BaseRepository<Classification>(_context));
             _InstituteRepository = new Lazy<IBaseRepository<Institute>>(() => new BaseRepository<Institute>(_context));
-            _InstituteMembershipRepository = new Lazy<IBaseRepository<InstituteMembership>>(() => new BaseRepository<InstituteMembership>(_context));
+            _InstituteMembershipRepository = new Lazy<IInstituteMembershipRepository>(() => new InstituteMembershipRepository(_context));
             _LevelRepository = new Lazy<IBaseRepository<Level>>(() => new BaseRepository<Level>(_context));
             _MembershipRequestRepository = new Lazy<IMembershipRequestRepository>(() => new MembershipRequestRepository(_context));
             _RoomRepository = new Lazy<IBaseRepository<Room>>(() => new BaseRepository<Room>(_context));

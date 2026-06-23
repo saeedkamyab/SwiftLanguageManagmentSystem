@@ -78,6 +78,11 @@ namespace SLMS.Application
 
             CreateMap<CreateMembershipRequestCommand, MembershipRequest>();
             CreateMap<MembershipRequest, MembershipRequestCommandResponse>();
+            
+            
+            CreateMap<InstituteMembership, MembershipRequestCommandResponse>();
+
+
 
             #endregion
 
