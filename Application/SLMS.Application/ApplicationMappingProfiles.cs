@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using SLMS.Application.Features.Auth.Commands;
 using SLMS.Application.Features.InstituteManagement.Institute.Commands;
+using SLMS.Application.Features.InstituteManagement.Level.Commands;
+using SLMS.Application.Features.InstituteManagement.Level.Queries;
 using SLMS.Application.Features.InstituteManagement.MembershipRequest.Commands;
 using SLMS.Application.Features.SocialNetwork.Comments.Commands;
 using SLMS.Application.Features.SocialNetwork.Posts.Commands;
@@ -45,6 +47,14 @@ namespace SLMS.Application
              .ForMember(postSummary => postSummary.IsLikedByCurrentUser, opt => opt.Ignore())
              .ForMember(postSummary => postSummary.IsBookmarkedByCurrentUser, opt => opt.Ignore());
 
+
+            //----------------------PostMedia---------------------------------
+            CreateMap<PostMedia, PostMediaDto>()
+      .ForMember(d => d.MediaAsset, o => o.MapFrom(s => s.MediaAsset));
+            CreateMap<PostMediaDto, PostMedia>();
+
+
+            //----------------------Post Command---------------------------------
             CreateMap<CreatePostCommand, Post>();
             CreateMap<UpdatePostCommand, Post>();
             CreateMap<Post, PostCommandResponse>();
@@ -53,14 +63,8 @@ namespace SLMS.Application
 
 
 
-            CreateMap<CreateCommentCommand, Comment>();
-            
-            
-         
-            CreateMap<PostMedia, PostMediaDto>()
-      .ForMember(d => d.MediaAsset, o => o.MapFrom(s => s.MediaAsset));
-
-            CreateMap<PostMediaDto, PostMedia>();
+            //----------------------Command---------------------------------
+            CreateMap<CreateCommentCommand, Comment>();  
             CreateMap<Comment, CommentDto>();
 
             #endregion
@@ -71,16 +75,26 @@ namespace SLMS.Application
             CreateMap<CreateMediaAssetDto, MediaAsset>();
 
             #endregion
+
             #region  Institute Managment
+
+            //---------------Institute----------------------------
             CreateMap<CreateInstituteCommand, Institute>();
             CreateMap<Institute, InstituteCommandResponse>();
 
 
+            //---------------Institute Membership----------------------------
             CreateMap<CreateMembershipRequestCommand, MembershipRequest>();
             CreateMap<MembershipRequest, MembershipRequestCommandResponse>();
-            
-            
             CreateMap<InstituteMembership, MembershipRequestCommandResponse>();
+           
+            
+
+            //---------------Level----------------------------
+            CreateMap<Level, LevelQueryResponse>();
+            CreateMap<CreateLevelCommand, Level>();
+            CreateMap<UpdateLevelCommand, Level>();
+            CreateMap<Level, LevelCommandResponse>();
 
 
 

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SLMS.Application.Features.Auth.Commands;
 using SLMS.Application.Features.InstituteManagement.Institute.Commands;
+using SLMS.Application.Features.InstituteManagement.Level.Commands;
 using SLMS.Application.Features.InstituteManagement.MembershipRequest.Commands;
 using SLMS.Application.Features.SocialNetwork.Comments.Commands;
 using SLMS.Application.Features.SocialNetwork.Posts.Commands;
@@ -38,12 +39,17 @@ namespace SLMS.Api
             #endregion
 
             #region  InstituteManagement
-            //----------------------User---------------------------------
+            //----------------------Instutite---------------------------------
             CreateMap<CreateInstitudeDto, CreateInstituteCommand>();
-            CreateMap<CreateMembershipRequestDto, CreateMembershipRequestCommand>();
-            
-            
+
+            //----------------------Instutite Membership---------------------------------
+            CreateMap<CreateMembershipRequestDto, CreateMembershipRequestCommand>();               
             CreateMap<ApproveMembershipRequestDto, ApproveMembershipRequestCommand>();
+
+            //----------------------Level---------------------------------
+            CreateMap<CreateLevelDto, CreateLevelCommand>();
+            CreateMap<UpdateLevelDto, UpdateLevelCommand>();
+
 
             #endregion
         }
