@@ -11,7 +11,6 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
         public Institute Institute { get; set; } = null!;
         public Guid UserId { get; set; }
         public Domain.User.User User { get; set; } = null!;
-
         public ICollection<Classification> Classifications { get; set; } = [];
 
     }

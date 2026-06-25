@@ -6,6 +6,8 @@ using SLMS.Application.Features.InstituteManagement.Level.Queries;
 using SLMS.Application.Features.InstituteManagement.MembershipRequest.Commands;
 using SLMS.Application.Features.InstituteManagement.Room.Commands;
 using SLMS.Application.Features.InstituteManagement.Room.Queries;
+using SLMS.Application.Features.InstituteManagement.TermCourse.Commands;
+using SLMS.Application.Features.InstituteManagement.TermCourse.Queries;
 using SLMS.Application.Features.SocialNetwork.Comments.Commands;
 using SLMS.Application.Features.SocialNetwork.Posts.Commands;
 using SLMS.Application.Features.SocialNetwork.Posts.Queries;
@@ -104,6 +106,12 @@ namespace SLMS.Application
             CreateMap<CreateRoomCommand, Room>();
             CreateMap<UpdateRoomCommand, Room>();
             CreateMap<Room, RoomCommandResponse>();
+
+            //---------------TermCourse----------------------------
+            CreateMap<TermCourse, TermCourseQueryResponse>();
+            CreateMap<CreateTermCourseCommand, TermCourse>();
+            CreateMap<UpdateTermCourseCommand, TermCourse>();
+            CreateMap<TermCourse, TermCourseCommandResponse>();
 
 
             #endregion

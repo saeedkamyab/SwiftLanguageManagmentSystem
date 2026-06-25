@@ -17,6 +17,8 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
         public Institute? Institute { get; set; }
         public Guid RoomId { get; set; }
         public Room Room { get; set; } = null!;
+        public Guid TeacherId { get; set; }
+        public InstituteMembership Teacher { get; set; } = null!;
 
         public ICollection<TermCourseSessionDay> TermCourseSessionDays { get; set; } = [];
         public ICollection<Classification> Classifications { get; set; } = [];

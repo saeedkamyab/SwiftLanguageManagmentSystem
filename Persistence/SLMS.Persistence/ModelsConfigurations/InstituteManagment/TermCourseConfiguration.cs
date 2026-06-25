@@ -11,18 +11,18 @@ namespace SLMS.Persistence.ModelsConfigurations.InstituteManagment
 
             termCourse.HasOne(tc => tc.Level)
                 .WithMany()
-                .HasForeignKey(tc => tc.LevelId)
-;
+                .HasForeignKey(tc => tc.LevelId);
             termCourse.HasOne(tc => tc.Institute)
              .WithMany()
              .HasForeignKey(tc => tc.InstituteId);
 
             termCourse.HasOne(tc => tc.Room)
           .WithMany(r => r.TermCourses)
-          .HasForeignKey(tc => tc.RoomId)
+          .HasForeignKey(tc => tc.RoomId);
 
-
-;
+            termCourse.HasOne(tc => tc.Teacher)
+             .WithMany()
+             .HasForeignKey(tc => tc.TeacherId);
         }
     }
 }

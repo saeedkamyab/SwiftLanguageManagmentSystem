@@ -6,8 +6,6 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
     public class Classification : BaseEntity
     {
         public string Title { get; set; } = string.Empty;
-       
-
         public Guid TermCourseId {  get; set; }
         public TermCourse? TermCourse { get; set; }
         public Guid ClassificationMemberId {  get; set; }//InstituteMembershipId

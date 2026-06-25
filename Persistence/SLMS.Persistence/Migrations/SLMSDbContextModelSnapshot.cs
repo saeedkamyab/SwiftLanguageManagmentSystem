@@ -500,6 +500,9 @@ namespace SLMS.Persistence.Migrations
                     b.Property<TimeOnly>("StartTime")
                         .HasColumnType("time without time zone");
 
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
@@ -511,6 +514,8 @@ namespace SLMS.Persistence.Migrations
                     b.HasIndex("LevelId");
 
                     b.HasIndex("RoomId");
+
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("TermCourse", "InstituteManagement");
                 });
@@ -1274,11 +1279,19 @@ namespace SLMS.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteMembership", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Institute");
 
                     b.Navigation("Level");
 
                     b.Navigation("Room");
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.TermCourseSessionDay", b =>
