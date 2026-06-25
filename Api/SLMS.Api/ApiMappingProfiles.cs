@@ -3,6 +3,7 @@ using SLMS.Application.Features.Auth.Commands;
 using SLMS.Application.Features.InstituteManagement.Institute.Commands;
 using SLMS.Application.Features.InstituteManagement.Level.Commands;
 using SLMS.Application.Features.InstituteManagement.MembershipRequest.Commands;
+using SLMS.Application.Features.InstituteManagement.Room.Commands;
 using SLMS.Application.Features.SocialNetwork.Comments.Commands;
 using SLMS.Application.Features.SocialNetwork.Posts.Commands;
 using SLMS.Dto.InstituteManagement;
@@ -50,6 +51,10 @@ namespace SLMS.Api
             CreateMap<CreateLevelDto, CreateLevelCommand>();
             CreateMap<UpdateLevelDto, UpdateLevelCommand>();
 
+
+            //----------------------Room---------------------------------
+            CreateMap<CreateRoomDto, CreateRoomCommand>();
+            CreateMap<UpdateRoomDto, UpdateRoomCommand>();
 
             #endregion
         }
