@@ -20,6 +20,8 @@ namespace SLMS.Persistence.ModelsConfigurations.InstituteManagment
             termCourse.HasOne(tc => tc.Room)
           .WithMany(r => r.TermCourses)
           .HasForeignKey(tc => tc.RoomId)
+
+
 ;
         }
     }

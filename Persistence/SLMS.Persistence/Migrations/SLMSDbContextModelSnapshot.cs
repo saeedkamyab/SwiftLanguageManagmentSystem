@@ -470,6 +470,9 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateOnly>("EndDate")
                         .HasColumnType("date");
 
+                    b.Property<TimeOnly>("EndTime")
+                        .HasColumnType("time without time zone");
+
                     b.Property<Guid>("InstituteId")
                         .HasColumnType("uuid");
 
@@ -494,11 +497,12 @@ namespace SLMS.Persistence.Migrations
                     b.Property<DateOnly>("StartDate")
                         .HasColumnType("date");
 
-                    b.Property<TimeOnly>("Time")
+                    b.Property<TimeOnly>("StartTime")
                         .HasColumnType("time without time zone");
 
-                    b.Property<byte>("WeekDay")
-                        .HasColumnType("smallint");
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -509,6 +513,40 @@ namespace SLMS.Persistence.Migrations
                     b.HasIndex("RoomId");
 
                     b.ToTable("TermCourse", "InstituteManagement");
+                });
+
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.TermCourseSessionDay", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("LastUpdate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TermCourseId")
+                        .HasColumnType("uuid");
+
+                    b.Property<byte>("WeekDay")
+                        .HasColumnType("smallint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TermCourseId");
+
+                    b.ToTable("TermCourseSessionDay", "InstituteManagement");
                 });
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.Media.MediaAsset", b =>
@@ -1243,6 +1281,17 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("Room");
                 });
 
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.TermCourseSessionDay", b =>
+                {
+                    b.HasOne("SLMS.ApplicationCore.Domain.InstituteManagement.TermCourse", "TermCourse")
+                        .WithMany("TermCourseSessionDays")
+                        .HasForeignKey("TermCourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TermCourse");
+                });
+
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.Messaging.ChatMessageMedia", b =>
                 {
                     b.HasOne("SLMS.ApplicationCore.Domain.Media.MediaAsset", "MediaAsset")
@@ -1466,6 +1515,8 @@ namespace SLMS.Persistence.Migrations
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.TermCourse", b =>
                 {
                     b.Navigation("Classifications");
+
+                    b.Navigation("TermCourseSessionDays");
                 });
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.Messaging.Conversation", b =>

@@ -32,6 +32,7 @@ namespace SLMS.Persistence
         public DbSet<MembershipRequest> MembershipRequests { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<TermCourse> TermCourses { get; set; }
+        public DbSet<TermCourseSessionDay> TermCourseSessionDays { get; set; }
         #endregion
 
         #region SocialNetwork
