@@ -46,16 +46,16 @@ namespace SLMS.Api.Controllers.v1.InstituteManagement
             return Ok(result);
         }
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] CreateTermCourseDto level)
+        public async Task<ActionResult> Create([FromBody] CreateTermCourseDto termCourse)
         {
-            var command = _mapper.Map<CreateTermCourseCommand>(level);
+            var command = _mapper.Map<CreateTermCourseCommand>(termCourse);
             var response = await _mediator.Send(command);
             return Ok(response);
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(Guid id, [FromBody]UpdateTermCourseDto level)
+        public async Task<ActionResult> Update(Guid id, [FromBody]UpdateTermCourseDto termCourse)
         {
-            var command = _mapper.Map<UpdateTermCourseCommand>(level);
+            var command = _mapper.Map<UpdateTermCourseCommand>(termCourse);
             command.Id = id;
             var response = await _mediator.Send(command);
             return Ok(response);

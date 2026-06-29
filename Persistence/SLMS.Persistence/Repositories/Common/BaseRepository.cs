@@ -52,6 +52,11 @@ namespace SLMS.Persistence.Repositories.Common
         {
             return await _dbSet.AnyAsync(x => x.Id == id);
         }
+        public async Task AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+        {
+            if (entities == null) throw new ArgumentNullException(nameof(entities));
+            await _dbSet.AddRangeAsync(entities, cancellationToken);
+        }
         public virtual async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken)
         {
             await _dbSet.AddAsync(entity, cancellationToken);

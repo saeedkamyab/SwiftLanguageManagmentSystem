@@ -110,7 +110,9 @@ namespace SLMS.Application
             //---------------TermCourse----------------------------
             CreateMap<TermCourse, TermCourseQueryResponse>();
             CreateMap<CreateTermCourseCommand, TermCourse>();
-            CreateMap<UpdateTermCourseCommand, TermCourse>();
+            CreateMap<UpdateTermCourseCommand, TermCourse>()
+    .ForMember(x => x.Id, opt => opt.Ignore())
+    .ForMember(x => x.TermCourseSessionDays, opt => opt.Ignore());
             CreateMap<TermCourse, TermCourseCommandResponse>();
 
 

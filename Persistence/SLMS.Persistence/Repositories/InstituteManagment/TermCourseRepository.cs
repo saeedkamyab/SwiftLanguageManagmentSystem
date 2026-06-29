@@ -26,7 +26,8 @@ namespace SLMS.Persistence.Repositories.InstituteManagment
             var query = _context.Set<TermCourse>().Where(x =>
                 x.TeacherId == teacherId &&
                 x.StartTime < endTime && x.EndTime > startTime &&
-                x.StartDate <= endDate && x.EndDate >= startDate);
+                x.StartDate <= endDate && x.EndDate >= startDate &&
+                x.IsActive==true);
 
             if (excludeTermCourseId.HasValue)
             {
@@ -49,7 +50,8 @@ namespace SLMS.Persistence.Repositories.InstituteManagment
             var query = _context.Set<TermCourse>().Where(x =>
                            x.RoomId == roomId &&
                            x.StartTime < endTime && x.EndTime > startTime &&
-                           x.StartDate <= endDate && x.EndDate >= startDate);
+                           x.StartDate <= endDate && x.EndDate >= startDate &&
+                           x.IsActive == true);
 
             if (excludeTermCourseId.HasValue)
             {
@@ -60,6 +62,14 @@ namespace SLMS.Persistence.Repositories.InstituteManagment
             var result = await query.SelectMany(x => x.TermCourseSessionDays)
                            .AnyAsync(d => weekDay.Contains(d.WeekDay), cancellationToken);
             return result;
+        }
+
+        public async Task<TermCourse?> GetByIdWithSessionDaysAsync(Guid id, 
+            CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<TermCourse>()
+                .Include(x => x.TermCourseSessionDays)
+                .FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted, cancellationToken);
         }
     }
 

@@ -42,6 +42,7 @@ namespace SLMS.Application.Contracts.Persistance
         IBaseRepository<Category> CategoryRepository { get; }
         IBaseRepository<Field> FieldRepository { get; }
         IBaseRepository<InstituteField> InstituteFieldRepository { get; }
+        IBaseRepository<TermCourseSessionDay> TermCourseSessionDayRepository { get; }
         #endregion
       
         Task<int> CommitAsync(CancellationToken cancellationToken = default);

@@ -3,6 +3,7 @@ using MediatR;
 using SLMS.Application.Contracts.Identity;
 using SLMS.Application.Contracts.Persistance;
 using SLMS.Application.Exceptions;
+using SLMS.ApplicationCore.Domain.InstituteManagement;
 using SLMS.Shared.Enums;
 
 namespace SLMS.Application.Features.InstituteManagement.TermCourse.Commands
@@ -32,10 +33,10 @@ namespace SLMS.Application.Features.InstituteManagement.TermCourse.Commands
                loginedUserMembership.MemberType != MemberType.Founder)
                 throw new UnauthorizedException("شما اجازه پردازش درخواست را ندارید.");
 
-            var teacherMembership= await _unitOfWork.InstituteMembershipRepository.GetUserMembersShipAsync(
-               request.TeacherId, request.InstituteId, cancellationToken) ?? throw new NotFoundException();
+            var teacherMembership = await _unitOfWork.InstituteMembershipRepository.GetByIdAsync(
+               request.TeacherId, cancellationToken) ?? throw new NotFoundException();
 
-            if (teacherMembership.MemberType != MemberType.Teacher)
+            if (teacherMembership.MemberType != MemberType.Teacher && teacherMembership.InstituteId == request.InstituteId)
                 throw new ForbiddenException("کاربر انتخاب شده معلم نمی باشد.");
 
 
@@ -45,7 +46,7 @@ namespace SLMS.Application.Features.InstituteManagement.TermCourse.Commands
                 request.StartDate, request.EndDate,
                 request.WeekDays,
                 cancellationToken);
-           
+
             if (teacherConflict)
                 throw new ConflictException("تداخل کلاسی برای این معلم وجود دارد");
 
@@ -65,6 +66,17 @@ namespace SLMS.Application.Features.InstituteManagement.TermCourse.Commands
 
             var termCourse = _mapper.Map<ApplicationCore.Domain.InstituteManagement.TermCourse>(request);
             var result = await _unitOfWork.TermCourseRepository.AddAsync(termCourse, cancellationToken);
+            result.IsActive = true;
+
+            foreach (var item in request.WeekDays)
+            {
+                await _unitOfWork.TermCourseSessionDayRepository.AddAsync(new TermCourseSessionDay
+                {
+                    TermCourseId = result.Id,
+                    WeekDay = item
+                }, cancellationToken);
+            }
+
 
             await _unitOfWork.CommitAsync();
             return _mapper.Map<TermCourseCommandResponse>(result);
