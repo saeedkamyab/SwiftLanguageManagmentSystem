@@ -79,12 +79,13 @@ if (!Directory.Exists(uploadsPath)) Directory.CreateDirectory(uploadsPath);
 if (app.Environment.IsDevelopment())
 {
     //app.MapOpenApi();
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Api V1");
-    });
+   
 }
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Api V1");
+});
 app.UseHttpsRedirection();
 
 app.UseStaticFiles(new StaticFileOptions
