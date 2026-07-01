@@ -54,5 +54,5 @@ jobs:
       - name: Start IIS Site
         run: |
           Import-Module WebAdministration
-          Start-WebSite -Name "YourSiteName"
+          Start-WebSite -Name "slms"
         shell: powershell
