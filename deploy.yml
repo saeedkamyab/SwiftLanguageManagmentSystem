@@ -1,0 +1,58 @@
+name: Deploy to IIS on Windows Server
+
+# این workflow وقتی فعال می‌شود که روی شاخه‌ی main کد جدید ارسال شود
+on:
+  push:
+    branches: [ Clean_Architecture ]
+
+jobs:
+  build-and-deploy:
+    # اینجا می‌گوییم که می‌خواهیم از رانر شخصی که روی ویندوز تنظیم کردیم استفاده کنیم
+    runs-on: self-hosted
+
+    steps:
+      # مرحله ۱: گرفتن آخرین کد از مخزن
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # مرحله ۲: نصب و تنظیم دات‌نت (اگر روی سرور نصب نیست)
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.x' # نسخه‌ی دات‌نت خود را وارد کنید
+
+      # مرحله ۳: بازیابی وابستگی‌ها (پکیج‌های NuGet)
+      - name: Restore dependencies
+        run: dotnet restore
+
+      # مرحله ۴: ساخت پروژه
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      # مرحله ۵: انتشار (Publish) پروژه برای استقرار
+      - name: Publish
+        run: dotnet publish -c Release -o ./publish --no-build
+
+      # مرحله ۶: متوقف کردن وب‌سایت در IIS
+      - name: Stop IIS Site
+        run: |
+          Import-Module WebAdministration
+          # 'slms' را با نام واقعی سایت خود در IIS عوض کنید
+          Stop-WebSite -Name "slms"
+        shell: powershell
+
+      # مرحله ۷: کپی فایل‌های جدید در پوشه‌ی سایت
+      - name: Deploy files
+        run: |
+          $source = "./publish/*"
+          # آدرس پوشه‌ای که سایت شما در IIS به آن اشاره می‌کند را وارد کنید
+          $destination = "C:\inetpub\wwwroot\slms"
+          Copy-Item -Path $source -Destination $destination -Recurse -Force -Exclude "appsettings*.json"
+        shell: powershell
+
+      # مرحله ۸: راه‌اندازی مجدد وب‌سایت
+      - name: Start IIS Site
+        run: |
+          Import-Module WebAdministration
+          Start-WebSite -Name "YourSiteName"
+        shell: powershell
