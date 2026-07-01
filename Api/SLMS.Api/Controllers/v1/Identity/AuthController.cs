@@ -34,11 +34,11 @@ namespace SLMS.Api.Controllers.v1.Identity
             return Ok(response);
         }
        
-        [Authorize]
-        [HttpGet("test")]
-        public IActionResult Test()
-        {
-            return Ok("Hi Authorized");
-        }
+        //[Authorize]
+        //[HttpGet("test")]
+        //public IActionResult Test()
+        //{
+        //    return Ok("Hi Authorized");
+        //}
     }
 }
