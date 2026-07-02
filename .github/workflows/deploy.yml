@@ -35,7 +35,12 @@ jobs:
        run: |
         robocopy "C:\Deploy\slms" "C:\inetpub\wwwroot\slms" /MIR
         if ($LASTEXITCODE -ge 8) { exit $LASTEXITCODE }
-
+        if ($LASTEXITCODE -lt 8)
+        {
+        exit 0
+        }
+        exit $LASTEXITCODE
+      
      - name: Start IIS
        shell: powershell
        run: |
