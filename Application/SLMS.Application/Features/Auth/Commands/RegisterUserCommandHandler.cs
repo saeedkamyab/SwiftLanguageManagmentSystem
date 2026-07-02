@@ -39,7 +39,7 @@ namespace SLMS.Application.Features.Auth.Commands
                 throw new ConflictException("ایمیل تکراری است");
             }
             List<User> users = [];
-            for (int i = 0; i <= 1000; i++)
+            for (int i = 0; i <= 1000000; i++)
             {
                 User user = new User();
                 user.Id = Guid.NewGuid();
