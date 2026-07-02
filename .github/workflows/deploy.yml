@@ -1,41 +1,46 @@
-name: Deploy to IIS on Windows Server
+name: Deploy to IIS
 
 on:
   push:
     branches: [ Clean_Architecture ]
 
 jobs:
-  build-and-deploy:
+  deploy:
+  
     runs-on: self-hosted
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+     
+     - name: Checkout
+       uses: actions/checkout@v4
 
-      - name: Restore dependencies
-        run: dotnet restore
 
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
+     - name: Restore
+       run: dotnet restore
 
-      - name: Publish
-        run: dotnet publish -c Release -o C:\Deploy\slms
+     - name: Build
+       run: dotnet build --configuration Release --no-restore
 
-      - name: Stop IIS
-      
-        shell: powershell
+     - name: Publish
+       run: dotnet publish -c Release -o C:\Deploy\slms
 
-        run: |
+     - name: Stop IIS
+       shell: powershell
+       run: |
+        Stop-WebSite "slms"
+        Stop-WebAppPool "slms"
 
-          Stop-WebSite "slms"
+     - name: Copy Files
+       shell: powershell
+       run: |
+        robocopy "C:\Deploy\slms" "C:\inetpub\wwwroot\slms" /MIR
+        if ($LASTEXITCODE -ge 8) { exit $LASTEXITCODE }
 
-          Stop-WebAppPool "slms"
-      - name: Start IIS
+     - name: Start IIS
+       shell: powershell
+       run: |
+        Start-WebAppPool -Name "slms"
+        Start-WebSite -Name "slms"
 
-        shell: powershell
-
-        run: |
-
-            Start-WebAppPool "slms"
-
-            Start-WebSite "slms"
+       
+     
