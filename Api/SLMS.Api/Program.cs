@@ -95,7 +95,7 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 
-app.UseMiddleware<GlobalExceptionMiddleware>();
+//app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
