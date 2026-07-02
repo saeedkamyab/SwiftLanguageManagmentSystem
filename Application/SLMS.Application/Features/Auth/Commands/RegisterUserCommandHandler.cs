@@ -3,6 +3,7 @@ using MediatR;
 using SLMS.Application.Contracts.Identity;
 using SLMS.Application.Contracts.Persistance;
 using SLMS.Application.Exceptions;
+using SLMS.ApplicationCore.Domain.User;
 
 namespace SLMS.Application.Features.Auth.Commands
 {
@@ -37,16 +38,17 @@ namespace SLMS.Application.Features.Auth.Commands
             {
                 throw new ConflictException("ایمیل تکراری است");
             }
+            List<User> users = [];
             for (int i = 0; i <= 1000; i++)
             {
-                var user = _mapper.Map<ApplicationCore.Domain.User.User>(request);
+                User user = new User();
                 user.Id = Guid.NewGuid();
                 user.UserName = request.UserName + i;
-                user.Email = $"user{i}@gmail.com";
+                user.Email = $"{request.UserName}{i}@gmail.com";
                 user.PasswordHash = _passwordHasher.HashPassword(request.Password);
-                var result = await _unitOfWork.UserRepository.AddAsync(user, cancellationToken);
-
+                users.Add(user);
             }
+              await _unitOfWork.UserRepository.AddRangeAsync(users, cancellationToken);
             //var user = _mapper.Map<ApplicationCore.Domain.User.User>(request);
             //user.PasswordHash = _passwordHasher.HashPassword(request.Password);
             //var result = await _unitOfWork.UserRepository.AddAsync(user, cancellationToken);
