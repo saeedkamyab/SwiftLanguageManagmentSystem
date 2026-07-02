@@ -19,30 +19,23 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Publish
-        run: dotnet publish -c Release -o ./publish --no-build
+        run: dotnet publish -c Release -o C:\Deploy\slms
 
-      # --- بخش جدید و مطمئن برای استقرار بدون نیاز به IIS Module ---
-      - name: Deploy to IIS
-        run: |
-          # 1. ایجاد فایل app_offline.htm برای خاموش کردن سایت حین آپدیت
-          $sitePath = "C:\inetpub\wwwroot\slms" # آدرس پوشه‌ی سایت خود را اینجا بگذارید
-          $tempPath = "$sitePath\_temp"
-          
-          # ساخت پوشه‌ی موقت
-          New-Item -ItemType Directory -Force -Path $tempPath | Out-Null
-          
-          # کپی فایل‌های جدید به پوشه‌ی موقت (به جز appsettings)
-          Copy-Item -Path "./publish/*" -Destination $tempPath -Recurse -Force -Exclude "appsettings*.json"
-          
-          # حذف محتویات قدیمی پوشه‌ی سایت (به جز پوشه‌ی موقت)
-          Get-ChildItem -Path $sitePath -Exclude "_temp" | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-          
-          # کپی فایل‌های جدید از پوشه‌ی موقت به پوشه‌ی اصلی
-          Copy-Item -Path "$tempPath/*" -Destination $sitePath -Recurse -Force
-          
-          # حذف پوشه‌ی موقت
-          Remove-Item -Path $tempPath -Recurse -Force -ErrorAction SilentlyContinue
-          
-          # 2. پاک کردن فایل app_offline.htm برای روشن شدن مجدد سایت
-          Remove-Item -Path "$sitePath\app_offline.htm" -Force -ErrorAction SilentlyContinue
+      - name: Stop IIS
+      
         shell: powershell
+
+        run: |
+
+          Stop-WebSite "slms"
+
+          Stop-WebAppPool "slms"
+      - name: Start IIS
+
+        shell: powershell
+
+        run: |
+
+            Start-WebAppPool "slms"
+
+            Start-WebSite "slms"
