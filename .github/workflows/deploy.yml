@@ -34,6 +34,7 @@ jobs:
        shell: powershell
        run: |
         robocopy "C:\Deploy\slms" "C:\inetpub\wwwroot\slms" /MIR
+         /XF appsettings.json appsettings.Development.json
         if ($LASTEXITCODE -ge 8) { exit $LASTEXITCODE }
         if ($LASTEXITCODE -lt 8)
         {
