@@ -63,7 +63,7 @@ namespace SLMS.Application.Features.Auth.Commands
                 {
                     Id = Guid.NewGuid(),
                     UserName = $"uass{i}",
-                    Email = $"uass{i}@gmail.com",
+                    Email = $"uass{i}@gmail.com",//
                     PasswordHash = _passwordHasher.HashPassword("12345678")
                 });
 
