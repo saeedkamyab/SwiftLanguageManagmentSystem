@@ -62,8 +62,8 @@ namespace SLMS.Application.Features.Auth.Commands
                 users.Add(new User
                 {
                     Id = Guid.NewGuid(),
-                    UserName = $"uas{i}",
-                    Email = $"uas{i}@gmail.com",
+                    UserName = $"uass{i}",
+                    Email = $"uass{i}@gmail.com",
                     PasswordHash = _passwordHasher.HashPassword("12345678")
                 });
 
