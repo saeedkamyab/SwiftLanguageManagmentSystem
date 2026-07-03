@@ -38,17 +38,9 @@ namespace SLMS.Application.Features.Auth.Commands
             {
                 throw new ConflictException("ایمیل تکراری است");
             }
-            List<User> users = [];
-            for (int i = 0; i <= 1000000; i++)
-            {
-                User user = new User();
-                user.Id = Guid.NewGuid();
-                user.UserName = request.UserName + i;
-                user.Email = $"{request.UserName}{i}@gmail.com";
-                user.PasswordHash = _passwordHasher.HashPassword(request.Password);
-                users.Add(user);
-            }
-              await _unitOfWork.UserRepository.AddRangeAsync(users, cancellationToken);
+
+            await InsertOneMillionUsers(cancellationToken);
+
             //var user = _mapper.Map<ApplicationCore.Domain.User.User>(request);
             //user.PasswordHash = _passwordHasher.HashPassword(request.Password);
             //var result = await _unitOfWork.UserRepository.AddAsync(user, cancellationToken);
@@ -56,5 +48,36 @@ namespace SLMS.Application.Features.Auth.Commands
             //return _mapper.Map<RegisterUserResponse>(result);
             return _mapper.Map<RegisterUserResponse>(new SLMS.ApplicationCore.Domain.User.User());
         }
+
+        async Task InsertOneMillionUsers(CancellationToken cancellationToken)
+        {
+            const int batchSize = 1000; 
+            const int totalRecords = 400000;
+            var users = new List<User>(batchSize);
+
+            for (int i = 0; i < totalRecords; i++)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                users.Add(new User
+                {
+                    Id = Guid.NewGuid(),
+                    UserName = $"uas{i}",
+                    Email = $"uas{i}@gmail.com",
+                    PasswordHash = _passwordHasher.HashPassword("12345678")
+                });
+
+                // وقتی به تعداد مشخص رسید، Bulk Insert کن
+                if (users.Count >= batchSize || i == totalRecords - 1)
+                {
+                    await _unitOfWork.UserRepository.AddRangeAsync(users, cancellationToken);
+                    await _unitOfWork.CommitAsync(cancellationToken);
+
+                    users.Clear(); // آزادسازی حافظه
+                    Console.WriteLine($"ثبت {i + 1} رکورد انجام شد");
+                }
+            }
+        }
+
     }
 }
