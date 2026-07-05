@@ -26,11 +26,11 @@ namespace SLMS.Application.Features.InstituteManagement.TermCourse.Commands
 
             var userId = _currentUser.Id!.Value;
 
-            var loginedUserMembership = await _unitOfWork.InstituteMembershipRepository.GetUserMembersShipAsync(
+            var loginedUserMembership = await _unitOfWork.InstituteMembershipRepository.GetUserMembersShipByUserIdAsync(
                userId, request.InstituteId, cancellationToken) ?? throw new NotFoundException();
 
-            if (loginedUserMembership.MemberType != MemberType.Admin &&
-               loginedUserMembership.MemberType != MemberType.Founder)
+            if (!loginedUserMembership.MembershipRoles.Any(r => r.MemberType == MemberType.Admin) &&
+                !loginedUserMembership.MembershipRoles.Any(r => r.MemberType == MemberType.Founder))
                 throw new UnauthorizedException("شما اجازه پردازش درخواست را ندارید.");
 
             var termCourseEntity = await _unitOfWork.TermCourseRepository.GetByIdWithSessionDaysAsync(request.Id, 
@@ -40,10 +40,10 @@ namespace SLMS.Application.Features.InstituteManagement.TermCourse.Commands
             if (termCourseEntity == null)
                 throw new NotFoundException(nameof(TermCourse), request.Id);
 
-            var teacherMembership = await _unitOfWork.InstituteMembershipRepository.GetByIdAsync(
-               request.TeacherId, cancellationToken) ?? throw new NotFoundException();
+            var teacherMembership = await _unitOfWork.InstituteMembershipRepository.GetUserMembersShipByIdAsync(
+               request.TeacherId,request.InstituteId, cancellationToken) ?? throw new NotFoundException();
 
-            if (teacherMembership.MemberType != MemberType.Teacher && teacherMembership.InstituteId == request.InstituteId)
+            if (!teacherMembership.MembershipRoles.Any(x=>x.MemberType==MemberType.Teacher))
                 throw new ForbiddenException("کاربر انتخاب شده معلم نمی باشد.");
 
             var teacherConflict = await _unitOfWork.TermCourseRepository.HasTeacherConflictAsync(

@@ -26,17 +26,19 @@ namespace SLMS.Application.Features.InstituteManagement.TermCourse.Commands
         {
             var userId = _currentUser.Id!.Value;
 
-            var loginedUserMembership = await _unitOfWork.InstituteMembershipRepository.GetUserMembersShipAsync(
+            var loginedUserMembership = await _unitOfWork.InstituteMembershipRepository.GetUserMembersShipByUserIdAsync(
                userId, request.InstituteId, cancellationToken) ?? throw new NotFoundException();
 
-            if (loginedUserMembership.MemberType != MemberType.Admin &&
-               loginedUserMembership.MemberType != MemberType.Founder)
+            if (!loginedUserMembership.MembershipRoles.Any(r => r.MemberType == MemberType.Admin) &&
+                !loginedUserMembership.MembershipRoles.Any(r => r.MemberType == MemberType.Founder))
                 throw new UnauthorizedException("شما اجازه پردازش درخواست را ندارید.");
 
-            var teacherMembership = await _unitOfWork.InstituteMembershipRepository.GetByIdAsync(
-               request.TeacherId, cancellationToken) ?? throw new NotFoundException();
 
-            if (teacherMembership.MemberType != MemberType.Teacher && teacherMembership.InstituteId == request.InstituteId)
+
+            var teacherMembership = await _unitOfWork.InstituteMembershipRepository.GetUserMembersShipByIdAsync(
+               request.TeacherId, request.InstituteId, cancellationToken) ?? throw new NotFoundException();
+
+            if (!teacherMembership.MembershipRoles.Any(x => x.MemberType == MemberType.Teacher))
                 throw new ForbiddenException("کاربر انتخاب شده معلم نمی باشد.");
 
 

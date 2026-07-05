@@ -27,10 +27,10 @@ namespace SLMS.Application.Features.InstituteManagement.Institute.Commands
 
             var userId = _currentUser.Id!.Value;
             
-            var loginedUserMembership = await _unitOfWork.InstituteMembershipRepository.GetUserMembersShipAsync(
+            var loginedUserMembership = await _unitOfWork.InstituteMembershipRepository.GetUserMembersShipByUserIdAsync(
               userId, request.Id, cancellationToken) ?? throw new NotFoundException();
            
-            if (loginedUserMembership.MemberType != MemberType.Founder)
+            if (!loginedUserMembership.MembershipRoles.Any(r => r.MemberType == MemberType.Founder))
                 throw new UnauthorizedException("شما اجازه پردازش درخواست را ندارید.");
 
             var instituteToUpdate = await _unitOfWork.InstituteRepository.GetByIdAsync(request.Id, cancellationToken) 

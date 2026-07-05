@@ -4,6 +4,7 @@ using SLMS.Application.Contracts.Identity;
 using SLMS.Application.Contracts.Persistance;
 using SLMS.Application.Exceptions;
 using SLMS.ApplicationCore.Domain.InstituteManagement;
+using SLMS.Shared.Enums;
 
 namespace SLMS.Application.Features.InstituteManagement.Institute.Commands
 {
@@ -49,9 +50,15 @@ namespace SLMS.Application.Features.InstituteManagement.Institute.Commands
 
             await _unitOfWork.InstituteMembershipRepository.AddAsync(new InstituteMembership
             {
-                MemberType = Shared.Enums.MemberType.Founder,
                 InstituteId = result.Id,
-                UserId = userId
+                UserId = userId,
+                MembershipRoles = new List<InstituteMembershipRole>
+                {
+                    new InstituteMembershipRole
+                    {
+                       MemberType = MemberType.Founder
+                    }
+                }
             }, cancellationToken);
 
             await _unitOfWork.CommitAsync();

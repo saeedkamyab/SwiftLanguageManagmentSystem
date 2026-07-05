@@ -294,9 +294,6 @@ namespace SLMS.Persistence.Migrations
                     b.Property<Guid?>("LastUpdatedById")
                         .HasColumnType("uuid");
 
-                    b.Property<byte>("MemberType")
-                        .HasColumnType("smallint");
-
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
@@ -307,6 +304,40 @@ namespace SLMS.Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("InstituteMembership", "InstituteManagement");
+                });
+
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteMembershipRole", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("CreatedById")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("InstituteMembershipId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("LastUpdate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LastUpdatedById")
+                        .HasColumnType("uuid");
+
+                    b.Property<byte>("MemberType")
+                        .HasColumnType("smallint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InstituteMembershipId");
+
+                    b.ToTable("InstituteMembershipRole", "InstituteManagement");
                 });
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Level", b =>
@@ -1188,6 +1219,17 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteMembershipRole", b =>
+                {
+                    b.HasOne("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteMembership", "InstituteMembership")
+                        .WithMany("MembershipRoles")
+                        .HasForeignKey("InstituteMembershipId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InstituteMembership");
+                });
+
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Level", b =>
                 {
                     b.HasOne("SLMS.ApplicationCore.Domain.InstituteManagement.Institute", "Institute")
@@ -1483,6 +1525,8 @@ namespace SLMS.Persistence.Migrations
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteMembership", b =>
                 {
                     b.Navigation("Classifications");
+
+                    b.Navigation("MembershipRoles");
                 });
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Room", b =>

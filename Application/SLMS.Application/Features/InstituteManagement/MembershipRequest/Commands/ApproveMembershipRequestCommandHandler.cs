@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using SLMS.Application.Contracts.Identity;
 using SLMS.Application.Contracts.Persistance;
 using SLMS.Application.Exceptions;
@@ -34,14 +33,14 @@ namespace SLMS.Application.Features.InstituteManagement.MembershipRequest.Comman
             if (membershipRequest.Status != MembershipRequestStatus.Pending)
                 throw new ConflictException("درخواست قبلا بررسی شده است.");
 
-            var loginedUserMembership = await _unitOfWork.InstituteMembershipRepository.GetUserMembersShipAsync(
+            var loginedUserMembership = await _unitOfWork.InstituteMembershipRepository.GetUserMembersShipByUserIdAsync(
                 userId, membershipRequest.InstituteId, cancellationToken) ?? throw new NotFoundException();
 
-            if (loginedUserMembership.MemberType != MemberType.Admin &&
-                loginedUserMembership.MemberType != MemberType.Founder)
+            if (!loginedUserMembership.MembershipRoles.Any(r => r.MemberType == MemberType.Admin) &&
+                !loginedUserMembership.MembershipRoles.Any(r => r.MemberType == MemberType.Founder))
                 throw new UnauthorizedException("شما اجازه پردازش درخواست را ندارید.");
 
-            var requestedUserMembership = await _unitOfWork.InstituteMembershipRepository.GetUserMembersShipAsync(
+            var requestedUserMembership = await _unitOfWork.InstituteMembershipRepository.GetUserMembersShipByUserIdAsync(
                 membershipRequest.UserId, membershipRequest.InstituteId, cancellationToken);
 
             if (requestedUserMembership != null)
@@ -50,9 +49,15 @@ namespace SLMS.Application.Features.InstituteManagement.MembershipRequest.Comman
             var result = await _unitOfWork.InstituteMembershipRepository.AddAsync(
                 new ApplicationCore.Domain.InstituteManagement.InstituteMembership
                 {
-                    MemberType = request.MemberType,
                     InstituteId = membershipRequest.InstituteId,
-                    UserId = membershipRequest.UserId
+                    UserId = membershipRequest.UserId,
+                    MembershipRoles = new List<ApplicationCore.Domain.InstituteManagement.InstituteMembershipRole>
+                    {
+                        new ApplicationCore.Domain.InstituteManagement.InstituteMembershipRole
+                        {
+                            MemberType = request.MemberType
+                        }
+                    }
                 }, cancellationToken);
 
             membershipRequest.Status = MembershipRequestStatus.Accepted;

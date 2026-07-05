@@ -21,4 +21,9 @@
     <ProjectReference Include="..\..\Dto\SLMS.Dto\SLMS.Dto.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\InstituteManagement\Membership\Commands\" />
+    <Folder Include="Features\InstituteManagement\Membership\Queries\" />
+  </ItemGroup>
+
 </Project>

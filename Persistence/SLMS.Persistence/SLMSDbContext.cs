@@ -28,6 +28,7 @@ namespace SLMS.Persistence
         public DbSet<Classification> Classifications { get; set; }
         public DbSet<Institute> Institutes { get; set; }
         public DbSet<InstituteMembership> InstituteMemberships { get; set; }
+        public DbSet<InstituteMembershipRole> InstituteMembershipRoles { get; set; }
         public DbSet<Level> Levels { get; set; }
         public DbSet<MembershipRequest> MembershipRequests { get; set; }
         public DbSet<Room> Rooms { get; set; }
