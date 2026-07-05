@@ -87,12 +87,20 @@ namespace SLMS.Persistence.Migrations
                     b.Property<Guid?>("LastUpdatedById")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("character varying(150)");
 
+                    b.Property<Guid?>("ParentCategoryId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ParentCategoryId");
 
                     b.ToTable("Category", "InstituteManagement");
                 });
@@ -191,42 +199,6 @@ namespace SLMS.Persistence.Migrations
                     b.ToTable("Classification", "InstituteManagement");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Field", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("CreatedById")
-                        .HasColumnType("uuid");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime?>("LastUpdate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid?>("LastUpdatedById")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("character varying(150)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Field", "InstituteManagement");
-                });
-
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Institute", b =>
                 {
                     b.Property<Guid>("Id")
@@ -262,19 +234,19 @@ namespace SLMS.Persistence.Migrations
                     b.ToTable("Institute", "InstituteManagement");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteField", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteCategory", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CategoryId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("CreatedById")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("FieldId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("InstituteId")
@@ -291,11 +263,11 @@ namespace SLMS.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FieldId");
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("InstituteId");
 
-                    b.ToTable("InstituteField", "InstituteManagement");
+                    b.ToTable("InstituteCategory", "InstituteManagement");
                 });
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteMembership", b =>
@@ -1139,6 +1111,15 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("Classifiction");
                 });
 
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Category", b =>
+                {
+                    b.HasOne("SLMS.ApplicationCore.Domain.InstituteManagement.Category", "ParentCategory")
+                        .WithMany()
+                        .HasForeignKey("ParentCategoryId");
+
+                    b.Navigation("ParentCategory");
+                });
+
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Certificate", b =>
                 {
                     b.HasOne("SLMS.ApplicationCore.Domain.InstituteManagement.Classification", "Classification")
@@ -1169,32 +1150,21 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("TermCourse");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Field", b =>
+            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteCategory", b =>
                 {
                     b.HasOne("SLMS.ApplicationCore.Domain.InstituteManagement.Category", "Category")
-                        .WithMany("Fields")
+                        .WithMany("InstituteCategories")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteField", b =>
-                {
-                    b.HasOne("SLMS.ApplicationCore.Domain.InstituteManagement.Field", "Field")
-                        .WithMany("InstituteFields")
-                        .HasForeignKey("FieldId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("SLMS.ApplicationCore.Domain.InstituteManagement.Institute", "Institute")
-                        .WithMany("InstituteFields")
+                        .WithMany("InstituteCategories")
                         .HasForeignKey("InstituteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Field");
+                    b.Navigation("Category");
 
                     b.Navigation("Institute");
                 });
@@ -1487,7 +1457,7 @@ namespace SLMS.Persistence.Migrations
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Category", b =>
                 {
-                    b.Navigation("Fields");
+                    b.Navigation("InstituteCategories");
                 });
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Classification", b =>
@@ -1497,14 +1467,9 @@ namespace SLMS.Persistence.Migrations
                     b.Navigation("Certificate");
                 });
 
-            modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Field", b =>
-                {
-                    b.Navigation("InstituteFields");
-                });
-
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Institute", b =>
                 {
-                    b.Navigation("InstituteFields");
+                    b.Navigation("InstituteCategories");
 
                     b.Navigation("InstituteMemberships");
 

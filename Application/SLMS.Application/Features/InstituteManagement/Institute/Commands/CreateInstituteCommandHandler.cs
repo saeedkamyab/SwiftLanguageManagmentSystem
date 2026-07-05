@@ -24,24 +24,26 @@ namespace SLMS.Application.Features.InstituteManagement.Institute.Commands
             CancellationToken cancellationToken)
         {
 
-            var userId = _currentUser.Id ?? throw new UnauthorizedException();
+            var userId = _currentUser.Id!.Value;
+
             var institute = _mapper.Map<ApplicationCore.Domain.InstituteManagement.Institute>(request);
+          
             var result = await _unitOfWork.InstituteRepository.AddAsync(institute, cancellationToken);
 
-            var fields = await _unitOfWork.FieldRepository
-    .GetByIdsAsync(request.FieldIds,cancellationToken);
+            var categories = await _unitOfWork.CategoryRepository
+    .GetByIdsAsync(request.CategoryIds,cancellationToken);
 
-            if (fields.Count != request.FieldIds.Count)
+            if (categories.Count != request.CategoryIds.Count)
             {
                 throw new NotFoundException();
             }
 
-            foreach (var field in request.FieldIds)
+            foreach (var category in request.CategoryIds)
             {
-                await _unitOfWork.InstituteFieldRepository.AddAsync(new InstituteField
+                await _unitOfWork.InstituteCategoryRepository.AddAsync(new InstituteCategory
                 {
                     InstituteId = result.Id,
-                    FieldId = field
+                    CategoryId = category
                 }, cancellationToken);
             }
 

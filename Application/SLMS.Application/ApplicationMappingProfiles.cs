@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SLMS.Application.Features.Auth.Commands;
 using SLMS.Application.Features.InstituteManagement.Institute.Commands;
+using SLMS.Application.Features.InstituteManagement.Institute.Queries;
 using SLMS.Application.Features.InstituteManagement.Level.Commands;
 using SLMS.Application.Features.InstituteManagement.Level.Queries;
 using SLMS.Application.Features.InstituteManagement.MembershipRequest.Commands;
@@ -84,7 +85,9 @@ namespace SLMS.Application
 
             //---------------Institute----------------------------
             CreateMap<CreateInstituteCommand, Institute>();
+            CreateMap<UpdateInstituteCommand, Institute>();
             CreateMap<Institute, InstituteCommandResponse>();
+            CreateMap<Institute, InstituteQueryResponse>();
 
 
             //---------------Institute Membership----------------------------

@@ -2,13 +2,12 @@
 
 namespace SLMS.ApplicationCore.Domain.InstituteManagement
 {
-    [Table("Field", Schema = "InstituteManagement")]
-    public class Field:BaseEntity
+    [Table("InstituteCategory", Schema = "InstituteManagement")]
+    public class InstituteCategory :BaseEntity
     {
-        public string Title { get; set; }=string.Empty;
+        public Guid InstituteId { get; set; }
+        public Institute Institute { get; set; } = null!;
         public Guid CategoryId { get; set; }
         public Category Category { get; set; } = null!;
-
-        public ICollection<InstituteField> InstituteFields { get; set; } = [];
     }
 }

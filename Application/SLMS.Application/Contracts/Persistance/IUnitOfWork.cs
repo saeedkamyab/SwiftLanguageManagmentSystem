@@ -40,8 +40,7 @@ namespace SLMS.Application.Contracts.Persistance
         IBaseRepository<Room> RoomRepository { get; }
         ITermCourseRepository TermCourseRepository { get; }
         IBaseRepository<Category> CategoryRepository { get; }
-        IBaseRepository<Field> FieldRepository { get; }
-        IBaseRepository<InstituteField> InstituteFieldRepository { get; }
+        IBaseRepository<InstituteCategory> InstituteCategoryRepository { get; }
         IBaseRepository<TermCourseSessionDay> TermCourseSessionDayRepository { get; }
         #endregion
       

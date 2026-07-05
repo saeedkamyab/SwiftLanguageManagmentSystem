@@ -18,7 +18,7 @@ namespace SLMS.Persistence.Repositories.InstituteManagment
         public async Task<bool> HasTeacherConflictAsync(Guid teacherId,
            TimeOnly startTime, TimeOnly endTime,
            DateOnly startDate, DateOnly endDate,
-           ICollection<WeekDay> weekDay, 
+           ICollection<WeekDay> weekDay,
            CancellationToken cancellationToken,
              Guid? excludeTermCourseId = null)
         {
@@ -27,7 +27,8 @@ namespace SLMS.Persistence.Repositories.InstituteManagment
                 x.TeacherId == teacherId &&
                 x.StartTime < endTime && x.EndTime > startTime &&
                 x.StartDate <= endDate && x.EndDate >= startDate &&
-                x.IsActive==true);
+                x.IsActive == true &&
+                x.IsDeleted == false);
 
             if (excludeTermCourseId.HasValue)
             {
@@ -35,9 +36,9 @@ namespace SLMS.Persistence.Repositories.InstituteManagment
             }
 
 
-            var result=await query.SelectMany(x => x.TermCourseSessionDays)
+            var result = await query.SelectMany(x => x.TermCourseSessionDays)
                 .AnyAsync(d => weekDay.Contains(d.WeekDay), cancellationToken);
-            
+
             return result;
         }
         public async Task<bool> HasRoomConflictAsync(Guid roomId,
@@ -51,7 +52,8 @@ namespace SLMS.Persistence.Repositories.InstituteManagment
                            x.RoomId == roomId &&
                            x.StartTime < endTime && x.EndTime > startTime &&
                            x.StartDate <= endDate && x.EndDate >= startDate &&
-                           x.IsActive == true);
+                           x.IsActive == true &&
+                           x.IsDeleted == false);
 
             if (excludeTermCourseId.HasValue)
             {
@@ -64,7 +66,7 @@ namespace SLMS.Persistence.Repositories.InstituteManagment
             return result;
         }
 
-        public async Task<TermCourse?> GetByIdWithSessionDaysAsync(Guid id, 
+        public async Task<TermCourse?> GetByIdWithSessionDaysAsync(Guid id,
             CancellationToken cancellationToken = default)
         {
             return await _context.Set<TermCourse>()

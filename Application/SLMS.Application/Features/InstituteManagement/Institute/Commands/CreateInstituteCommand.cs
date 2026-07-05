@@ -6,6 +6,6 @@ namespace SLMS.Application.Features.InstituteManagement.Institute.Commands
     {
         public string Title { get; set; } = string.Empty;
         public string? Description { get; set; }
-        public List<Guid> FieldIds { get; set; } = [];
+        public List<Guid> CategoryIds { get; set; } = [];
     }
 }

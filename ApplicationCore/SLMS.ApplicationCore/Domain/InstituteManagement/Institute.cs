@@ -14,6 +14,6 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
         public ICollection<MembershipRequest> MembershipRequests { get; set; } = [];
         public ICollection<Level> Levels { get; set; } = [];
         public ICollection<Room> Rooms { get; set; } = [];
-        public ICollection<InstituteField> InstituteFields { get; set; } = [];
+        public ICollection<InstituteCategory> InstituteCategories { get; set; } = [];
     }
 }

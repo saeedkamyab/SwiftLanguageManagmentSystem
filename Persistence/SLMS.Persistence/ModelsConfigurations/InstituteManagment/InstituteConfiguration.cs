@@ -11,7 +11,7 @@ namespace SLMS.Persistence.ModelsConfigurations.InstituteManagment
             institute.Property(i => i.Title).HasMaxLength(100).IsRequired(true);
             institute.Property(i => i.Description).HasMaxLength(300).IsRequired(false);
            
-            institute.HasMany(i => i.InstituteFields)
+            institute.HasMany(i => i.InstituteCategories)
                         .WithOne(i => i.Institute)
                         .HasForeignKey(i => i.InstituteId);
 

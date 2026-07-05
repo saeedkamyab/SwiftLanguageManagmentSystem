@@ -2,7 +2,7 @@
 
 namespace SLMS.Application.Features.InstituteManagement.TermCourse.Queries
 {
-    public class GetTermCourseRequest:IRequest<TermCourseQueryResponse>
+    public class GetTermCourseQuery:IRequest<TermCourseQueryResponse>
     {
         public Guid Id { get; set; }
     }

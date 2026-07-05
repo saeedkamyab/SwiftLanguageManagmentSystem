@@ -50,8 +50,7 @@ namespace SLMS.Persistence
         private readonly Lazy<IBaseRepository<Room>> _RoomRepository;
         private readonly Lazy<ITermCourseRepository> _TermCourseRepository;
         private readonly Lazy<IBaseRepository<Category>> _CategoryRepository;
-        private readonly Lazy<IBaseRepository<Field>> _FieldRepository;
-        private readonly Lazy<IBaseRepository<InstituteField>> _InstituteFieldRepository;
+        private readonly Lazy<IBaseRepository<InstituteCategory>> _InstituteCategoryRepository;
         private readonly Lazy<IBaseRepository<TermCourseSessionDay>> _TermCourseSessionDayRepository;
         #endregion
 
@@ -93,8 +92,7 @@ namespace SLMS.Persistence
         public IBaseRepository<Room> RoomRepository => _RoomRepository.Value;
         public ITermCourseRepository TermCourseRepository => _TermCourseRepository.Value;
         public IBaseRepository<Category> CategoryRepository => _CategoryRepository.Value;
-        public IBaseRepository<Field> FieldRepository => _FieldRepository.Value;
-        public IBaseRepository<InstituteField> InstituteFieldRepository => _InstituteFieldRepository.Value;
+        public IBaseRepository<InstituteCategory> InstituteCategoryRepository => _InstituteCategoryRepository.Value;
         public IBaseRepository<TermCourseSessionDay> TermCourseSessionDayRepository => _TermCourseSessionDayRepository.Value;
 
         #endregion
@@ -139,8 +137,7 @@ namespace SLMS.Persistence
             _RoomRepository = new Lazy<IBaseRepository<Room>>(() => new BaseRepository<Room>(_context));
             _TermCourseRepository = new Lazy<ITermCourseRepository>(() => new TermCourseRepository(_context));
             _CategoryRepository = new Lazy<IBaseRepository<Category>>(() => new BaseRepository<Category>(_context));
-            _FieldRepository = new Lazy<IBaseRepository<Field>>(() => new BaseRepository<Field>(_context));
-            _InstituteFieldRepository = new Lazy<IBaseRepository<InstituteField>>(() => new BaseRepository<InstituteField>(_context));
+            _InstituteCategoryRepository = new Lazy<IBaseRepository<InstituteCategory>>(() => new BaseRepository<InstituteCategory>(_context));
             _TermCourseSessionDayRepository = new Lazy<IBaseRepository<TermCourseSessionDay>>(() => new BaseRepository<TermCourseSessionDay>(_context));
             #endregion
 

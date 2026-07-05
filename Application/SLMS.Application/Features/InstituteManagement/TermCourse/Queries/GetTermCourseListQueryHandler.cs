@@ -7,12 +7,12 @@ using SLMS.Shared;
 
 namespace SLMS.Application.Features.InstituteManagement.TermCourse.Queries
 {
-    public class GetTermCourseListRequestHandler : IRequestHandler<GetTermCourseListRequest, PagedResult<TermCourseQueryResponse>>
+    public class GetTermCourseListQueryHandler : IRequestHandler<GetTermCourseListRequest, PagedResult<TermCourseQueryResponse>>
     {
         IMapper _mapper;
         IUnitOfWork _unitofwork;
 
-        public GetTermCourseListRequestHandler(IMapper mapper, IUnitOfWork unitofwork)
+        public GetTermCourseListQueryHandler(IMapper mapper, IUnitOfWork unitofwork)
         {
             _mapper = mapper;
             _unitofwork = unitofwork;

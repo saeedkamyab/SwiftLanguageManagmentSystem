@@ -3,6 +3,9 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SLMS.Application.Features.InstituteManagement.Institute.Commands;
+using SLMS.Application.Features.InstituteManagement.Institute.Queries;
+using SLMS.Application.Features.InstituteManagement.Level.Queries;
+using SLMS.Application.Features.InstituteManagement.Room.Commands;
 using SLMS.Dto.InstituteManagement;
 
 namespace SLMS.Api.Controllers.v1.InstituteManagement
@@ -20,44 +23,33 @@ namespace SLMS.Api.Controllers.v1.InstituteManagement
             _mediator = mediator;
             _mapper = mapper;
         }
-       
-      
-    //    [HttpGet]
-    //    [ProducesResponseType(typeof(PagedResult<GetPostListQueryResponse>), StatusCodes.Status200OK)]
-    //    public async Task<ActionResult<PagedResult<GetPostListQueryResponse>>> GetHomePagePosts(
-    //[FromQuery] int pageNumber = 1,
-    //[FromQuery] int pageSize = 10,
-    //[FromQuery] bool onlyMyFollowings = false,
-    //[FromQuery] string? searchTerm = null)
-    //    {
-    //        var query = new GetPostListQuery()
-    //        {
-    //            PageNumber = pageNumber,
-    //            PageSize = pageSize,
-    //            OnlyMyFollowings = onlyMyFollowings,
-    //            SearchTerm = searchTerm
-    //        };
 
-    //        var result = await _mediator.Send(query);
-    //        return Ok(result);
-    //    }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<InstituteQueryResponse>> Get(Guid id)
+        {
+            var result = await _mediator.Send(new GetInstituteQuery { Id = id });
+            return Ok(result);
+        }
+
 
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] CreateInstitudeDto institute)
+        public async Task<ActionResult> Create([FromBody] CreateInstituteDto institute)
         {
             var command = _mapper.Map<CreateInstituteCommand>(institute);
             var response = await _mediator.Send(command);
             return Ok(response);
         }
 
-        //[HttpPut]
-        //public async Task<ActionResult> Update([FromBody] UpdatePostDto post)
-        //{
-        //    var command = _mapper.Map<UpdatePostCommand>(post);
-        //    var response = await _mediator.Send(command);
-        //    return Ok(response);
-        //}
-
+       
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Update(Guid id, [FromBody] UpdateInstituteDto institute)
+        {
+            var command = _mapper.Map<UpdateInstituteCommand>(institute);
+            command.Id = id;
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
 
 
 

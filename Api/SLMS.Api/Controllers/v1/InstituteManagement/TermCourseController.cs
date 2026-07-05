@@ -42,7 +42,7 @@ namespace SLMS.Api.Controllers.v1.InstituteManagement
         [HttpGet("{id}")]
         public async Task<ActionResult<TermCourseQueryResponse>> Get(Guid id)
         {
-            var result = await _mediator.Send(new GetTermCourseRequest { Id = id });
+            var result = await _mediator.Send(new GetTermCourseQuery { Id = id });
             return Ok(result);
         }
         [HttpPost]

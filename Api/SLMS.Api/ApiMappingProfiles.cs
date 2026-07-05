@@ -42,7 +42,8 @@ namespace SLMS.Api
 
             #region  InstituteManagement
             //----------------------Instutite---------------------------------
-            CreateMap<CreateInstitudeDto, CreateInstituteCommand>();
+            CreateMap<CreateInstituteDto, CreateInstituteCommand>();
+            CreateMap<UpdateInstituteDto, UpdateInstituteCommand>();
 
             //----------------------Instutite Membership---------------------------------
             CreateMap<CreateMembershipRequestDto, CreateMembershipRequestCommand>();               

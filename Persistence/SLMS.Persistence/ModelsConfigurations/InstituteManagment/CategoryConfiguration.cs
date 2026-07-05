@@ -8,12 +8,12 @@ namespace SLMS.Persistence.ModelsConfigurations.InstituteManagment
     {
         public void Configure(EntityTypeBuilder<Category> category)
         {
-            category.Property(i => i.Title)
+            category.Property(i => i.Name)
                 .HasMaxLength(150).IsRequired(true);
 
-            category.HasMany(c => c.Fields)
-                .WithOne(f => f.Category)
-                .HasForeignKey(f => f.CategoryId);
+            category.HasMany(c => c.InstituteCategories)
+                .WithOne(ic => ic.Category)
+                .HasForeignKey(ic => ic.CategoryId);
         }
     }
 }
