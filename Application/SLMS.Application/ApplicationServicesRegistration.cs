@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using SLMS.Application.Behaviors;
 using SLMS.Application.Contracts.FileService;
 using SLMS.Application.Contracts.Identity;
+using SLMS.Application.Contracts.InstituteManagment;
+using SLMS.Application.Contracts.Persistance;
 using SLMS.Application.Services;
 using System.Reflection;
 
@@ -24,9 +26,16 @@ namespace SLMS.Application
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
             //services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddScoped<IMediaUploadService, MediaUploadService>();
+
+
+
             services.AddTransient(
     typeof(IPipelineBehavior<,>),
     typeof(ValidationBehavior<,>));
+           
+            services.AddTransient(
+  typeof(IPipelineBehavior<,>),
+  typeof(AuthorizationBehavior<,>));
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             return services;
         }

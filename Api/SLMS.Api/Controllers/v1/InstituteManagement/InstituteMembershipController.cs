@@ -2,6 +2,10 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SLMS.Application.Features.InstituteManagement.Membership.Commands;
+using SLMS.Application.Features.InstituteManagement.Room.Commands;
+using SLMS.ApplicationCore.Domain.InstituteManagement;
+using SLMS.Dto.InstituteManagement;
 
 namespace SLMS.Api.Controllers.v1.InstituteManagement
 {
@@ -20,26 +24,23 @@ namespace SLMS.Api.Controllers.v1.InstituteManagement
         }
 
 
-        //[HttpPost("{id}/active")]
-        //public async Task<ActionResult> ActiveMembership(Guid id)
-        //{
-        //    var command = new ActiveMembershipCommand
-        //    {
-        //        Id = id
-        //    };
-        //    var response = await _mediator.Send(command);
-        //    return Ok(response);
-        //}
-        //[HttpPost("{id}/deactive")]
-        //public async Task<ActionResult> DeactiveMembership(Guid id)
-        //{
-        //    var command = new DeactiveMembershipCommand
-        //    {
-        //        Id = id
-        //    };
-        //    var response = await _mediator.Send(command);
-        //    return Ok(response);
-        //}
+        [HttpPost("{id}/active")]
+        public async Task<ActionResult> ActiveMembership(Guid id, [FromBody] ActiveMembershipDto activeMembershipDto)
+        {
+            var command = _mapper.Map<ActiveMembershipCommand>(activeMembershipDto);
+            command.Id= id;
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
+
+        [HttpPost("{id}/deactive")]
+        public async Task<ActionResult> DeactiveMembership(Guid id,[FromBody] DeactiveMembershipDto deactiveMembershipDto)
+        {
+            var command = _mapper.Map<DeactiveMembershipCommand>(deactiveMembershipDto);
+            command.Id = id;
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
 
     }
 }

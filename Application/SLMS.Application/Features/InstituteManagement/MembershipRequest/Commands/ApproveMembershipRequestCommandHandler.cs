@@ -39,6 +39,7 @@ namespace SLMS.Application.Features.InstituteManagement.MembershipRequest.Comman
                 {
                     InstituteId = membershipRequest.InstituteId,
                     UserId = membershipRequest.UserId,
+                    IsActived = true,
                     MembershipRoles = new List<ApplicationCore.Domain.InstituteManagement.InstituteMembershipRole>
                     {
                         new ApplicationCore.Domain.InstituteManagement.InstituteMembershipRole

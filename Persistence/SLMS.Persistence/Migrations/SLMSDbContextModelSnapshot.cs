@@ -285,6 +285,9 @@ namespace SLMS.Persistence.Migrations
                     b.Property<Guid>("InstituteId")
                         .HasColumnType("uuid");
 
+                    b.Property<bool>("IsActived")
+                        .HasColumnType("boolean");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 

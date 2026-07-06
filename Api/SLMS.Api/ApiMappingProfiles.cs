@@ -2,6 +2,7 @@
 using SLMS.Application.Features.Auth.Commands;
 using SLMS.Application.Features.InstituteManagement.Institute.Commands;
 using SLMS.Application.Features.InstituteManagement.Level.Commands;
+using SLMS.Application.Features.InstituteManagement.Membership.Commands;
 using SLMS.Application.Features.InstituteManagement.MembershipRequest.Commands;
 using SLMS.Application.Features.InstituteManagement.Room.Commands;
 using SLMS.Application.Features.InstituteManagement.TermCourse.Commands;
@@ -48,6 +49,12 @@ namespace SLMS.Api
             //----------------------Instutite Membership---------------------------------
             CreateMap<CreateMembershipRequestDto, CreateMembershipRequestCommand>();               
             CreateMap<ApproveMembershipRequestDto, ApproveMembershipRequestCommand>();
+            
+            CreateMap<ActiveMembershipDto, ActiveMembershipCommand>();
+            CreateMap<DeactiveMembershipDto, DeactiveMembershipCommand>();
+
+
+
 
             //----------------------Level---------------------------------
             CreateMap<CreateLevelDto, CreateLevelCommand>();

@@ -50,6 +50,7 @@ namespace SLMS.Application.Features.InstituteManagement.Institute.Commands
             {
                 InstituteId = result.Id,
                 UserId = _currentUser.Id!.Value,
+                IsActived=true,
                 MembershipRoles = new List<InstituteMembershipRole>
                 {
                     new InstituteMembershipRole
