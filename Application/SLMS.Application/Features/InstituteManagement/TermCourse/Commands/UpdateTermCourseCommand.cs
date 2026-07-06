@@ -1,9 +1,11 @@
 ﻿using MediatR;
+using SLMS.Application.Attributes;
 using SLMS.Application.Contracts.Identity;
 using SLMS.Shared.Enums;
 
 namespace SLMS.Application.Features.InstituteManagement.TermCourse.Commands
 {
+    [RequireRoles(MemberType.Founder, MemberType.Admin)]
     public class UpdateTermCourseCommand : IRequest<TermCourseCommandResponse>, IAuthorizedRequest
     {
         public Guid Id { get; set; }
@@ -13,10 +15,11 @@ namespace SLMS.Application.Features.InstituteManagement.TermCourse.Commands
         public TimeOnly StartTime { get; set; }
         public TimeOnly EndTime { get; set; }
         public Guid LevelId { get; set; }
-        public Guid InstituteId { get; set; }
+        public required Guid InstituteId { get; set; }
         public Guid RoomId { get; set; }
         public Guid TeacherId { get; set; }
 
         public ICollection<WeekDay> WeekDays { get; set; } = [];
+
     }
 }

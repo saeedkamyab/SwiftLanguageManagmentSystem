@@ -20,30 +20,26 @@ namespace SLMS.Api.Controllers.v1.InstituteManagement
         }
 
 
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<InstituteMembershipQueryResponse>> Get(Guid id)
+        //[HttpPost("{id}/active")]
+        //public async Task<ActionResult> ActiveMembership(Guid id)
         //{
-        //    var result = await _mediator.Send(new GetInstituteMembershipQuery { Id = id });
-        //    return Ok(result);
-        //}
-       
-        //[HttpPut("{id}")]
-        //public async Task<ActionResult> Update(Guid id, [FromBody] UpdateInstituteMembershipDto institute)
-        //{
-        //    var command = _mapper.Map<UpdateInstituteMembershipCommand>(institute);
-        //    command.Id = id;
+        //    var command = new ActiveMembershipCommand
+        //    {
+        //        Id = id
+        //    };
         //    var response = await _mediator.Send(command);
         //    return Ok(response);
         //}
-
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult> Delete(Guid id)
+        //[HttpPost("{id}/deactive")]
+        //public async Task<ActionResult> DeactiveMembership(Guid id)
         //{
-        //    var command = new DeleteInstituteMembershipCommand { Id = id };
+        //    var command = new DeactiveMembershipCommand
+        //    {
+        //        Id = id
+        //    };
         //    var response = await _mediator.Send(command);
         //    return Ok(response);
         //}
-
 
     }
 }

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using SLMS.Application.Contracts.Identity;
 using SLMS.Application.Contracts.Persistance;
 
 namespace SLMS.Application.Features.InstituteManagement.Room.Commands
@@ -9,13 +8,11 @@ namespace SLMS.Application.Features.InstituteManagement.Room.Commands
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ICurrentUserService _currentUser;
 
-        public CreateRoomCommandHandler(IMapper mapper, IUnitOfWork unitOfWork, ICurrentUserService currentUser)
+        public CreateRoomCommandHandler(IMapper mapper, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
-            _currentUser = currentUser;
         }
 
         public async Task<RoomCommandResponse> Handle(CreateRoomCommand request,

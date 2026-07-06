@@ -24,10 +24,9 @@ namespace SLMS.Application.Features.InstituteManagement.MembershipRequest.Comman
             CancellationToken cancellationToken)
         {
 
-            var userId = _currentUser.Id ?? throw new UnauthorizedException();
 
             if (await _unitOfWork.MembershipRequestRepository.
-                ExistsRequestAsync(userId, request.InstituteId, cancellationToken))
+                ExistsRequestAsync(_currentUser.Id!.Value, request.InstituteId, cancellationToken))
             {
                 throw new ConflictException("درخواست از قبل ثبت شده است.");
             }
@@ -37,7 +36,7 @@ namespace SLMS.Application.Features.InstituteManagement.MembershipRequest.Comman
             }
 
             var membershipRequest = _mapper.Map<ApplicationCore.Domain.InstituteManagement.MembershipRequest>(request);
-            membershipRequest.UserId = userId;
+            membershipRequest.UserId = _currentUser.Id!.Value;
             membershipRequest.Status = MembershipRequestStatus.Pending;
             membershipRequest.RequestDate = DateTime.UtcNow;
 

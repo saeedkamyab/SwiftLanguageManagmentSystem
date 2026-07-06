@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using SLMS.Application.Contracts.Identity;
 using SLMS.Application.Contracts.Persistance;
 
 namespace SLMS.Application.Features.InstituteManagement.Level.Commands
@@ -9,18 +8,17 @@ namespace SLMS.Application.Features.InstituteManagement.Level.Commands
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ICurrentUserService _currentUser;
 
-        public CreateLevelCommandHandler(IMapper mapper, IUnitOfWork unitOfWork, ICurrentUserService currentUser)
+        public CreateLevelCommandHandler(IMapper mapper, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
-            _currentUser = currentUser;
         }
 
         public async Task<LevelCommandResponse> Handle(CreateLevelCommand request,
             CancellationToken cancellationToken)
         {
+
             var level = _mapper.Map<ApplicationCore.Domain.InstituteManagement.Level>(request);
             var result = await _unitOfWork.LevelRepository.AddAsync(level, cancellationToken);
 

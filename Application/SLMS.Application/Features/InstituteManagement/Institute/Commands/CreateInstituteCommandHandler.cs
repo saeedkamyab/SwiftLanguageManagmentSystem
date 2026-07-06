@@ -25,8 +25,6 @@ namespace SLMS.Application.Features.InstituteManagement.Institute.Commands
             CancellationToken cancellationToken)
         {
 
-            var userId = _currentUser.Id!.Value;
-
             var institute = _mapper.Map<ApplicationCore.Domain.InstituteManagement.Institute>(request);
           
             var result = await _unitOfWork.InstituteRepository.AddAsync(institute, cancellationToken);
@@ -51,7 +49,7 @@ namespace SLMS.Application.Features.InstituteManagement.Institute.Commands
             await _unitOfWork.InstituteMembershipRepository.AddAsync(new InstituteMembership
             {
                 InstituteId = result.Id,
-                UserId = userId,
+                UserId = _currentUser.Id!.Value,
                 MembershipRoles = new List<InstituteMembershipRole>
                 {
                     new InstituteMembershipRole

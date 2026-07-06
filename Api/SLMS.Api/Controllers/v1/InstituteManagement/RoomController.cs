@@ -46,25 +46,26 @@ namespace SLMS.Api.Controllers.v1.InstituteManagement
             return Ok(result);
         }
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] CreateRoomDto level)
+        public async Task<ActionResult> Create([FromBody] CreateRoomDto room)
         {
-            var command = _mapper.Map<CreateRoomCommand>(level);
+            var command = _mapper.Map<CreateRoomCommand>(room);
             var response = await _mediator.Send(command);
             return Ok(response);
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(Guid id, [FromBody]UpdateRoomDto level)
+        public async Task<ActionResult> Update(Guid id, [FromBody]UpdateRoomDto room)
         {
-            var command = _mapper.Map<UpdateRoomCommand>(level);
+            var command = _mapper.Map<UpdateRoomCommand>(room);
             command.Id = id;
             var response = await _mediator.Send(command);
             return Ok(response);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<ActionResult> Delete(Guid id,[FromBody] DeleteRoomDto room)
         {
-            var command = new DeleteRoomCommand { Id = id };
+            var command = _mapper.Map<DeleteRoomCommand>(room);
+            command.Id = id;
             var response = await _mediator.Send(command);
             return Ok(response);
         }

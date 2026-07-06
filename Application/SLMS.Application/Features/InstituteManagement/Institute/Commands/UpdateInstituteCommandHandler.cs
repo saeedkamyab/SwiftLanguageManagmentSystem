@@ -24,11 +24,9 @@ namespace SLMS.Application.Features.InstituteManagement.Institute.Commands
         public async Task<InstituteCommandResponse> Handle(UpdateInstituteCommand request,
             CancellationToken cancellationToken)
         {
-
-            var userId = _currentUser.Id!.Value;
             
             var loginedUserMembership = await _unitOfWork.InstituteMembershipRepository.GetUserMembersShipByUserIdAsync(
-              userId, request.Id, cancellationToken) ?? throw new NotFoundException();
+              _currentUser.Id!.Value, request.Id, cancellationToken) ?? throw new NotFoundException();
            
             if (!loginedUserMembership.MembershipRoles.Any(r => r.MemberType == MemberType.Founder))
                 throw new UnauthorizedException("شما اجازه پردازش درخواست را ندارید.");

@@ -62,9 +62,10 @@ namespace SLMS.Api.Controllers.v1.InstituteManagement
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<ActionResult> Delete(Guid id, [FromBody] DeleteTermCourseDto termCourse)
         {
-            var command = new DeleteTermCourseCommand { Id = id };
+            var command = _mapper.Map<DeleteTermCourseCommand>(termCourse);
+            command.Id = id;
             var response = await _mediator.Send(command);
             return Ok(response);
         }

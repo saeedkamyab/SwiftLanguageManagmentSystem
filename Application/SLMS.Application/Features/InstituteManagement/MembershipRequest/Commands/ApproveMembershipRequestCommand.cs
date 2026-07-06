@@ -1,11 +1,15 @@
 ﻿using MediatR;
+using SLMS.Application.Attributes;
+using SLMS.Application.Contracts.Identity;
 using SLMS.Shared.Enums;
 
 namespace SLMS.Application.Features.InstituteManagement.MembershipRequest.Commands
 {
-    public class ApproveMembershipRequestCommand : IRequest<MembershipRequestCommandResponse>
+    [RequireRoles(MemberType.Founder, MemberType.Admin)]
+    public class ApproveMembershipRequestCommand : IRequest<MembershipRequestCommandResponse>,IAuthorizedRequest
     {
         public Guid Id { get; set; }
         public MemberType MemberType { get; set; }
+        public required Guid InstituteId { get; set; }
     }
 }

@@ -12,29 +12,18 @@ namespace SLMS.Application.Features.InstituteManagement.TermCourse.Commands
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ICurrentUserService _currentUser;
 
         public CreateTermCourseCommandHandler(IMapper mapper, IUnitOfWork unitOfWork, ICurrentUserService currentUser)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
-            _currentUser = currentUser;
+        
         }
 
         public async Task<TermCourseCommandResponse> Handle(CreateTermCourseCommand request,
             CancellationToken cancellationToken)
         {
-            var userId = _currentUser.Id!.Value;
-
-            var loginedUserMembership = await _unitOfWork.InstituteMembershipRepository.GetUserMembersShipByUserIdAsync(
-               userId, request.InstituteId, cancellationToken) ?? throw new NotFoundException();
-
-            if (!loginedUserMembership.MembershipRoles.Any(r => r.MemberType == MemberType.Admin) &&
-                !loginedUserMembership.MembershipRoles.Any(r => r.MemberType == MemberType.Founder))
-                throw new UnauthorizedException("شما اجازه پردازش درخواست را ندارید.");
-
-
-
+           
             var teacherMembership = await _unitOfWork.InstituteMembershipRepository.GetUserMembersShipByIdAsync(
                request.TeacherId, request.InstituteId, cancellationToken) ?? throw new NotFoundException();
 

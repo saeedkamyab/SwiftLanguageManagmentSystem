@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using SLMS.Application.Contracts.Persistance;
 using SLMS.Application.Exceptions;
-using SLMS.ApplicationCore.Domain.InstituteManagement;
 
 namespace SLMS.Application.Features.InstituteManagement.Level.Commands
 {

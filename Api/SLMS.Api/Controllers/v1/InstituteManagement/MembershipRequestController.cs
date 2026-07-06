@@ -35,17 +35,19 @@ namespace SLMS.Api.Controllers.v1.InstituteManagement
             var command = new ApproveMembershipRequestCommand
             {
                 Id=id,
-                MemberType=approveMembership.MemberType,
+                InstituteId = approveMembership.InstituteId,
+                MemberType =approveMembership.MemberType,
             };
             var response= await _mediator.Send(command);
             return Ok(response);
         }
         [HttpPost("{id}/reject")]
-        public async Task<ActionResult> RejectRequest(Guid id)
+        public async Task<ActionResult> RejectRequest(Guid id, RejectMembershipRequestDto rejectMembership)
         {
             var command = new RejectMembershipRequestCommand
             {
-                Id = id
+                Id = id,
+                InstituteId = rejectMembership.InstituteId
             };
             var response = await _mediator.Send(command);
             return Ok(response);
