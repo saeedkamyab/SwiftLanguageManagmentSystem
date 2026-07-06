@@ -15,10 +15,14 @@ namespace SLMS.Application.Features.InstituteManagement.TermCourse.Commands
 
         public async Task<bool> Handle(DeleteTermCourseCommand request, CancellationToken cancellationToken)
         {
-            var termCourse = await _unitOfWork.TermCourseRepository.GetByIdAsync(request.Id, cancellationToken);
+            var termCourse = await _unitOfWork.TermCourseRepository.GetByIdWithClassificationsAsync(request.Id, cancellationToken);
             if (termCourse == null)
-                throw new NotFoundException(nameof(TermCourse),request.Id);
+                throw new NotFoundException(nameof(TermCourse), request.Id);
 
+            if (termCourse.Classifications.Count > 0)
+            {
+                throw new ConflictException("ترم / دوره هایی که کلاس بندی شده اند قابل حذف نمی باشند.");
+            }
             var result = _unitOfWork.TermCourseRepository.SoftDelete(request.Id, cancellationToken);
             await _unitOfWork.CommitAsync();
 

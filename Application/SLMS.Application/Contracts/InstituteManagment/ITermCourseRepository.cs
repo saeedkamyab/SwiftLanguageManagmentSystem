@@ -25,6 +25,9 @@ namespace SLMS.Application.Contracts.InstituteManagment
 
         public Task<TermCourse?> GetByIdWithSessionDaysAsync(Guid id, 
             CancellationToken cancellationToken = default);
+        public Task<TermCourse?> GetByIdWithClassificationsAsync(Guid id, 
+            CancellationToken cancellationToken = default);
 
+       
     }
 }

@@ -3,8 +3,6 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SLMS.Application.Features.InstituteManagement.Membership.Commands;
-using SLMS.Application.Features.InstituteManagement.Room.Commands;
-using SLMS.ApplicationCore.Domain.InstituteManagement;
 using SLMS.Dto.InstituteManagement;
 
 namespace SLMS.Api.Controllers.v1.InstituteManagement

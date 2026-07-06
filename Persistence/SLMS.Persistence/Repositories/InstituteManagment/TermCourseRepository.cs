@@ -73,6 +73,14 @@ namespace SLMS.Persistence.Repositories.InstituteManagment
                 .Include(x => x.TermCourseSessionDays)
                 .FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted, cancellationToken);
         }
+
+        public async Task<TermCourse?> GetByIdWithClassificationsAsync(Guid id,
+          CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<TermCourse>()
+                .Include(x => x.Classifications)
+                .FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted, cancellationToken);
+        }
     }
 
 }
