@@ -19,7 +19,7 @@ namespace SLMS.Application.Features.InstituteManagement.Level.Commands
             if (level == null)
                 throw new NotFoundException(nameof(Level),request.Id);
 
-            var result = _unitOfWork.LevelRepository.SoftDelete(request.Id, cancellationToken);
+            var result = _unitOfWork.LevelRepository.SoftDeleteAsync(request.Id, cancellationToken);
             await _unitOfWork.CommitAsync();
 
             return true;

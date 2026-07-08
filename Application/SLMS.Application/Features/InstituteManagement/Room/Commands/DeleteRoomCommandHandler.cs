@@ -19,7 +19,7 @@ namespace SLMS.Application.Features.InstituteManagement.Room.Commands
             if (room == null)
                 throw new NotFoundException(nameof(Room),request.Id);
 
-            var result = _unitOfWork.RoomRepository.SoftDelete(request.Id, cancellationToken);
+            var result = _unitOfWork.RoomRepository.SoftDeleteAsync(request.Id, cancellationToken);
             await _unitOfWork.CommitAsync();
 
             return true;

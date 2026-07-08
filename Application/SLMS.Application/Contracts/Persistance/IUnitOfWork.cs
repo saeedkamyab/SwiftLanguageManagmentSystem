@@ -32,7 +32,7 @@ namespace SLMS.Application.Contracts.Persistance
         #region InstituteManagement
         IBaseRepository<AbsentPresent> AbsentPresentRepository { get; }
         IBaseRepository<Certificate> CertificateRepository { get; }
-        IBaseRepository<Classification> ClassificationRepository { get;}
+        IClassificationRepository ClassificationRepository { get;}
         IBaseRepository<Institute> InstituteRepository { get;  }
         IInstituteMembershipRepository InstituteMembershipRepository { get;  }
         IBaseRepository<Level> LevelRepository { get; }

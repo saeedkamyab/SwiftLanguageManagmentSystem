@@ -15,9 +15,9 @@ namespace SLMS.Persistence.ModelsConfigurations.InstituteManagment
                 .WithMany(tc => tc.Classifications)
                 .HasForeignKey(c => c.TermCourseId)
 ;
-            classification.HasOne(c => c.ClassificationMember)
+            classification.HasOne(c => c.PupilMembership)
         .WithMany(im => im.Classifications)
-        .HasForeignKey(c => c.ClassificationMemberId)
+        .HasForeignKey(c => c.PupilMembershipId)
 ;        }
     }
 }

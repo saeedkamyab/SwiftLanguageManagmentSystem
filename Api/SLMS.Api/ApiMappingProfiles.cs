@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SLMS.Application.Features.Auth.Commands;
+using SLMS.Application.Features.InstituteManagement.Classification.Commands;
 using SLMS.Application.Features.InstituteManagement.Institute.Commands;
 using SLMS.Application.Features.InstituteManagement.Level.Commands;
 using SLMS.Application.Features.InstituteManagement.Membership.Commands;
@@ -69,6 +70,14 @@ namespace SLMS.Api
             //----------------------TermCourse---------------------------------
             CreateMap<CreateTermCourseDto, CreateTermCourseCommand>();
             CreateMap<UpdateTermCourseDto, UpdateTermCourseCommand>();
+
+
+
+            //----------------------Classification---------------------------------
+            CreateMap<CreateClassificationDto, CreateClassificationCommand>();
+            CreateMap<DeleteClassificationDto, DeleteClassificationCommand>();
+
+
 
             #endregion
         }

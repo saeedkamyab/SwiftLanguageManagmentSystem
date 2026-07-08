@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SLMS.Application.Features.Auth.Commands;
+using SLMS.Application.Features.InstituteManagement.Classification.Commands;
 using SLMS.Application.Features.InstituteManagement.Institute.Commands;
 using SLMS.Application.Features.InstituteManagement.Institute.Queries;
 using SLMS.Application.Features.InstituteManagement.Level.Commands;
@@ -119,6 +120,9 @@ namespace SLMS.Application
             CreateMap<TermCourse, TermCourseCommandResponse>();
 
 
+            //---------------Classification----------------------------
+            CreateMap<CreateClassificationCommand, Classification>();
+            CreateMap<Classification, ClassificationCommandResponse>();
             #endregion
 
 

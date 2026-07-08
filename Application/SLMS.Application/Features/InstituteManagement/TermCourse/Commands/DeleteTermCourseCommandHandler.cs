@@ -23,7 +23,7 @@ namespace SLMS.Application.Features.InstituteManagement.TermCourse.Commands
             {
                 throw new ConflictException("ترم / دوره هایی که کلاس بندی شده اند قابل حذف نمی باشند.");
             }
-            var result = _unitOfWork.TermCourseRepository.SoftDelete(request.Id, cancellationToken);
+            var result = _unitOfWork.TermCourseRepository.SoftDeleteAsync(request.Id, cancellationToken);
             await _unitOfWork.CommitAsync();
 
             return true;

@@ -19,7 +19,7 @@ namespace SLMS.Application.Features.SocialNetwork.Comments.Commands
         {
             try
             {
-                var result = _unitOfWork.CommentRepository.SoftDelete(request.Id, cancellationToken);
+                var result = _unitOfWork.CommentRepository.SoftDeleteAsync(request.Id, cancellationToken);
                 await _unitOfWork.CommitAsync();
 
                 return true;

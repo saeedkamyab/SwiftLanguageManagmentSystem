@@ -23,7 +23,7 @@ namespace SLMS.Application.Contracts.Persistance
 
 
 
-        Task SoftDelete(Guid id, CancellationToken cancellationToken);
+        Task SoftDeleteAsync(Guid id, CancellationToken cancellationToken);
         void SoftDeleteRange(IEnumerable<TEntity> entities);
 
     }

@@ -164,9 +164,6 @@ namespace SLMS.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ClassificationMemberId")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -182,6 +179,9 @@ namespace SLMS.Persistence.Migrations
                     b.Property<Guid?>("LastUpdatedById")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("PupilMembershipId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("TermCourseId")
                         .HasColumnType("uuid");
 
@@ -192,7 +192,7 @@ namespace SLMS.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClassificationMemberId");
+                    b.HasIndex("PupilMembershipId");
 
                     b.HasIndex("TermCourseId");
 
@@ -1167,9 +1167,9 @@ namespace SLMS.Persistence.Migrations
 
             modelBuilder.Entity("SLMS.ApplicationCore.Domain.InstituteManagement.Classification", b =>
                 {
-                    b.HasOne("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteMembership", "ClassificationMember")
+                    b.HasOne("SLMS.ApplicationCore.Domain.InstituteManagement.InstituteMembership", "PupilMembership")
                         .WithMany("Classifications")
-                        .HasForeignKey("ClassificationMemberId")
+                        .HasForeignKey("PupilMembershipId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1179,7 +1179,7 @@ namespace SLMS.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ClassificationMember");
+                    b.Navigation("PupilMembership");
 
                     b.Navigation("TermCourse");
                 });

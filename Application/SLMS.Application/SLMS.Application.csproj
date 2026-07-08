@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\InstituteManagement\Classification\Queries\" />
     <Folder Include="Features\InstituteManagement\Membership\Queries\" />
   </ItemGroup>
 

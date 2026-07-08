@@ -78,7 +78,7 @@ namespace SLMS.Persistence.Repositories.Common
         {
             _dbSet.RemoveRange(entities);
         }
-        public virtual async Task SoftDelete(Guid id, CancellationToken cancellationToken = default)
+        public virtual async Task SoftDeleteAsync(Guid id, CancellationToken cancellationToken = default)
         {
             var entity = await GetByIdAsync(id, cancellationToken);
             if (entity != null)

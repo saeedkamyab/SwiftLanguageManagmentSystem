@@ -19,7 +19,7 @@ namespace SLMS.Application.Features.Users.Commands
         {
             try
             { 
-                await _unitOfWork.UserRepository.SoftDelete(request.Id,cancellationToken);
+                await _unitOfWork.UserRepository.SoftDeleteAsync(request.Id,cancellationToken);
                 await _unitOfWork.CommitAsync();
                 return true;
             }
