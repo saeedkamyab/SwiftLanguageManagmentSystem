@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SLMS.Application.Features.Auth.Commands;
+using SLMS.Application.Features.InstituteManagement.Certificate.Commands;
 using SLMS.Application.Features.InstituteManagement.Classification.Commands;
 using SLMS.Application.Features.InstituteManagement.Institute.Commands;
 using SLMS.Application.Features.InstituteManagement.Level.Commands;
@@ -76,6 +77,11 @@ namespace SLMS.Api
             //----------------------Classification---------------------------------
             CreateMap<CreateClassificationDto, CreateClassificationCommand>();
             CreateMap<DeleteClassificationDto, DeleteClassificationCommand>();
+
+            //----------------------Certificate---------------------------------
+            CreateMap<CreateCertificateDto, CreateCertificateCommand>();
+            CreateMap<UpdateCertificateDto, UpdateCertificateCommand>();
+            CreateMap<DeleteCertificateDto, DeleteCertificateCommand>();
 
 
 

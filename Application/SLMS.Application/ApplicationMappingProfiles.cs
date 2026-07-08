@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using SLMS.Application.Features.Auth.Commands;
+using SLMS.Application.Features.InstituteManagement.Certificate.Commands;
+using SLMS.Application.Features.InstituteManagement.Certificate.Queries;
 using SLMS.Application.Features.InstituteManagement.Classification.Commands;
 using SLMS.Application.Features.InstituteManagement.Institute.Commands;
 using SLMS.Application.Features.InstituteManagement.Institute.Queries;
@@ -123,6 +125,12 @@ namespace SLMS.Application
             //---------------Classification----------------------------
             CreateMap<CreateClassificationCommand, Classification>();
             CreateMap<Classification, ClassificationCommandResponse>();
+
+            //---------------Certificate----------------------------
+            CreateMap<Certificate, CertificateQueryResponse>();
+            CreateMap<CreateCertificateCommand, Certificate>();
+            CreateMap<UpdateCertificateCommand, Certificate>();
+            CreateMap<Certificate, CertificateCommandResponse>();
             #endregion
 
 

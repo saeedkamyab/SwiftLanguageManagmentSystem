@@ -1,0 +1,22 @@
+using MediatR;
+using SLMS.Application.Attributes;
+using SLMS.Application.Contracts.Identity;
+using SLMS.Shared.Enums;
+
+namespace SLMS.Application.Features.InstituteManagement.Certificate.Commands
+{
+    [RequireRoles(MemberType.Founder, MemberType.Admin)]
+    public class UpdateCertificateCommand : IRequest<CertificateCommandResponse>, IAuthorizedRequest
+    {
+        public Guid Id { get; set; }
+        public int Reading { get; set; }
+        public int Writting { get; set; }
+        public int Listening { get; set; }
+        public int Speaking { get; set; }
+        public int MidTerm { get; set; }
+        public int Final { get; set; }
+        public CertificateStatus Status { get; set; }
+        public Guid ClassificationId { get; set; }
+        public required Guid InstituteId { get; set; }
+    }
+}
