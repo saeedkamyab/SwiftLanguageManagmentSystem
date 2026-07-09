@@ -5,7 +5,7 @@ namespace SLMS.ApplicationCore.Domain.InstituteManagement
     [Table("AbsentPresent", Schema = "InstituteManagement")]
     public class AbsentPresent:BaseEntity
     {
-        public bool Status { get; set; }
+        public bool IsPresent { get; set; }
         public DateTime Date { get; set; }
         public int SessionNumber { get; set; }
         public string? Description { get; set; } 

@@ -47,6 +47,9 @@ namespace SLMS.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
+                    b.Property<bool>("IsPresent")
+                        .HasColumnType("boolean");
+
                     b.Property<DateTime?>("LastUpdate")
                         .HasColumnType("timestamp with time zone");
 
@@ -55,9 +58,6 @@ namespace SLMS.Persistence.Migrations
 
                     b.Property<int>("SessionNumber")
                         .HasColumnType("integer");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 

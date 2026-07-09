@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using SLMS.Application.Features.Auth.Commands;
+using SLMS.Application.Features.InstituteManagement.AbsentPresent.Commands;
+using SLMS.Application.Features.InstituteManagement.AbsentPresent.Queries;
 using SLMS.Application.Features.InstituteManagement.Certificate.Commands;
 using SLMS.Application.Features.InstituteManagement.Certificate.Queries;
 using SLMS.Application.Features.InstituteManagement.Classification.Commands;
@@ -131,6 +133,12 @@ namespace SLMS.Application
             CreateMap<CreateCertificateCommand, Certificate>();
             CreateMap<UpdateCertificateCommand, Certificate>();
             CreateMap<Certificate, CertificateCommandResponse>();
+
+            //---------------AbsentPresent----------------------------
+            CreateMap<AbsentPresent, AbsentPresentQueryResponse>();
+            CreateMap<CreateAbsentPresentCommand, AbsentPresent>();
+            CreateMap<UpdateAbsentPresentCommand, AbsentPresent>();
+            CreateMap<AbsentPresent, AbsentPresentCommandResponse>();
             #endregion
 
 

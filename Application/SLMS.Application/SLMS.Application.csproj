@@ -25,6 +25,8 @@
     <Folder Include="Features\InstituteManagement\Classification\Queries\" />
     <Folder Include="Features\InstituteManagement\Membership\Queries\" />
     <Folder Include="Features\InstituteManagement\Certificate\Queries\" />
+    <Folder Include="Features\InstituteManagement\AbsentPresent\" />
+    <Folder Include="Features\InstituteManagement\AbsentPresent\Commands" />
   </ItemGroup>
 
 </Project>
