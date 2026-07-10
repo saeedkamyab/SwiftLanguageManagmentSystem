@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches:
+      [ Clean_Architecture ]
+
+  pull_request:
+    branches:
+      [ Clean_Architecture ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore SwiftLanguageManagmentSystem.sln
+
+      - name: Build
+        run: dotnet build SwiftLanguageManagmentSystem.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test SwiftLanguageManagmentSystem.sln --configuration Release --no-build

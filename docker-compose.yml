@@ -1,0 +1,64 @@
+version: "3.9"
+
+services:
+
+  postgres:
+    image: postgres:17
+
+    container_name: slms-postgres
+
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: SLMSDb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Sk@123456
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+   
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d SLMSDb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  api:
+
+    build:
+      context: .
+      dockerfile: Api/SLMS.Api/Dockerfile
+
+    container_name: slms-api
+
+    restart: unless-stopped
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    ports:
+      - "8080:8080"
+
+    environment:
+
+      ASPNETCORE_ENVIRONMENT: Production
+
+      ConnectionStrings__connectionString: Host=postgres;Port=5432;Database=SLMSDb;Username=postgres;Password=Sk@123456
+
+      JwtSettings__Key: ThisIsMyVerySecretKeyForJwtAuthentication123456
+      JwtSettings__Issuer: SLMS
+      JwtSettings__Audience: SLMSClient
+
+      FileStorage__UploadFolder: /app/uploads
+
+    volumes:
+      - uploads:/app/uploads
+
+volumes:
+
+  postgres_data:
+
+  uploads:

@@ -39,14 +39,14 @@ namespace SLMS.Application.Features.Auth.Commands
                 throw new ConflictException("ایمیل تکراری است");
             }
 
-            await InsertOneMillionUsers(cancellationToken);
+            //await InsertOneMillionUsers(cancellationToken);
 
-            //var user = _mapper.Map<ApplicationCore.Domain.User.User>(request);
-            //user.PasswordHash = _passwordHasher.HashPassword(request.Password);
-            //var result = await _unitOfWork.UserRepository.AddAsync(user, cancellationToken);
+            var user = _mapper.Map<ApplicationCore.Domain.User.User>(request);
+            user.PasswordHash = _passwordHasher.HashPassword(request.Password);
+            var result = await _unitOfWork.UserRepository.AddAsync(user, cancellationToken);
             await _unitOfWork.CommitAsync(cancellationToken);
-            //return _mapper.Map<RegisterUserResponse>(result);
-            return _mapper.Map<RegisterUserResponse>(new SLMS.ApplicationCore.Domain.User.User());
+            return _mapper.Map<RegisterUserResponse>(result);
+           // return _mapper.Map<RegisterUserResponse>(new SLMS.ApplicationCore.Domain.User.User());
         }
 
         async Task InsertOneMillionUsers(CancellationToken cancellationToken)
