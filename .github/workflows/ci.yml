@@ -26,9 +26,9 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Restore
-        run: dotnet restore SwiftLanguageManagmentSystem.sln
+        run: dotnet restore
 
       - name: Build
-        run: dotnet build SwiftLanguageManagmentSystem.sln --configuration Release --no-restore
+        run: dotnet build --configuration Release --no-restore
 
       
