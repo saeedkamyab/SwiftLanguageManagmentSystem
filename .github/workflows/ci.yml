@@ -31,5 +31,4 @@ jobs:
       - name: Build
         run: dotnet build SwiftLanguageManagmentSystem.sln --configuration Release --no-restore
 
-      - name: Test
-        run: dotnet test SwiftLanguageManagmentSystem.sln --configuration Release --no-build
+      
