@@ -8,7 +8,8 @@ on:
   push:
     branches:
       [ Clean_Architecture ]
-
+  tags:
+      - "v*"
   pull_request:
     branches:
       [ Clean_Architecture ]
@@ -41,8 +42,11 @@ jobs:
           images: ghcr.io/${{ github.repository_owner }}/slms-api
           tags: |
             type=raw,value=latest
-            type=sha
             type=ref,event=branch
+            type=sha
+            type=semver,pattern={{version}}
+
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
      
