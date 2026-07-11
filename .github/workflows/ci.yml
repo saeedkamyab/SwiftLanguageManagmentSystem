@@ -8,7 +8,7 @@ on:
   push:
     branches:
       [ Clean_Architecture ]
-  tags:
+    tags:
       - "v*"
   pull_request:
     branches:
