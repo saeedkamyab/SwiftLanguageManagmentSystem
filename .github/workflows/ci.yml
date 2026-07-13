@@ -1,5 +1,6 @@
 name: CI
 
+
 permissions:
   contents: read
   packages: write
@@ -65,5 +66,27 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          
+      - name: Extract Docker metadata (Blazor)
+        id: meta-web
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/slms-web
+          tags: |
+            type=raw,value=latest
+            type=ref,event=branch
+            type=sha
+            type=semver,pattern={{version}}
+
+      - name: Build and Push Blazor image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Presentation/SLMS.WebApplication/Dockerfile
+          push: true
+          tags: ${{ steps.meta-web.outputs.tags }}
+          labels: ${{ steps.meta-web.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
