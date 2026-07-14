@@ -1,10 +1,14 @@
 name: cd
 
+
 on:
   workflow_run:
     workflows: ["CI"]
     types:
       - completed
+
+permissions:
+  packages: read
 
 jobs:
   deploy:
@@ -13,8 +17,8 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Show Docker Version
-        run: docker --version
+      - name: Login to GHCR
+        shell: cmd
+        run: echo %{{ secrets.GHCR_TOKEN }}
